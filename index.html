@@ -1,1423 +1,1727 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bhageeratha Reddy Portfolio</title>
-  <meta name="description" content="Portfolio of Bhageeratha Reddy – Data Scientist, AI Developer. Explore my projects in NLP, Deep Learning, and more!" />
-  <meta name="keywords" content="Bhageeratha Reddy, Data Scientist, AI Developer, NLP, Deep Learning, Python, Flask, Interstellar, Inception, Portfolio" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Bhageeratha Reddy Portfolio" />
-  <meta property="og:description" content="Portfolio of Bhageeratha Reddy – Data Scientist and AI Developer specializing in NLP and Deep Learning." />
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/159548324?v=4" />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#1a535c" />
-  <link rel="icon" href="https://avatars.githubusercontent.com/u/159548324?v=4" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-  <style>
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Noto Sans', sans-serif;
-      background: linear-gradient(120deg, #1a202c 0%, #2d3748 100%);
-      min-height: 100vh;
-      transition: background 0.5s ease;
-      color: #f5f6f5;
-      overflow-x: hidden;
-    }
-    .peacock-feather {
-      display: none; /* Hide peacock feather to remove green lighting */
-    }
-    .custom-cursor {
-      position: fixed;
-      width: 24px;
-      height: 24px;
-      border: 2px solid #4ecdc4;
-      border-radius: 50%;
-      opacity: 0.3;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease;
-      animation: pulse 1.5s infinite;
-      z-index: 9999;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
-    }
-    a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
-      border-color: #1a535c;
-      opacity: 0.5;
-      transform: translate(-50%, -50%) scale(1.5);
-    }
-    body.light-theme {
-      background: #f5f6f5;
-      color: #1a202c;
-    }
-    body.light-theme .peacock-feather { display: none; }
-    body.light-theme .glass {
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    body.light-theme .neumorph {
-      background: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 -1px 0 #e5e7eb;
-    }
-    body.light-theme .text-[#1a535c] { color: #1a535c; }
-    body.light-theme .text-[#4ecdc4] { color: #2a9d8f; }
-    body.light-theme .text-[#f5f6f5] { color: #1a202c; }
-    body.light-theme .text-[#6b7280] { color: #4b5563; }
-    body.light-theme nav { background: #ffffff !important; }
-    body.light-theme footer { background: #1a202c; color: #f5f6f5; }
-    .glass {
-      background: rgba(26, 32, 44, 0.7);
-      backdrop-filter: blur(10px) saturate(1.2);
-      border-radius: 0.5rem;
-      border: 1px solid rgba(78, 205, 196, 0.2);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    }
-    .neumorph {
-      box-shadow: 4px 4px 12px #1a202c80, -4px -4px 12px #2d3748cc;
-      background: linear-gradient(120deg, #1a202c 60%, #2d3748 100%);
-      border-radius: 0.5rem;
-      transition: box-shadow 0.2s, transform 0.3s;
-    }
-    .neumorph:hover, .neumorph:focus {
-      box-shadow: 0 0 0 2px #4ecdc4, 0 4px 16px rgba(78, 205, 196, 0.3);
-      transform: scale(1.02);
-    }
-    .fade-section {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-    .fade-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .gradient-hero {
-      background: #1a202c; /* Solid background to remove green lighting */
-      position: relative;
-    }
-    body.light-theme .gradient-hero {
-      background: #f5f6f5; /* Matches light theme */
-    }
-    .parallax {
-      background-attachment: fixed;
-      background-position: center;
-      background-size: cover;
-      position: relative;
-      overflow: hidden;
-    }
-    .parallax::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(26, 32, 44, 0.3), rgba(45, 55, 72, 0.8));
-      z-index: 0;
-    }
-    .parallax > * {
-      position: relative;
-      z-index: 1;
-    }
-    .progress-bar {
-      height: 8px;
-      background: #4ecdc4;
-      border-radius: 4px;
-      transition: width 1s ease-in-out;
-    }
-    .progress-bar.animate {
-      animation: progress-animate 2s ease-in-out;
-    }
-    @keyframes progress-animate {
-      0% { width: 0%; }
-      100% { width: var(--progress-width); }
-    }
-    body.light-theme .progress-bar { background: #2a9d8f; }
-    .badge-img {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      margin-bottom: 1.5rem;
-    }
-    
-    a:focus, button:focus, input:focus, textarea:focus {
-      outline: 2px solid #4ecdc4;
-      outline-offset: 2px;
-    }
-    .code-typing {
-      font-family: 'Source Code Pro', monospace;
-      background: #2d3748;
-      border-radius: 0.5rem;
-      padding: 1.5rem;
-      color: #f5f6f5;
-      width: 100%;
-      max-width: 600px;
-      margin: 1rem auto;
-      border: 1px solid #4ecdc4;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
-    body.light-theme .code-typing {
-      background: #f5f6f5;
-      color: #1a202c;
-      border: 1px solid #e5e7eb;
-    }
-    .code-typing::after {
-      content: '';
-      width: 2px;
-      height: 1.2rem;
-      background: #4ecdc4;
-      position: absolute;
-      animation: blink 0.7s infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    .code-typing span.typed-cursor {
-      color: #4ecdc4;
-      font-size: 1.2rem;
-    }
-    .code-typing .keyword { color: #4ecdc4; }
-    .code-typing .string { color: #2a9d8f; }
-    .code-typing .comment { color: #6b7280; }
-    body.light-theme .code-typing .keyword { color: #2a9d8f; }
-    body.light-theme .code-typing .string { color: #9b2226; }
-    body.light-theme .code-typing .comment { color: #6b7280; }
-    .timeline {
-      position: relative;
-      padding: 2rem 0;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: #4ecdc4;
-      transform: translateX(-50%);
-    }
-    body.light-theme .timeline::before { background: #2a9d8f; }
-    .timeline-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 2rem;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .timeline-item.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .timeline-item:nth-child(even) {
-      flex-direction: row-reverse;
-      transform: translateX(20px);
-    }
-    .timeline-item:nth-child(even).visible {
-      transform: translateX(0);
-    }
-    .timeline-content {
-      width: 45%;
-      padding: 1rem;
-    }
-    .timeline-dot {
-      width: 16px;
-      height: 16px;
-      background: #2a9d8f;
-      border-radius: 50%;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0 0 8px rgba(78, 205, 196, 0.5);
-    }
-    .filter-btn.active {
-      background: #4ecdc4;
-      color: #1a202c;
-      border: 1px solid #2a9d8f;
-    }
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    body.fallback {
-      font-family: Arial, sans-serif;
-      background: #f5f6f5;
-      color: #1a202c;
-      cursor: auto;
-    }
-    body.fallback header {
-      background: #1a202c;
-      color: #f5f6f5;
-      padding: 1rem;
-      text-align: center;
-    }
-    body.fallback header nav a {
-      color: #f5f6f5;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
-    body.fallback section {
-      margin: 2rem auto;
-      max-width: 700px;
-      padding: 1rem;
-      background: #ffffff;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    body.fallback footer {
-      text-align: center;
-      padding: 1rem;
-      background: #1a202c;
-      color: #f5f6f5;
-    }
-    body.fallback form input, body.fallback form textarea {
-      margin-bottom: 1rem;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      border: 1px solid #e5e7eb;
-    }
-    body.fallback form button {
-      background: #4ecdc4;
-      color: #1a202c;
-      border: none;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-    }
-    body.fallback form button:hover {
-      background: #2a9d8f;
-    }
-    #back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 50;
-      display: none;
-      padding: 12px;
-      border-radius: 0.5rem;
-      background: #4ecdc4;
-      color: #1a202c;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    #back-to-top.visible {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-    #back-to-top:hover {
-      transform: scale(1.1);
-    }
-    #resume-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-    #resume-modal.visible {
-      display: flex;
-    }
-    #resume-modal .modal-content {
-      background: #2d3748;
-      padding: 2rem;
-      border-radius: 0.5rem;
-      max-width: 90%;
-      max-height: 90%;
-      overflow: auto;
-      position: relative;
-    }
-    body.light-theme #resume-modal .modal-content {
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-    }
-    #resume-modal .close {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #4ecdc4;
-    }
-    .sidebar {
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      width: 60px;
-      z-index: 40;
-      display: none;
-    }
-    @media (min-width: 1280px) {
-      .sidebar { display: block; }
-    }
-    .sidebar a {
-      display: block;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 0.5rem;
-      background: #1a202c;
-      text-align: center;
-      color: #4ecdc4;
-      transition: background 0.3s, transform 0.3s;
-    }
-    body.light-theme .sidebar a {
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-    }
-    .sidebar a:hover {
-      background: #4ecdc4;
-      color: #1a202c;
-      transform: scale(1.2);
-    }
-    .preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #1a202c;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 0.5s ease-out;
-    }
-    .preloader.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .loader {
-      border: 8px solid #2d3748;
-      border-top: 8px solid #4ecdc4;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .skill-bar:hover .progress-bar {
-      background: #2a9d8f;
-      transition: background 0.3s ease;
-    }
-    .skill-tooltip {
-      visibility: hidden;
-      position: absolute;
-      background: #2d3748;
-      color: #f5f6f5;
-      padding: 0.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.875rem;
-      z-index: 10;
-      white-space: nowrap;
-    }
-    .skill-bar:hover .skill-tooltip {
-      visibility: visible;
-    }
-    .project-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 24px rgba(78, 205, 196, 0.4);
-    }
-    .timeline-item:hover .timeline-content {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
-    }
-    .timeline-summary {
-      display: none;
-      position: absolute;
-      background: #2d3748;
-      color: #f5f6f5;
-      padding: 0.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.875rem;
-      z-index: 10;
-      white-space: nowrap;
-    }
-    .timeline-item:hover .timeline-summary {
-      display: block;
-    }
-    .hire-me-btn {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 12px 24px;
-      background: #4ecdc4;
-      color: #1a202c;
-      font-weight: bold;
-      border-radius: 0.5rem;
-      z-index: 50;
-      animation: bounce 2s infinite;
-      transition: transform 0.3s ease;
-    }
-    .hire-me-btn:hover {
-      transform: translateX(-50%) scale(1.1);
-      background: #2a9d8f;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-10px); }
-    }
-    body.light-theme .hire-me-btn { background: #2a9d8f; }
-    body.light-theme .hire-me-btn:hover { background: #1a535c; }
-    @media (max-width: 768px) {
-      .sidebar { display: none !important; }
-      .grid-cols-2 { grid-template-columns: 1fr; }
-      .hire-me-btn { display: none; }
-    }
-    @media (hover: none) {
-      .custom-cursor { display: none; }
-    }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .animate-fadeInUp {
-      animation: fadeInUp 1s ease-out forwards;
-    }
-    .fade-in-on-scroll {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s ease-out, transform 1s ease-out;
-    }
-    .fade-in-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    body.light-theme .parallax::before {
-      background: none !important;
-    }
-    body.light-theme .parallax {
-      background-image: none !important;
-    }
-    .skill-bar img {
-  transition: transform 0.3s ease;
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bhageeratha Reddy | AI Engineer</title>
+<link rel="icon" href="https://avatars.githubusercontent.com/u/172971697?v=4"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+<style>
+:root{
+  --bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--bg4:#21262d;
+  --border:rgba(48,54,61,1);--border2:rgba(63,185,80,0.25);
+  --green:#3fb950;--green2:#26a641;--green3:#006d32;--green4:#56d364;
+  --cyan:#58a6ff;--purple:#bc8cff;--orange:#e3b341;--red:#f85149;--pink:#ff7b72;
+  --text:#e6edf3;--text2:#8b949e;--text3:#484f58;
+  --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+  --radius:8px;--radius2:12px;
 }
-.skill-bar:hover img {
-  transform: translateY(-5px);
-}
-.project-card img {
-  transition: transform 0.3s ease;
-}
-.project-card:hover img {
-  transform: scale(1.1);
-}
-.timeline-dot.visible {
-  animation: dotPulse 1.5s infinite;
-}
-@keyframes dotPulse {
-  0%, 100% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.3); }
-}
-.hire-me-btn:hover {
-  transform: translateX(-50%) rotate(5deg) scale(1.1);
-}
-.sidebar a:hover {
-  transform: scale(1.2) rotate(360deg);
-  transition: transform 0.5s ease;
-}
-.timeline-content {
-  transform: perspective(1000px) rotateY(90deg);
-  transition: transform 0.5s ease;
-}
-.timeline-content.visible {
-  transform: perspective(1000px) rotateY(0deg);
-}
-.typed-cursor {
-  animation: glowCursor 1s infinite;
-}
-@keyframes glowCursor {
-  0%, 100% { box-shadow: 0 0 5px #4ecdc4; }
-  50% { box-shadow: 0 0 10px #4ecdc4; }
-}
-.neumorph-btn-pulse {
-  animation: glowPulse 2s infinite ease-in-out;
-}
-@keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(78, 205, 196, 0.3); }
-  50% { box-shadow: 0 0 16px rgba(78, 205, 196, 0.6); }
-}
-/* Spin animation for Tools and Libraries icons */
-.tools li img,
-.libraries li img {
-  transition: transform 0.5s ease;
-}
-.tools li:hover img,
-.libraries li:hover img {
-  transform: rotate(360deg);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;line-height:1.6}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--green3);border-radius:3px}
+::selection{background:rgba(63,185,80,0.25);color:var(--green4)}
+
+/* CANVAS BG */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.4}
+.above{position:relative;z-index:1}
+
+/* SCAN LINES */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px);pointer-events:none;z-index:2}
+
+/* CURSOR */
+#cur{position:fixed;width:6px;height:6px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .05s;mix-blend-mode:screen}
+#cur-ring{position:fixed;width:26px;height:26px;border:1.5px solid rgba(63,185,80,0.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease}
+@media(hover:none){#cur,#cur-ring{display:none}}
+
+/* PRELOADER */
+#preloader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:var(--mono);font-size:.8rem}
+#preloader.done{opacity:0;pointer-events:none;transition:opacity .5s .2s}
+.pl-line{color:var(--green2);opacity:0;animation:plShow .3s forwards}
+.pl-line:nth-child(1){animation-delay:.1s}
+.pl-line:nth-child(2){animation-delay:.45s}
+.pl-line:nth-child(3){animation-delay:.8s}
+.pl-line:nth-child(4){animation-delay:1.15s}
+.pl-line:nth-child(5){color:var(--cyan);animation-delay:1.5s}
+@keyframes plShow{to{opacity:1}}
+.pl-bar{width:300px;height:2px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:8px}
+.pl-fill{height:100%;width:0;background:linear-gradient(90deg,var(--green3),var(--green4));animation:plFill 1.9s ease forwards .2s;border-radius:2px}
+@keyframes plFill{to{width:100%}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(13,17,23,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-w{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--mono);font-size:.82rem}
+.nav-brand img{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--green3)}
+.nav-brand .p1{color:var(--green)}
+.nav-brand .p2{color:var(--text2)}
+.nav-brand .p3{color:var(--cyan)}
+.nav-links{display:flex;gap:2px}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:.78rem;font-family:var(--mono);padding:5px 11px;border-radius:var(--radius);transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-r{display:flex;gap:8px;align-items:center}
+.nav-btn{background:none;border:1px solid var(--border);color:var(--text2);font-family:var(--mono);font-size:.72rem;padding:5px 12px;border-radius:var(--radius);cursor:pointer;transition:all .15s}
+.nav-btn:hover{border-color:var(--green);color:var(--green)}
+.hamburger{display:none}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:block}}
+#mob-menu{display:none;background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 20px}
+#mob-menu.open{display:block}
+#mob-menu a{display:block;color:var(--text2);text-decoration:none;padding:8px 0;font-family:var(--mono);font-size:.82rem;border-bottom:1px solid var(--border)}
+#mob-menu a:last-child{border:none}
+#mob-menu a:hover{color:var(--green)}
+
+/* LAYOUT */
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.sec-tag{font-family:var(--mono);font-size:.72rem;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.sec-h{font-size:1.7rem;font-weight:700;display:flex;align-items:center;gap:14px;margin-bottom:32px}
+.sec-h::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade.in{opacity:1;transform:translateY(0)}
+
+/* BTNS */
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.8rem;font-weight:600;padding:9px 18px;border-radius:var(--radius);text-decoration:none;cursor:pointer;border:none;transition:all .15s}
+.btn-g{background:var(--green);color:#0d1117}
+.btn-g:hover{background:var(--green4);transform:translateY(-1px)}
+.btn-o{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-o:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
+
+/* CARD */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s}
+.card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(63,185,80,.07)}
+
+/* BADGE CHIPS */
+.chip{font-family:var(--mono);font-size:.68rem;padding:3px 9px;border-radius:20px;border:1px solid;display:inline-flex;align-items:center;gap:4px}
+.chip-g{color:var(--green);border-color:rgba(63,185,80,.35);background:rgba(63,185,80,.07)}
+.chip-b{color:var(--cyan);border-color:rgba(88,166,255,.35);background:rgba(88,166,255,.07)}
+.chip-p{color:var(--purple);border-color:rgba(188,140,255,.35);background:rgba(188,140,255,.07)}
+.chip-o{color:var(--orange);border-color:rgba(227,179,65,.35);background:rgba(227,179,65,.07)}
+.chip-r{color:var(--red);border-color:rgba(248,81,73,.35);background:rgba(248,81,73,.07)}
+
+/* ===== HERO ===== */
+#hero{min-height:100vh;display:flex;align-items:center;padding:80px 0 40px;position:relative}
+#hero-net{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.3}
+.hero-inner{position:relative;z-index:1;width:100%}
+.hero-grid{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start}
+@media(max-width:640px){.hero-grid{grid-template-columns:1fr;gap:24px}}
+.avatar-wrap{position:relative;width:110px;flex-shrink:0}
+.avatar-wrap img{width:110px;height:110px;border-radius:50%;border:2px solid var(--green2);display:block;object-fit:cover}
+.avatar-ring{position:absolute;inset:-7px;border-radius:50%;border:1px dashed rgba(63,185,80,.25);animation:spinRing 25s linear infinite}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+.avatar-dot{position:absolute;bottom:4px;right:4px;width:13px;height:13px;background:var(--green);border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 8px var(--green)}
+.hero-greeting{font-family:var(--mono);color:var(--green2);font-size:.82rem;margin-bottom:6px}
+.hero-name{font-size:clamp(1.8rem,4vw,2.9rem);font-weight:900;line-height:1.1;margin-bottom:8px}
+.hero-name em{color:var(--green);font-style:normal}
+.hero-role{font-family:var(--mono);color:var(--text2);font-size:.95rem;margin-bottom:18px;min-height:1.4em}
+.cursor-b{display:inline-block;width:2px;height:.9em;background:var(--green);margin-left:2px;vertical-align:middle;animation:blink .85s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ===== TERMINAL ===== */
+.term{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden;margin-top:36px;font-family:var(--mono)}
+.term-bar{background:var(--bg3);border-bottom:1px solid var(--border);padding:9px 14px;display:flex;align-items:center;gap:6px}
+.td{width:10px;height:10px;border-radius:50%}
+.td-r{background:#ff5f57}.td-y{background:#febc2e}.td-g{background:#28c840}
+.term-title{font-size:.72rem;color:var(--text2);margin-left:8px}
+.term-body{padding:16px 18px;font-size:.78rem;line-height:1.9}
+.tp{color:var(--green)}.tpath{color:var(--cyan)}.tsym{color:var(--text2)}
+.to{display:block;padding-left:2px}
+.to-ok{color:var(--green2)}.to-i{color:var(--cyan)}.to-e{color:var(--red)}
+
+/* ===== CONTRIB GRAPH ===== */
+.contrib-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;margin-top:24px}
+.contrib-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-family:var(--mono);font-size:.75rem}
+.contrib-top strong{color:var(--green)}
+.contrib-top span{color:var(--text2)}
+.contrib-legend{display:flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--mono);font-size:.7rem;color:var(--text2)}
+.cl{width:11px;height:11px;border-radius:2px}
+
+/* ===== SNAKE ===== */
+.snake-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;margin-top:24px}
+.snake-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-family:var(--mono);font-size:.75rem;color:var(--text2)}
+.snake-top strong{color:var(--orange)}
+#snake-canvas{display:block;width:100%;border-radius:6px;background:var(--bg)}
+
+/* ===== SKILLS ===== */
+#skills-sec{padding:80px 0}
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:768px){.skills-layout{grid-template-columns:1fr}}
+.file-tree{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:20px;font-family:var(--mono);font-size:.78rem;line-height:2}
+.ft-dir{color:var(--cyan)}.ft-exe{color:var(--green)}.ft-lib{color:var(--purple)}.ft-cfg{color:var(--orange)}.ft-c{color:var(--text3);user-select:none}
+.graph-box{border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden;background:var(--bg2)}
+#sk-canvas{display:block;width:100%;height:400px}
+.sk-legend{display:flex;flex-wrap:wrap;gap:10px;padding:10px 14px 14px;font-family:var(--mono);font-size:.7rem}
+.sk-leg{display:flex;align-items:center;gap:5px;color:var(--text2)}
+.sk-dot{width:8px;height:8px;border-radius:50%}
+.skill-chips{margin-top:28px;display:flex;flex-wrap:wrap;gap:7px}
+
+/* ===== GIT LOG ===== */
+#exp-sec{padding:80px 0}
+.git-log{font-family:var(--mono);font-size:.82rem}
+.gl-head{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2) var(--radius2) 0 0;padding:10px 16px;display:flex;gap:40px;font-size:.72rem;color:var(--text2);border-bottom:none}
+.gl-head b{color:var(--orange)}
+.gl-commit{display:flex;border:1px solid var(--border);border-top:none;background:var(--bg2);transition:background .15s}
+.gl-commit:last-child{border-radius:0 0 var(--radius2) var(--radius2)}
+.gl-commit:hover{background:var(--bg3)}
+.gl-tree{width:38px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding:16px 0 16px 14px}
+.gl-node{width:11px;height:11px;border-radius:50%;border:2px solid;flex-shrink:0;position:relative;z-index:1}
+.gl-line{width:2px;flex:1;min-height:16px}
+.gl-branch{position:absolute;left:14px;top:-2px;font-size:.65rem;padding:1px 7px;border-radius:20px;white-space:nowrap;border:1px solid;font-family:var(--mono)}
+.gl-body{padding:16px;flex:1}
+.gl-hash{color:var(--cyan);font-size:.72rem;margin-bottom:3px}
+.gl-title{font-weight:700;font-size:.88rem;margin-bottom:4px}
+.gl-meta{color:var(--text2);font-size:.72rem;display:flex;gap:16px;flex-wrap:wrap;margin-bottom:7px}
+.gl-desc{color:var(--text2);font-size:.8rem;line-height:1.6;margin-bottom:8px}
+.gl-tags{display:flex;flex-wrap:wrap;gap:5px}
+.gl-tag{font-size:.68rem;padding:2px 8px;border-radius:20px;border:1px solid;font-family:var(--mono)}
+
+/* ===== PROJECTS ===== */
+#proj-sec{padding:80px 0}
+.proj-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:20px}
+.fbtn{font-family:var(--mono);font-size:.72rem;padding:5px 13px;border-radius:var(--radius);border:1px solid var(--border);background:none;color:var(--text2);cursor:pointer;transition:all .15s}
+.fbtn:hover,.fbtn.on{border-color:var(--green);color:var(--green);background:rgba(63,185,80,.08)}
+#shuf-btn{margin-left:auto;font-family:var(--mono);font-size:.72rem;padding:5px 13px;border-radius:var(--radius);border:1px solid var(--border);background:none;color:var(--text2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+#shuf-btn:hover{border-color:var(--orange);color:var(--orange)}
+.shuf-icon{display:inline-block;transition:transform .5s}
+#shuf-btn.spin .shuf-icon{transform:rotate(360deg)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s,box-shadow .2s}
+.proj-card:hover{border-color:rgba(63,185,80,.3);transform:translateY(-4px);box-shadow:0 10px 35px rgba(63,185,80,.06)}
+.proj-card.featured{border-color:rgba(63,185,80,.3);background:linear-gradient(135deg,var(--bg2),#0f1c0f 200%)}
+.proj-card.shuf-out{animation:shOut .38s ease forwards}
+.proj-card.shuf-in{animation:shIn .48s cubic-bezier(.2,.8,.3,1.1) forwards}
+@keyframes shOut{to{opacity:0;transform:translateY(-30px) rotate(-3deg) scale(.9)}}
+@keyframes shIn{0%{opacity:0;transform:translateY(50px) rotate(3deg) scale(.9)}70%{transform:translateY(-4px) rotate(-1deg) scale(1.02)}100%{opacity:1;transform:none}}
+.proj-hero{height:110px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;overflow:hidden}
+.proj-featured-hero{height:140px;background:linear-gradient(135deg,#0d1117,#0f1c12 60%,#111827);display:flex;align-items:center;justify-content:center;gap:20px;position:relative;overflow:hidden}
+.proj-featured-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(63,185,80,.1),transparent 60%),radial-gradient(ellipse at 75% 40%,rgba(88,166,255,.08),transparent 60%)}
+.proj-featured-badge{position:absolute;top:10px;right:12px;font-family:var(--mono);font-size:.65rem;padding:3px 9px;border-radius:20px;border:1px solid rgba(227,179,65,.4);color:var(--orange);background:rgba(227,179,65,.08)}
+.proj-body{padding:15px;flex:1;display:flex;flex-direction:column}
+.proj-lang{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;color:var(--text2);margin-bottom:7px}
+.lang-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.proj-title{font-weight:700;font-size:.9rem;margin-bottom:5px;color:var(--text)}
+.proj-desc{font-size:.78rem;color:var(--text2);line-height:1.6;flex:1;margin-bottom:10px}
+.proj-stats{display:flex;gap:12px;font-family:var(--mono);font-size:.7rem;color:var(--text2);margin-bottom:10px}
+.proj-foot{border-top:1px solid var(--border);padding:9px 15px;display:flex;justify-content:space-between;align-items:center}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px}
+.ptag{font-family:var(--mono);font-size:.65rem;padding:2px 7px;border-radius:20px;border:1px solid rgba(88,166,255,.25);color:var(--cyan);background:rgba(88,166,255,.05)}
+.proj-link{font-family:var(--mono);font-size:.72rem;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:4px}
+.proj-link:hover{text-decoration:underline}
+
+/* ===== BADGES ===== */
+#badges-sec{padding:80px 0}
+.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.badge-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:16px;display:flex;align-items:center;gap:12px;transition:border-color .2s,transform .2s}
+.badge-card:hover{border-color:rgba(188,140,255,.35);transform:translateY(-2px)}
+.badge-card img{width:44px;height:44px;object-fit:contain;flex-shrink:0}
+.badge-card h3{font-size:.78rem;font-weight:600;margin-bottom:2px}
+.badge-card p{font-family:var(--mono);font-size:.68rem;color:var(--text2)}
+
+/* ===== TESTIMONIALS ===== */
+#testi-sec{padding:80px 0}
+.swiper-slide{display:flex;justify-content:center}
+.tcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:28px 32px;max-width:580px;width:100%}
+.tcard p{font-style:italic;color:var(--text2);font-size:.88rem;line-height:1.8;margin-bottom:12px}
+.tcard .author{font-family:var(--mono);font-size:.75rem;color:var(--green)}
+
+/* ===== CONTACT ===== */
+#contact-sec{padding:80px 0 120px}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:640px){.contact-layout{grid-template-columns:1fr}}
+.cform{display:flex;flex-direction:column;gap:10px}
+.cform input,.cform textarea{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:10px 13px;color:var(--text);font-family:var(--mono);font-size:.78rem;outline:none;transition:border-color .15s;resize:none}
+.cform input:focus,.cform textarea:focus{border-color:var(--green)}
+.cform textarea{min-height:110px;resize:vertical}
+.cform ::placeholder{color:var(--text3)}
+.clinks{display:flex;flex-direction:column;gap:9px}
+.clink{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px;text-decoration:none;color:var(--text);font-family:var(--mono);font-size:.78rem;transition:border-color .15s,color .15s}
+.clink:hover{border-color:var(--green);color:var(--green)}
+.clink svg{color:var(--text2);flex-shrink:0;transition:color .15s}
+.clink:hover svg{color:var(--green)}
+
+/* ===== GITHUB ACTIVITY ===== */
+.act-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.77rem;color:var(--text2)}
+.act-item:last-child{border:none}
+.act-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ===== NEWSLETTER ===== */
+#nl-sec{padding:60px 0}
+.nl-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.nl-box h3{font-size:1rem;font-weight:700;margin-bottom:3px}
+.nl-box p{color:var(--text2);font-size:.82rem}
+.nl-form{display:flex;gap:9px;flex:1;min-width:220px;flex-wrap:wrap}
+.nl-form input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:9px 13px;color:var(--text);font-family:var(--mono);font-size:.78rem;outline:none;min-width:160px;transition:border-color .15s}
+.nl-form input:focus{border-color:var(--green)}
+
+/* ===== POSTS ===== */
+#posts-sec{padding:60px 0}
+.posts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:540px){.posts-grid{grid-template-columns:1fr}}
+.post-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s;display:block}
+.post-card:hover{border-color:rgba(88,166,255,.35);transform:translateY(-2px)}
+.post-date{font-family:var(--mono);font-size:.7rem;color:var(--text2);margin-bottom:7px}
+.post-title{font-weight:700;font-size:.88rem;color:var(--cyan);margin-bottom:5px}
+.post-desc{font-size:.78rem;color:var(--text2);line-height:1.6}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--border);padding:20px;text-align:center;font-family:var(--mono);font-size:.72rem;color:var(--text2)}
+footer a{color:var(--green);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+/* ===== FIXED UI ===== */
+#btt{position:fixed;bottom:26px;right:26px;z-index:50;background:var(--bg2);border:1px solid var(--border);color:var(--green);width:36px;height:36px;border-radius:var(--radius);font-size:.9rem;display:none;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
+#btt.show{display:flex}
+#btt:hover{border-color:var(--green);transform:translateY(-2px)}
+#hire{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--green);color:#0d1117;font-family:var(--mono);font-size:.75rem;font-weight:700;padding:9px 20px;border-radius:var(--radius);text-decoration:none;z-index:50;animation:hBounce 2.5s ease-in-out infinite;border:none;cursor:pointer}
+@keyframes hBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+#hire:hover{background:var(--green4)}
+@media(max-width:540px){#hire{display:none}}
+.sidebar{position:fixed;top:50%;right:20px;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;z-index:50}
+.sidebar a{width:32px;height:32px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;text-decoration:none;color:var(--text2);transition:all .15s;font-family:var(--mono)}
+.sidebar a:hover{border-color:var(--green);color:var(--green);transform:scale(1.1)}
+@media(max-width:1200px){.sidebar{display:none}}
+
+/* ===== MODAL ===== */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:200}
+.overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:26px;max-width:90%;position:relative;min-width:280px}
+.modal-x{position:absolute;top:11px;right:14px;background:none;border:none;color:var(--text2);font-family:var(--mono);font-size:1rem;cursor:pointer}
+.modal-x:hover{color:var(--red)}
+
+/* ===== LIGHT THEME ===== */
+body.light{--bg:#ffffff;--bg2:#f6f8fa;--bg3:#eaeef2;--bg4:#d0d7de;--border:rgba(208,215,222,.9);--text:#1f2328;--text2:#656d76;--text3:#adb5bd;--green:#1a7f37;--green4:#2da44e;--cyan:#0969da;--purple:#8250df;--orange:#9a6700;--red:#d1242f}
+body.light nav{background:rgba(255,255,255,.95)}
+body.light #bg-canvas{opacity:.12}
+body.light::after{opacity:.15}
+
+/* ===== CHESS ===== */
+/* Floating ambient chess pieces */
+.chess-float{position:fixed;font-size:1.6rem;pointer-events:none;z-index:0;animation:chessDrift linear infinite;opacity:0;user-select:none;filter:drop-shadow(0 0 6px rgba(63,185,80,.3))}
+@keyframes chessDrift{
+  0%{transform:translateY(110vh) rotate(0deg);opacity:0}
+  5%{opacity:.08}
+  90%{opacity:.06}
+  100%{transform:translateY(-10vh) rotate(180deg);opacity:0}
 }
 
-/* Respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .skill-bar img,
-  .tools li img,
-  .libraries li img {
-    transition: none;
-    transform: none;
-  }
-}
-/* Project card flip container */
-.project-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 24px rgba(78, 205, 196, 0.4);
-    }
+/* Chess divider between sections */
+.chess-divider{width:100%;overflow:hidden;height:36px;position:relative;margin:8px 0;user-select:none}
+.chess-divider-inner{display:flex;align-items:center;gap:0;white-space:nowrap;animation:chessScroll 22s linear infinite}
+.chess-divider-inner span{font-size:1.1rem;padding:0 6px;opacity:.13;transition:opacity .3s}
+.chess-divider-inner span:hover{opacity:.55}
+@keyframes chessScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-.f1-emoji {
-  position: fixed;
-  left: 20px;
-  top: 50%;
-  z-index: 50;
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  background: rgba(26, 32, 44, 0.7);
-  border-radius: 50%;
-  padding: 8px;
-  box-shadow: 0 4px 16px rgba(78, 205, 196, 0.2);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+/* Chess role-map section */
+.chess-roles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:16px}
+.chess-role-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:16px 14px;text-align:center;cursor:default;transition:border-color .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.chess-role-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,var(--glow-col,rgba(63,185,80,.08)),transparent 70%);opacity:0;transition:opacity .3s}
+.chess-role-card:hover::before{opacity:1}
+.chess-role-card:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.chess-piece{font-size:2.4rem;display:block;margin-bottom:10px;line-height:1;transition:transform .3s}
+.chess-role-card:hover .chess-piece{transform:scale(1.2) rotate(-5deg)}
+.chess-role-label{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.chess-role-desc{font-size:.72rem;color:var(--text2);line-height:1.5}
 
-body.light-theme .f1-emoji {
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+/* Chess piece on project card corner */
+.proj-chess{position:absolute;top:8px;left:10px;font-size:1.3rem;opacity:.55;transition:opacity .2s,transform .2s;line-height:1;z-index:2;pointer-events:none}
+.proj-card:hover .proj-chess{opacity:.9;transform:scale(1.15) rotate(-8deg)}
+.proj-featured-hero{position:relative}
 
-.f1-emoji.moving-up {
-  transform: translateY(calc(-50% - 50px)) rotate(5deg);
-}
+/* Chess sidebar icons */
+.sidebar a.chess{font-size:1rem}
 
-.f1-emoji.moving-down {
-  transform: translateY(calc(-50% + 50px)) rotate(-5deg);
-}
+/* Chess piece in section headings */
+.sec-chess{font-size:1.1rem;opacity:.6;margin-right:4px}
 
-.f1-emoji:hover {
-  box-shadow: 0 0 12px rgba(78, 205, 196, 0.6);
-  transform: translateY(-50%) scale(1.2) rotate(0deg);
-}
+/* Chessboard mini decoration */
+.mini-board{display:inline-grid;grid-template-columns:repeat(8,12px);gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden;vertical-align:middle;margin-left:10px;opacity:.35}
+.mini-board div{width:12px;height:12px}
+.mb-l{background:rgba(255,255,255,.06)}
+.mb-d{background:rgba(0,0,0,.25)}
 
-/* Tilt animation when not moving */
-.f1-emoji:not(.moving-up):not(.moving-down) {
-  animation: tilt 0.2s infinite alternate;
-}
-
-@keyframes tilt {
-  0% { transform: translateY(-50%) rotate(0deg); }
-  100% { transform: translateY(-50%) rotate(5deg); }
-}
-
-/* Hide on mobile to avoid clutter */
-@media (max-width: 768px) {
-  .f1-emoji {
-    display: none;
-  }
-}
-
-/* Disable animation for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .f1-emoji, .f1-emoji.moving-up, .f1-emoji.moving-down, .f1-emoji:hover {
-    transform: translateY(-50%) rotate(0deg);
-    transition: none;
-    animation: none;
-  }
-}
-.progress-bar {
-  display: none;
-}
-#particles-js {
-  opacity: 0.7;
-  animation: fadeIn 1s ease-in-out forwards;
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 0.7; }
-}
-#particles-js {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      background-image: url('https://images.unsplash.com/photo-1447433819943-74a1f0802f4d');
-      background-size: cover;
-      background-position: center;
-    }
-  </style>
+/* Glowing chess piece stat chip */
+.chess-stat{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.72rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text2)}
+.chess-stat .p{font-size:.95rem}
+</style>
 </head>
-<body class="text-[#f5f6f5]">
-  <!-- Full-page Particles Background -->
+<body>
 
+<canvas id="bg-canvas"></canvas>
+<div id="cur"></div><div id="cur-ring"></div>
 
-  <div class="custom-cursor" id="custom-cursor"></div>
-  <div class="peacock-feather"></div>
+<!-- FLOATING CHESS PIECES (ambient) -->
+<div class="chess-float" style="left:5%;animation-duration:18s;animation-delay:0s;font-size:2rem">&#9820;</div>
+<div class="chess-float" style="left:12%;animation-duration:24s;animation-delay:3s;font-size:1.4rem">&#9822;</div>
+<div class="chess-float" style="left:25%;animation-duration:20s;animation-delay:7s;font-size:1.8rem">&#9813;</div>
+<div class="chess-float" style="left:38%;animation-duration:16s;animation-delay:1s;font-size:1.3rem">&#9816;</div>
+<div class="chess-float" style="left:52%;animation-duration:22s;animation-delay:5s;font-size:2rem">&#9819;</div>
+<div class="chess-float" style="left:65%;animation-duration:19s;animation-delay:9s;font-size:1.5rem">&#9812;</div>
+<div class="chess-float" style="left:75%;animation-duration:25s;animation-delay:2s;font-size:1.6rem">&#9817;</div>
+<div class="chess-float" style="left:85%;animation-duration:17s;animation-delay:6s;font-size:1.8rem">&#9818;</div>
+<div class="chess-float" style="left:92%;animation-duration:21s;animation-delay:11s;font-size:1.3rem">&#9821;</div>
+<div class="chess-float" style="left:18%;animation-duration:26s;animation-delay:14s;font-size:1.1rem">&#9815;</div>
+<div class="chess-float" style="left:45%;animation-duration:23s;animation-delay:16s;font-size:1.4rem">&#9814;</div>
+<div class="chess-float" style="left:58%;animation-duration:28s;animation-delay:8s;font-size:1.2rem">&#9820;</div>
 
-  <!-- Preloader -->
-  <div class="preloader" id="preloader">
-    <div class="loader"></div>
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pl-line">[ OK ] Starting kernel bhageeratha-5.15.0...</div>
+  <div class="pl-line">[ OK ] Loading ml_stack.ko tensorflow pytorch xgboost...</div>
+  <div class="pl-line">[ OK ] Mounting /dev/portfolio on /home/bhageeratha...</div>
+  <div class="pl-line">[ OK ] Starting fastapi.service flask.service nextjs.service...</div>
+  <div class="pl-line">[ OK ] Welcome to Bhageeratha's Dev Environment</div>
+  <div class="pl-bar"><div class="pl-fill"></div></div>
+</div>
+
+<!-- FIXED -->
+<button id="btt" title="Back to top">&#8593;</button>
+<a href="#contact-sec" id="hire">$ hire --me</a>
+<div class="sidebar">
+  <a href="#hero" title="King — Home" class="chess" style="color:var(--orange)">&#9812;</a>
+  <a href="#skills-sec" title="Queen — Skills" class="chess" style="color:var(--purple)">&#9813;</a>
+  <a href="#exp-sec" title="Rook — Experience" class="chess" style="color:var(--cyan)">&#9814;</a>
+  <a href="#proj-sec" title="Bishop — Projects" class="chess" style="color:var(--green)">&#9815;</a>
+  <a href="#badges-sec" title="Knight — Badges" class="chess" style="color:var(--orange)">&#9816;</a>
+  <a href="#contact-sec" title="Pawn — Contact" class="chess" style="color:var(--text2)">&#9817;</a>
+</div>
+
+<!-- NAV -->
+<nav class="above">
+  <div class="nav-w">
+    <a href="#hero" class="nav-brand">
+      <img src="https://avatars.githubusercontent.com/u/172971697?v=4" alt="avatar" onerror="this.src='https://github.com/identicons/bhageeratha.png'"/>
+      <span class="p1">bhageeratha</span><span class="p2">@</span><span class="p3">portfolio</span><span class="p2">:~$</span>
+    </a>
+    <div class="nav-links">
+      <a href="#skills-sec">skills</a>
+      <a href="#exp-sec">git log</a>
+      <a href="#proj-sec">repos</a>
+      <a href="#badges-sec">badges</a>
+      <a href="#contact-sec">contact</a>
+    </div>
+    <div class="nav-r">
+      <button class="nav-btn" id="theme-btn">&#9728; light</button>
+      <button class="nav-btn hamburger" onclick="document.getElementById('mob-menu').classList.toggle('open')">&#9776; menu</button>
+    </div>
   </div>
-
-  <!-- Theme Toggle -->
-  <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-2 rounded-full glass neumorph" aria-label="Toggle dark/light theme">
-    <svg id="theme-icon" class="w-6 h-6 text-[#4ecdc4]" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
-    </svg>
-  </button>
-
-  <!-- Back to Top Button -->
-  <button id="back-to-top" class="glass neumorph" aria-label="Back to top">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-    </svg>
-  </button>
-
-  <!-- Hire Me Button -->
-  <a href="#contact" class="hire-me-btn" aria-label="Hire Me">Hire Me</a>
-
-  <!-- Sticky Sidebar -->
-  <div class="sidebar">
-    <a href="#about" title="About" aria-label="Go to About section">🔍</a>
-    <a href="#skills" title="Skills" aria-label="Go to Skills section">💻</a>
-    <a href="#experience" title="Experience" aria-label="Go to Experience section">📅</a>
-    <a href="#projects" title="Projects" aria-label="Go to Projects section">🚀</a>
-    <a href="#analytics" title="Analytics" aria-label="Go to Analytics section">📊</a>
-    <a href="#badges" title="Badges" aria-label="Go to Badges section">🏅</a>
-    <a href="#posts" title="Posts" aria-label="Go to Posts section">📝</a>
-    <a href="#contact" title="Contact" aria-label="Go to Contact section">📧</a>
+  <div id="mob-menu">
+    <a href="#skills-sec" onclick="this.closest('#mob-menu').classList.remove('open')">skills</a>
+    <a href="#exp-sec" onclick="this.closest('#mob-menu').classList.remove('open')">git log</a>
+    <a href="#proj-sec" onclick="this.closest('#mob-menu').classList.remove('open')">repos</a>
+    <a href="#badges-sec" onclick="this.closest('#mob-menu').classList.remove('open')">badges</a>
+    <a href="#contact-sec" onclick="this.closest('#mob-menu').classList.remove('open')">contact</a>
   </div>
- <div class="f1-emoji" id="f1-emoji" role="img" aria-label="Formula 1 Car Emoji">✌️</div>
-  <!-- Navigation Bar -->
-  <nav aria-label="Main navigation" class="fixed w-full top-0 left-0 z-40 bg-[#1a202c]/90 backdrop-blur shadow transition duration-300">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
-      <a href="#" class="flex items-center gap-2 font-black text-2xl text-[#4ecdc4] tracking-wider" aria-label="Home">
-        <img src="./bhageeratha_profile.jpg" alt="Bhageeratha Reddy Logo" class="w-10 h-10 rounded-full" loading="lazy" />
-        Bhageeratha Reddy
-      </a>
-      <div class="hidden md:flex space-x-8 text-lg">
-        <a href="#about" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">About</a>
-        <a href="#skills" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">Skills</a>
-        <a href="#experience" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">Experience</a>
-        <a href="#education" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">Education</a>
-        <a href="#projects" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">Projects</a>
-        <a href="#analytics" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">Analytics</a>
-        <a href="#badges" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">Badges</a>
-        <a href="#posts" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">Posts</a>
-        <a href="#contact" class="hover:text-[#2a9d8f] transition focus:text-[#2a9d8f]" tabindex="0">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="above">
+  <canvas id="hero-net"></canvas>
+  <div class="wrap hero-inner">
+    <div class="hero-grid fade">
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <img src="./PROFILE_PICTURE.jpg" alt="Bhageeratha Reddy" onerror="this.src='https://avatars.githubusercontent.com/u/172971697?v=4'"/>
+        <div class="avatar-dot" title="Open to work"></div>
       </div>
-      <button aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
-        onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
-        class="md:hidden text-[#4ecdc4] focus:outline-none">
-        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/></svg>
-      </button>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-[#2d3748] px-4 py-2">
-      <a href="#about" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">About</a>
-      <a href="#skills" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">Skills</a>
-      <a href="#experience" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">Experience</a>
-      <a href="#education" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">Education</a>
-      <a href="#projects" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">Projects</a>
-      <a href="#analytics" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">Analytics</a>
-      <a href="#badges" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">Badges</a>
-      <a href="#posts" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">Posts</a>
-      <a href="#contact" class="block py-2 hover:text-[#2a9d8f]" tabindex="0">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="min-h-screen flex flex-col justify-center items-center px-4 pt-24 gradient-hero fade-section relative" data-transition-delay="0">
-    <div id="particles-js"></div>
-    <img src="./bhageeratha_profile.jpg" alt="Bhageeratha Reddy Profile" class="rounded-full w-48 mb-8 border-4 border-[#2a9d8f] shadow-2xl" loading="lazy" />
-    <h1 class="text-5xl md:text-7xl font-extrabold text-center leading-tight mb-4 drop-shadow-lg">
-      Kuppireddy Bhageeratha Reddy
-    </h1>
-    <h2 class="text-2xl md:text-3xl text-center mb-6 font-bold drop-shadow-lg">
-      Aspiring Data Scientist & AI Developer
-    </h2>
-    <div class="code-typing">
-      <span id="typed"></span>
-    </div>
-    <p class="text-lg md:text-xl text-center mb-8 max-w-2xl font-medium">
-      Speed of F1. Spirit of Zanpakuto. Dreaming of the Grand Line.<br>Building intelligent systems inspired by the cosmos.
-    </p>
-    <div class="flex gap-6">
-      <a href="#projects" class="neumorph px-10 py-4 font-bold text-lg text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition focus:outline-none" tabindex="0">🚀 Explore My Work</a>
-      <button
-  id="resume-preview"
-  onclick="window.open('./resume_bhagi.pdf', '_blank')"
-  class="neumorph px-10 py-4 font-bold text-lg text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition focus:outline-none"
-  tabindex="0"
->
-  Preview Resume
-</button>
-<a href="./resume_bhagi.pdf" download class="neumorph px-10 py-4 font-bold text-lg text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition focus:outline-none" tabindex="0">Download CV</a>
-    </div>
-  </section>
-
-
-  <!-- Resume Preview Modal -->
-  <div id="resume-modal" aria-hidden="true">
-    <div class="modal-content glass neumorph">
-      <span class="close" aria-label="Close modal">×</span>
-      <h2 class="text-2xl font-bold mb-4 text-[#4ecdc4]">Resume Preview</h2>
-      <iframe src="https://via.placeholder.com/800x1000?text=Resume+Preview" class="w-full h-[600px] rounded-lg" title="Resume Preview"></iframe>
-      <a href="https://via.placeholder.com/150?text=CV.pdf" download class="block mt-4 text-center neumorph px-6 py-3 font-bold text-lg text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition" tabindex="0">Download Resume</a>
-    </div>
-  </div>
-
-  <!-- About -->
-  <section id="about" class="max-w-5xl mx-auto px-4 py-20 fade-section parallax" style="background-image: url('https://images.unsplash.com/photo-1618005182380-9f7d7e0b7255');" data-transition-delay="0.2">
-    <div class="glass p-10 flex flex-col md:flex-row gap-8 items-center shadow-xl animate-fadeInUp">
-      <img src="./Bleach Tattoo.jpeg" alt="Profile" class="w-36 h-36 rounded-full object-cover shadow-2xl border-2 border-[#2a9d8f] transition-transform duration-700 ease-in-out hover:scale-105" loading="lazy" />
-      <div class="transition-opacity duration-[1200ms] delay-[300ms] ease-in-out opacity-0 fade-in-on-scroll">
-        <h2 class="text-4xl font-extrabold mb-4 text-[#4ecdc4]">About Me</h2>
-        <p class="text-lg font-medium leading-relaxed">
-          Aspiring Data Scientist specializing in NLP and Deep Learning. I craft AI-powered solutions using Python, Java, Flask, and MongoDB. Inspired by the precision of F1, the depth of Interstellar, and the layered complexity of Inception, I build systems that push the boundaries of intelligence.
-        </p>
-      </div>
-    </div>
-  </section>
-<!-- Skills -->
-<section id="skills" class="max-w-5xl mx-auto px-4 py-20 fade-section" data-transition-delay="0.4">
-  <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Skills</h2>
-  <div class="glass p-10 shadow-lg">
-    <ul class="grid grid-cols-2 md:grid-cols-3 gap-6 text-lg">
-      <!-- Each skill item -->
-      <li class="flex items-center gap-3 p-3 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl bg-[#1e1e2f]/20">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-6 h-6">
-        Python
-      </li>
-      <li class="flex items-center gap-3 p-3 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl bg-[#1e1e2f]/20">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="w-6 h-6">
-        Java
-      </li>
-      <li class="flex items-center gap-3 p-3 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl bg-[#1e1e2f]/20">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask" class="w-6 h-6">
-        Flask & Django
-      </li>
-      <li class="flex items-center gap-3 p-3 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl bg-[#1e1e2f]/20">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" class="w-6 h-6">
-        TensorFlow & Scikit-learn
-      </li>
-      <li class="flex items-center gap-3 p-3 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl bg-[#1e1e2f]/20">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="w-6 h-6">
-        MongoDB & MySQL
-      </li>
-      <li class="flex items-center gap-3 p-3 rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl bg-[#1e1e2f]/20">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="w-6 h-6">
-        NLP & Deep Learning
-      </li>
-    </ul>
-  </div>
-</section>
-
-
-
-  <!-- Tools -->
-  <section id="tools" class="max-w-5xl mx-auto px-4 py-12 fade-section" data-transition-delay="0.5">
-    <h2 class="text-3xl font-extrabold mb-6 text-[#4ecdc4]">Tools</h2>
-    <div class="glass p-10 shadow-lg">
-      <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
-        <li class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" class="w-6 h-6">VS Code</li>
-        <li class="flex items-center gap-3"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Colaboratory_SVG_Logo.svg" alt="Colab" class="w-6 h-6">Google Colab</li>
-        <li class="flex items-center gap-3"><img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Jupyter_logo.svg" alt="Jupyter" class="w-6 h-6">Jupyter Notebook</li>
-        <li class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-6 h-6">Git</li>
-        <li class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" class="w-6 h-6">Linux</li>
-        <li class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="w-6 h-6">PyTorch</li>
-        <li class="flex items-center gap-3">
-          <img src="https://img.icons8.com/color/48/000000/tableau-software.png" alt="Tableau" class="w-6 h-6">Tableau
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Libraries -->
-  <section id="libraries" class="max-w-5xl mx-auto px-4 py-12 fade-section" data-transition-delay="0.6">
-    <h2 class="text-3xl font-extrabold mb-6 text-[#4ecdc4]">Libraries</h2>
-    <div class="glass p-10 shadow-lg">
-      <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
-        <li class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" class="w-6 h-6">NumPy</li>
-        <li class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" class="w-6 h-6">Pandas</li>
-        <li class="flex items-center gap-3"><img src="https://huggingface.co/front/assets/huggingface_logo.svg" alt="Hugging Face" class="w-6 h-6">Hugging Face</li>
-        <li class="flex items-center gap-3">
-          <img src="https://img.icons8.com/ios-filled/50/4ecdc4/book.png" alt="NLTK" class="w-6 h-6">NLTK
-        </li>
-        <li class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="w-6 h-6">PyTorch</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Experience & Education Timeline -->
-  <section id="experience" class="max-w-5xl mx-auto px-4 py-20 fade-section" data-transition-delay="0.6">
-    <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Experience & Education</h2>
-    <div class="glass rounded-lg p-10 shadow-xl timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content glass p-6 neumorph relative">
-          <h3 class="font-bold text-[#4ecdc4]">Freelancer</h3>
-          <span>2023 - Present</span>
-          <p>Developed AI-driven web applications (sentiment analysis, chatbots) using Flask & deep learning. Collaborated with clients for scalable solutions, achieving 90%+ NLP accuracy. Deployed projects to cloud platforms.</p>
-          <div class="timeline-summary">AI web apps with 90%+ accuracy, cloud deployment.</div>
+      <div>
+        <div class="hero-greeting">// Hello, World! Let's build something great.</div>
+        <div class="hero-name">Kuppireddy<br><em>Bhageeratha Reddy</em>
+          <div class="mini-board" style="display:inline-grid">
+            <div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div>
+            <div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div>
+            <div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div>
+            <div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div>
+            <div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div>
+            <div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div>
+            <div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div>
+            <div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div><div class="mb-d"></div><div class="mb-l"></div>
+          </div>
         </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content glass p-6 neumorph relative">
-          <h3 class="font-bold text-[#4ecdc4]">VIT-AP University</h3>
-          <span>2022 - 2026</span>
-          <p>B.Tech Computer Science, CGPA: 8.84</p>
-          <div class="timeline-summary">Pursuing B.Tech with strong academic performance.</div>
+        <div class="hero-role"><span id="typed-role"></span><span class="cursor-b"></span></div>
+        <div class="hero-chips">
+          <span class="chip chip-g">&#9817; Linux</span>
+          <span class="chip chip-b">&#9816; Python &bull; TS &bull; Java</span>
+          <span class="chip chip-p">&#9815; NLP &bull; Deep Learning</span>
+          <span class="chip chip-o">&#9814; FastAPI &bull; Next.js &bull; React</span>
+          <span class="chip chip-g">&#9813; 53 Repos &bull; Open Source</span>
+          <span class="chip chip-b">&#9812; AWS &bull; Vercel &bull; Netlify</span>
         </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content glass p-6 neumorph relative">
-          <h3 class="font-bold text-[#4ecdc4]">Sri Chaitanya Junior College</h3>
-          <span>2020 - 2022</span>
-          <p>Intermediate, 96.7%</p>
-          <div class="timeline-summary">High academic excellence in intermediate studies.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content glass p-6 neumorph relative">
-          <h3 class="font-bold text-[#4ecdc4]">Sri Chaitanya School</h3>
-          <span>2020</span>
-          <p>High School, 99.6%</p>
-          <div class="timeline-summary">Top performer in high school education.</div>
+        <div class="hero-btns">
+          <a href="#proj-sec" class="btn btn-g">&#9638; View Repos</a>
+          <button class="btn btn-o" id="resume-btn">&#8615; Resume</button>
+          <a href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" class="btn btn-o">&#9671; GitHub</a>
         </div>
       </div>
     </div>
-  </section>
-<div id="projects-particles" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"></div>
-<!-- Projects -->
-<section id="projects" class="max-w-5xl mx-auto px-4 py-20 fade-section parallax" style="background-image: url('https://images.unsplash.com/photo-1618005182380-9f7d7e0b7255');" data-transition-delay="0.8">
-  <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Projects</h2>
-  <div class="flex flex-wrap gap-4 mb-8 justify-center">
-    <button class="filter-btn neumorph px-4 py-2 text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition active" data-filter="all" tabindex="0">All</button>
-    <button class="filter-btn neumorph px-4 py-2 text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition" data-filter="Python" tabindex="0">Python</button>
-    <button class="filter-btn neumorph px-4 py-2 text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition" data-filter="Flask" tabindex="0">Flask</button>
-    <button class="filter-btn neumorph px-4 py-2 text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition" data-filter="Deep Learning" tabindex="0">Deep Learning</button>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 project-container">
 
-    <!-- Sentiment Analysis -->
-    <div class="glass rounded-lg p-6 shadow-lg tilt neumorph project-card project" data-tags="Python,Flask,Deep Learning" data-tilt data-tilt-max="10">
-      <img src="https://www.cision.com/content/dam/cision-revamp/cision-optimized/resources/articles/thumbnails/what-is-sentinent-analysis-thumbnail.png" alt="Sentiment Analysis App" class="rounded-lg mb-4 object-cover h-40 w-full" loading="lazy" />
-      <h3 class="text-xl font-bold mb-1 text-[#2a9d8f]">Sentiment Analysis Web Application</h3>
-      <p class="text-sm mb-2">Flask app using VADER and LIME for real-time sentiment analysis.</p>
-      <p class="text-xs mb-3">Technologies: Python, Flask, VADER, LIME</p>
-      <div class="mt-auto flex gap-3">
-        <a href="https://github.com/kuppireddybhageerathareddy1110/sentiment-analysis-app.git" target="_blank" rel="noopener" class="text-[#4ecdc4] hover:text-[#2a9d8f] hover:underline text-sm neumorph px-3 py-1">GitHub</a>
+    <!-- TERMINAL -->
+    <div class="term fade" style="transition-delay:.15s">
+      <div class="term-bar">
+        <div class="td td-r"></div><div class="td td-y"></div><div class="td td-g"></div>
+        <span class="term-title">bhageeratha@arch &mdash; bash &mdash; 90x24</span>
+      </div>
+      <div class="term-body">
+        <div><span class="tp">bhageeratha@arch</span><span class="tsym">:</span><span class="tpath">~/</span><span class="tsym">$ </span><span>python3 -c "import me; me.introduce()"</span></div>
+        <span class="to to-ok">&#10003; Loaded: tensorflow, pytorch, xgboost, lightgbm, shap, optuna</span>
+        <span class="to to-i">&#8594; Name : Kuppireddy Bhageeratha Reddy</span>
+        <span class="to to-i">&#8594; Role : AI Engineer | Full-Stack Dev | Java HPC</span>
+        <span class="to to-i">&#8594; Focus: NLP, Deep Learning, AutoML, Computer Vision</span>
+        <span class="to to-ok">&#10003; Flagship: AutoML-STUDIO &mdash; live @ automl-studio.netlify.app</span>
+        <span class="to to-ok">&#10003; CGPA 8.84 &mdash; VIT-AP University 2022-2026 &mdash; 53 repos</span>
+        <div style="margin-top:8px"><span class="tp">bhageeratha@arch</span><span class="tsym">:</span><span class="tpath">~/</span><span class="tsym">$ </span><span id="typed-term"></span></div>
       </div>
     </div>
 
-    <!-- Medical Chatbot -->
-    <div class="glass rounded-lg p-6 shadow-lg tilt neumorph project-card project" data-tags="Python,Deep Learning" data-tilt data-tilt-max="10">
-      <img src="https://media.istockphoto.com/id/1401811766/vector/a-cute-round-robot-wearing-a-stethoscope-new-technologies-and-lifestyle.jpg?s=612x612&w=0&k=20&c=KcnoJHezDoLSrUMXHpAP4KBjxMd2XECUHG0irdLyhmE=" alt="Medical Chatbot" class="rounded-lg mb-4 object-cover h-40 w-full" loading="lazy" />
-      <h3 class="text-xl font-bold mb-1 text-[#2a9d8f]">Medical Chatbot</h3>
-      <p class="text-sm mb-2">Deep learning chatbot using SBERT and BioBERT for health queries.</p>
-      <p class="text-xs mb-3">Technologies: Python, SBERT, BioBERT</p>
-      <div class="mt-auto flex gap-3">
-        <a href="https://github.com/kuppireddybhageerathareddy1110/bot1.git" target="_blank" rel="noopener" class="text-[#4ecdc4] hover:text-[#2a9d8f] hover:underline text-sm neumorph px-3 py-1">GitHub</a>
+    <!-- CONTRIBUTION GRAPH -->
+    <div class="contrib-box fade" style="transition-delay:.3s">
+      <div class="contrib-top">
+        <span><strong id="contrib-count">0</strong> contributions in the last year</span>
+        <span>kuppireddybhageerathareddy1110</span>
+      </div>
+      <canvas id="contrib-canvas" height="88"></canvas>
+      <div class="contrib-legend">
+        Less
+        <div class="cl" style="background:var(--bg3)"></div>
+        <div class="cl" style="background:var(--green3)"></div>
+        <div class="cl" style="background:var(--green2)"></div>
+        <div class="cl" style="background:var(--green)"></div>
+        <div class="cl" style="background:var(--green4)"></div>
+        More
       </div>
     </div>
 
-    <!-- Drowsiness Detection -->
-    <div class="glass rounded-lg p-6 shadow-lg tilt neumorph project-card project" data-tags="Python" data-tilt data-tilt-max="10">
-      <img src="./image.png" alt="Drowsiness Detection" class="rounded-lg mb-4 object-cover h-40 w-full" loading="lazy" />
-      <h3 class="text-xl font-bold mb-1 text-[#2a9d8f]">Drowsiness Detection System</h3>
-      <p class="text-sm mb-2">Real-time OpenCV system on Raspberry Pi for drowsiness detection.</p>
-      <p class="text-xs mb-3">Technologies: Python, OpenCV, Raspberry Pi</p>
-      <div class="mt-auto flex gap-3">
-        <a href="https://github.com/KUPPIREDDYBHAGEERATHAREDDY11/ECS-1-DROWSINESS-DETECTION-SYSTEM.git" target="_blank" rel="noopener" class="text-[#4ecdc4] hover:text-[#2a9d8f] hover:underline text-sm neumorph px-3 py-1">GitHub</a>
+    <!-- SNAKE ANIMATION -->
+    <div class="snake-box fade" style="transition-delay:.45s">
+      <div class="snake-top">
+        <span>Contribution Snake &mdash; eating commits</span>
+        <strong>&#128027; live</strong>
       </div>
+      <canvas id="snake-canvas" height="80"></canvas>
     </div>
 
-    <!-- Gas Detection -->
-    <div class="glass rounded-lg p-6 shadow-lg tilt neumorph project-card project" data-tags="Arduino" data-tilt data-tilt-max="10">
-      <img src="https://projects.arduinocontent.cc/5d68945e-7f08-4907-86c0-2d23e4cad955.png" alt="Gas Detection" class="rounded-lg mb-4 object-cover h-40 w-full" loading="lazy" />
-      <h3 class="text-xl font-bold mb-1 text-[#2a9d8f]">Gas & Smoke Detection System</h3>
-      <p class="text-sm mb-2">Arduino-based system with MQ-2 sensors for gas detection.</p>
-      <p class="text-xs mb-3">Technologies: Arduino, MQ-2 Sensors</p>
-      <div class="mt-auto flex gap-3">
-        <a href="https://github.com/KUPPIREDDYBHAGEERATHAREDDY11/ECS2-GAS-AND-SMOKE-DETECTION-SYSTEM.git" target="_blank" rel="noopener" class="text-[#4ecdc4] hover:text-[#2a9d8f] hover:underline text-sm neumorph px-3 py-1">GitHub</a>
+    <!-- CHESS ROLE MAP -->
+    <div style="margin-top:32px" class="fade" style="transition-delay:.55s">
+      <div style="font-family:var(--mono);font-size:.72rem;color:var(--text2);margin-bottom:14px;">$ cat ~/chess_strategy.md <span style="color:var(--green)"># each piece = a skill role</span></div>
+      <div class="chess-roles">
+        <div class="chess-role-card" style="--glow-col:rgba(227,179,65,.1);border-color:rgba(227,179,65,.2)">
+          <span class="chess-piece" style="color:#e3b341;text-shadow:0 0 12px rgba(227,179,65,.4)">&#9812;</span>
+          <div class="chess-role-label" style="color:var(--orange)">King</div>
+          <div class="chess-role-desc">Python &mdash; the foundation everything else is built around</div>
+        </div>
+        <div class="chess-role-card" style="--glow-col:rgba(188,140,255,.1);border-color:rgba(188,140,255,.2)">
+          <span class="chess-piece" style="color:#bc8cff;text-shadow:0 0 12px rgba(188,140,255,.4)">&#9813;</span>
+          <div class="chess-role-label" style="color:var(--purple)">Queen</div>
+          <div class="chess-role-desc">AutoML &bull; SHAP &mdash; most powerful, moves in all directions</div>
+        </div>
+        <div class="chess-role-card" style="--glow-col:rgba(88,166,255,.1);border-color:rgba(88,166,255,.2)">
+          <span class="chess-piece" style="color:#58a6ff;text-shadow:0 0 12px rgba(88,166,255,.4)">&#9814;</span>
+          <div class="chess-role-label" style="color:var(--cyan)">Rook</div>
+          <div class="chess-role-desc">FastAPI &bull; Flask &mdash; straight-line backend power</div>
+        </div>
+        <div class="chess-role-card" style="--glow-col:rgba(63,185,80,.1);border-color:rgba(63,185,80,.2)">
+          <span class="chess-piece" style="color:#3fb950;text-shadow:0 0 12px rgba(63,185,80,.4)">&#9815;</span>
+          <div class="chess-role-label" style="color:var(--green)">Bishop</div>
+          <div class="chess-role-desc">TensorFlow &bull; PyTorch &mdash; diagonal deep learning angles</div>
+        </div>
+        <div class="chess-role-card" style="--glow-col:rgba(227,179,65,.1);border-color:rgba(227,179,65,.2)">
+          <span class="chess-piece" style="color:#e3b341;text-shadow:0 0 12px rgba(227,179,65,.4)">&#9816;</span>
+          <div class="chess-role-label" style="color:var(--orange)">Knight</div>
+          <div class="chess-role-desc">Java HPC &bull; Linux &mdash; unconventional L-shaped moves</div>
+        </div>
+        <div class="chess-role-card" style="--glow-col:rgba(248,81,73,.1);border-color:rgba(248,81,73,.2)">
+          <span class="chess-piece" style="color:#f85149;text-shadow:0 0 12px rgba(248,81,73,.4)">&#9817;</span>
+          <div class="chess-role-label" style="color:var(--red)">Pawn</div>
+          <div class="chess-role-desc">Git &bull; Docker &mdash; ground level, but can become a queen</div>
+        </div>
       </div>
     </div>
-
   </div>
 </section>
 
+<!-- CHESS DIVIDER -->
+<div class="chess-divider above">
+  <div class="chess-divider-inner">
+    <span>&#9812;</span><span>&#9813;</span><span>&#9814;</span><span>&#9815;</span><span>&#9816;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span>
+    <span>&#9818;</span><span>&#9819;</span><span>&#9820;</span><span>&#9821;</span><span>&#9822;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span>
+    <span>&#9812;</span><span>&#9813;</span><span>&#9814;</span><span>&#9815;</span><span>&#9816;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span>
+    <span>&#9818;</span><span>&#9819;</span><span>&#9820;</span><span>&#9821;</span><span>&#9822;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span>
+  </div>
+</div>
 
-  <!-- Analytics Dashboard
-  <section id="analytics" class="max-w-5xl mx-auto px-4 py-20 fade-section" data-transition-delay="1.0">
-    <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Project Analytics</h2>
-    <div class="glass rounded-lg p-10 shadow-xl">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h3 class="font-bold text-[#2a9d8f] mb-4">Project Metrics</h3>
-          <canvas id="analytics-chart" height="200"></canvas>
+<!-- SKILLS -->
+<section id="skills-sec" class="above">
+  <div class="wrap">
+    <div class="sec-tag fade">$ ls -la ~/skills/ | tree</div>
+    <div class="sec-h fade"><span class="sec-chess">&#9813;</span>Skills &amp; Stack</div>
+    <div class="skills-layout">
+      <div class="fade">
+        <div class="file-tree">
+<span class="ft-dir">bhageeratha@arch</span>:<span class="ft-dir">~/skills</span>$ tree .<br>
+<span class="ft-dir">.</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; languages/</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">python3.12*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">typescript5*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">javascript-es2024*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">java17-openjdk*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">cpp17*</span><br>
+<span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-lib">r-4.3.whl</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; ai_ml/</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">tensorflow2.16*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">pytorch2.3*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">scikit-learn.whl</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">xgboost.whl</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">lightgbm.whl</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">shap.whl</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">optuna.whl</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">transformers.whl</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">opencv-python.whl</span><br>
+<span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-lib">nltk.whl</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; web_stack/</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">fastapi*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">flask-3.0*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">django-5*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">nextjs-14*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">react-18*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">tailwindcss.css</span><br>
+<span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-lib">vite.config.ts</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; databases/</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">mongodb.conf</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">mysql.conf</span><br>
+<span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-cfg">postgresql.conf</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; devops_cloud/</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">docker*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">git*</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">aws.key</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">vercel.json</span><br>
+<span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">netlify.toml</span><br>
+<span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-cfg">firebase.json</span><br>
+<span class="ft-c">&#9492;&#9472;&#9472;</span> <span class="ft-dir">&#128193; data_science/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-lib">pandas.whl</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-lib">numpy.whl</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-lib">matplotlib.whl</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="ft-c">&#9492;&#9472;&#9472;</span> <span class="ft-lib">scipy.whl</span><br>
+<br>
+<span style="color:var(--text2)">8 directories, 41 files</span>
         </div>
-        <div>
-          <p><span class="font-bold text-[#4ecdc4]">Sentiment Analysis:</span> 120 Stars, 50 Forks</p>
-          <p><span class="font-bold text-[#4ecdc4]">Medical Chatbot:</span> 80 Stars, 30 Forks</p>
-          <p><span class="font-bold text-[#4ecdc4]">Drowsiness Detection:</span> 60 Stars, 20 Forks</p>
-          <p><span class="font-bold text-[#4ecdc4]">Gas & Smoke Detection:</span> 40 Stars, 15 Forks</p>
+      </div>
+      <div class="fade" style="transition-delay:.1s">
+        <div class="graph-box">
+          <canvas id="sk-canvas"></canvas>
+          <div class="sk-legend">
+            <div class="sk-leg"><div class="sk-dot" style="background:var(--green)"></div>Languages</div>
+            <div class="sk-leg"><div class="sk-dot" style="background:var(--cyan)"></div>Frameworks</div>
+            <div class="sk-leg"><div class="sk-dot" style="background:var(--purple)"></div>ML/AI</div>
+            <div class="sk-leg"><div class="sk-dot" style="background:var(--orange)"></div>DevOps</div>
+            <div class="sk-leg"><div class="sk-dot" style="background:var(--red)"></div>Cloud/DB</div>
+          </div>
         </div>
       </div>
     </div>
-  </section> -->
+    <div style="margin-top:10px;font-family:var(--mono);font-size:.72rem;color:var(--text2);" class="fade">$ skill --proficiency --sort=desc</div>
+    <div id="skill-chips" class="skill-chips fade" style="transition-delay:.1s"></div>
+  </div>
+</section>
 
-  <!-- Badges -->
-  <section id="badges" class="max-w-5xl mx-auto px-4 py-20 fade-section" data-transition-delay="1.2">
-    <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">LinkedIn Badges</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="glass rounded-lg p-6 shadow-lg tilt neumorph text-center" data-tilt data-tilt-max="10">
-        <img src="./applied-data-science-with-python-level-2.png" alt="Data Science Badge" class="badge-img mx-auto" loading="lazy" />
-        <h3 class="font-bold mb-2 text-[#4ecdc4]">Data Science with Python</h3>
-        <p class="text-sm">Python & statistical analysis.</p>
+<!-- GIT LOG -->
+<section id="exp-sec" class="above">
+  <div class="wrap">
+    <div class="sec-tag fade">$ git log --graph --all --oneline</div>
+    <div class="sec-h fade"><span class="sec-chess">&#9814;</span>Experience &amp; Education</div>
+    <div class="git-log fade">
+      <div class="gl-head"><b>commit</b> <span>author</span> <span>date</span> <span>message</span></div>
+
+      <div class="gl-commit">
+        <div class="gl-tree">
+          <div class="gl-node" style="border-color:var(--green);background:rgba(63,185,80,.15);position:relative">
+            <span class="gl-branch" style="color:var(--green);border-color:rgba(63,185,80,.35);background:rgba(63,185,80,.07)">HEAD &rarr; main</span>
+          </div>
+          <div class="gl-line" style="background:var(--green);opacity:.4"></div>
+        </div>
+        <div class="gl-body">
+          <div class="gl-hash">3fb950a</div>
+          <div class="gl-title">feat: AI-driven freelance &mdash; 90%+ NLP accuracy, cloud deployments</div>
+          <div class="gl-meta"><span>&#128100; Bhageeratha Reddy</span><span>&#128197; 2023 &ndash; Present</span></div>
+          <div class="gl-desc">Developed full-stack AI web apps (sentiment analysis, chatbots, AutoML) using Flask, FastAPI &amp; deep learning. Deployed to AWS, Vercel &amp; Netlify. Clients across tech &amp; healthcare domains.</div>
+          <div class="gl-tags">
+            <span class="gl-tag chip-g">FastAPI</span><span class="gl-tag chip-b">Flask</span><span class="gl-tag chip-p">Deep Learning</span><span class="gl-tag chip-o">Cloud</span>
+          </div>
+        </div>
       </div>
-      <div class="glass rounded-lg p-6 shadow-lg tilt neumorph text-center" data-tilt data-tilt-max="10">
-        <img src="./deep-learning-using-tensorflow (1).png" alt="Deep Learning Badge" class="badge-img mx-auto" loading="lazy" />
-        <h3 class="font-bold mb-2 text-[#4ecdc4]">Deep Learning Using Tensorflow</h3>
-        <p class="text-sm">Expertise in neural networks and TensorFlow.</p>
+
+      <div class="gl-commit">
+        <div class="gl-tree">
+          <div class="gl-node" style="border-color:var(--cyan);background:rgba(88,166,255,.15)"></div>
+          <div class="gl-line" style="background:var(--cyan);opacity:.4"></div>
+        </div>
+        <div class="gl-body">
+          <div class="gl-hash">58a6ff2</div>
+          <div class="gl-title">init: B.Tech Computer Science @ VIT-AP University</div>
+          <div class="gl-meta"><span>&#127963; VIT-AP University</span><span>&#128197; 2022 &ndash; 2026</span><span style="color:var(--green)">CGPA: 8.84</span></div>
+          <div class="gl-desc">Specialization in AI/ML. Built AutoML-STUDIO, medical chatbots, drowsiness detection systems, and HPC matrix engines. Consistent top performer.</div>
+          <div class="gl-tags"><span class="gl-tag chip-b">CS</span><span class="gl-tag chip-p">AI/ML</span><span class="gl-tag chip-g">HPC</span></div>
+        </div>
       </div>
-      <div class="glass rounded-lg p-6 shadow-lg tilt neumorph text-center" data-tilt data-tilt-max="10">
-        <img src="./data-visualization-with-r.png" alt="DATA VISUALIZATION WITH R" class="badge-img mx-auto" loading="lazy" />
-        <h3 class="font-bold mb-2 text-[#4ecdc4]">DATA VISUALIZATION WITH R </h3>
-        <p class="text-sm">Proficiency in R for VISUALIZATION.</p>
+
+      <div class="gl-commit">
+        <div class="gl-tree">
+          <div class="gl-node" style="border-color:var(--orange);background:rgba(227,179,65,.15)"></div>
+          <div class="gl-line" style="background:var(--orange);opacity:.4"></div>
+        </div>
+        <div class="gl-body">
+          <div class="gl-hash">e3b341c</div>
+          <div class="gl-title">score: Sri Chaitanya Junior College &mdash; 96.7%</div>
+          <div class="gl-meta"><span>&#127979; Sri Chaitanya Junior College</span><span>&#128197; 2020 &ndash; 2022</span><span style="color:var(--green)">96.7%</span></div>
+          <div class="gl-desc">Top-tier academic performance in Mathematics, Physics &amp; Chemistry. Foundation for computational thinking.</div>
+        </div>
       </div>
-      <div class="glass rounded-lg p-6 shadow-lg tilt neumorph text-center" data-tilt data-tilt-max="10">
-        <img src="./aws-academy-graduate-aws-academy-cloud-architecting.png" alt="AWS Academy Cloud Architecting" class="badge-img mx-auto" loading="lazy" />
-        <h3 class="font-bold mb-2 text-[#4ecdc4]">AWS Academy Graduate - AWS Academy Cloud Architecting</h3>
-        <p class="text-sm">Cloud Architecting.</p>
-      </div>
-      <div class="glass rounded-lg p-6 shadow-lg tilt neumorph text-center" data-tilt data-tilt-max="10">
-        <img src="./Adobe Express - file.png" alt="Oracle Cloud Infrastructure 2025 Certified Generative AI Professional" class="badge-img mx-auto" loading="lazy" />
-        <h3 class="font-bold mb-2 text-[#4ecdc4]">Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</h3>
-        <p class="text-sm">Gen AI.</p>
-      </div>
-      <div class="glass rounded-lg p-6 shadow-lg tilt neumorph text-center" data-tilt data-tilt-max="10">
-        <img src="./OCI25DSOCP-Photoroom.png" alt="Oracle Cloud Infrastructure 2025 Certified Data Science Professional" class="badge-img mx-auto" loading="lazy" />
-        <h3 class="font-bold mb-2 text-[#4ecdc4]">Oracle Cloud Infrastructure 2025 Certified Data Science Professional</h3>
-        <p class="text-sm">DATA SCIENCE.</p>
+
+      <div class="gl-commit">
+        <div class="gl-tree">
+          <div class="gl-node" style="border-color:var(--purple);background:rgba(188,140,255,.15)"></div>
+        </div>
+        <div class="gl-body">
+          <div class="gl-hash">bc8cff9</div>
+          <div class="gl-title">init: Sri Chaitanya School &mdash; 99.6%</div>
+          <div class="gl-meta"><span>&#127979; Sri Chaitanya School</span><span>&#128197; 2020</span><span style="color:var(--green)">99.6%</span></div>
+          <div class="gl-desc">Perfect academic foundation. Top performer across all subjects.</div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="max-w-5xl mx-auto px-4 py-20 fade-section" data-transition-delay="1.4">
-    <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Testimonials</h2>
-    <div class="glass rounded-lg p-10 shadow-xl">
-      <div class="swiper">
+<!-- CHESS DIVIDER -->
+<div class="chess-divider above">
+  <div class="chess-divider-inner" style="animation-direction:reverse">
+    <span>&#9820;</span><span>&#9822;</span><span>&#9821;</span><span>&#9819;</span><span>&#9823;</span><span>&#9818;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span>
+    <span>&#9814;</span><span>&#9816;</span><span>&#9815;</span><span>&#9813;</span><span>&#9817;</span><span>&#9812;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span>
+    <span>&#9820;</span><span>&#9822;</span><span>&#9821;</span><span>&#9819;</span><span>&#9823;</span><span>&#9818;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span><span>&#9823;</span>
+    <span>&#9814;</span><span>&#9816;</span><span>&#9815;</span><span>&#9813;</span><span>&#9817;</span><span>&#9812;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span><span>&#9817;</span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="proj-sec" class="above">
+  <div class="wrap">
+    <div class="sec-tag fade">$ gh repo list kuppireddybhageerathareddy1110 --limit 9</div>
+    <div class="sec-h fade"><span class="sec-chess">&#9815;</span>Repositories</div>
+    <div class="proj-controls fade">
+      <button class="fbtn on" data-f="all">All</button>
+      <button class="fbtn" data-f="Python">Python</button>
+      <button class="fbtn" data-f="ML">ML/AI</button>
+      <button class="fbtn" data-f="FullStack">Full Stack</button>
+      <button class="fbtn" data-f="Java">Java/HPC</button>
+      <button id="shuf-btn"><span class="shuf-icon">&#8644;</span> git reorder</button>
+    </div>
+    <div class="proj-grid" id="proj-grid">
+
+      <!-- AutoML Studio FLAGSHIP -->
+      <div class="proj-card featured project" data-t="Python,ML,FullStack" style="grid-column:span 2">
+        <div class="proj-featured-hero">
+          <div class="proj-featured-badge">&#9813; Flagship &bull; 5 stars</div>
+          <div style="text-align:center;position:relative;z-index:1">
+            <div style="font-size:2.8rem">&#129302;</div>
+            <div style="font-family:var(--mono);font-size:.88rem;color:var(--green);font-weight:700;margin-top:5px">AutoML Studio</div>
+            <div style="font-family:var(--mono);font-size:.68rem;color:var(--text2);margin-top:3px">Full-Stack &bull; Deployed &bull; Live</div>
+          </div>
+          <div style="text-align:left;position:relative;z-index:1;font-family:var(--mono);font-size:.7rem;color:var(--text2);line-height:1.9">
+            <div style="color:var(--green)">&#10003; FastAPI + Next.js + React</div>
+            <div style="color:var(--cyan)">&#10003; XGBoost + LightGBM + SHAP</div>
+            <div style="color:var(--purple)">&#10003; AutoML + EDA + Explainability</div>
+            <div style="color:var(--orange)">&#10003; Live: automl-studio.netlify.app</div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3178C6"></div>TypeScript &bull; Python</div>
+          <div class="proj-title">AutoML-STUDIO</div>
+          <div class="proj-desc">Production-ready full-stack AutoML platform. Upload CSV/XLSX, run EDA, statistical tests, automated ML with XGBoost/LightGBM, SHAP explainability, Optuna tuning. FastAPI backend on Render + Next.js frontend on Netlify.</div>
+          <div class="proj-stats"><span>&#11088; 5</span><span>&#8921; 0</span><span>&#127760; <a href="https://automl-studio.netlify.app/" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">Live Demo</a></span></div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">FastAPI</span><span class="ptag">Next.js</span><span class="ptag">XGBoost</span><span class="ptag">SHAP</span><span class="ptag">Optuna</span><span class="ptag">TailwindCSS</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/AutoML-STUDIO" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Sentiment Analysis -->
+      <div class="proj-card project" data-t="Python,ML" style="position:relative">
+        <div class="proj-chess">&#9813;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#128172;</div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">sentiment-analysis-app</div>
+          <div class="proj-desc">Flask app using VADER + LIME for real-time sentiment analysis with explainability. 90%+ NLP accuracy.</div>
+          <div class="proj-stats"><span>&#11088; 120</span><span>&#8921; 50</span></div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">Flask</span><span class="ptag">VADER</span><span class="ptag">LIME</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/sentiment-analysis-app.git" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Medical Chatbot -->
+      <div class="proj-card project" data-t="Python,ML" style="position:relative">
+        <div class="proj-chess">&#9814;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#127973;</div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">medical-chatbot</div>
+          <div class="proj-desc">Deep learning chatbot using SBERT + BioBERT for medical Q&amp;A. Contextual understanding with medical knowledge base.</div>
+          <div class="proj-stats"><span>&#11088; 80</span><span>&#8921; 30</span></div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">SBERT</span><span class="ptag">BioBERT</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/bot1.git" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Heart Disease -->
+      <div class="proj-card project" data-t="Python,ML" style="position:relative">
+        <div class="proj-chess">&#9815;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#129728;</div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">heart-disease-ml</div>
+          <div class="proj-desc">Ensemble ML (Random Forest + Bagging) for clinical heart disease classification. 81%+ accuracy, ROC curve &amp; cross-validation analysis.</div>
+          <div class="proj-stats"><span>&#11088; 65</span><span>&#8921; 22</span></div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">Sklearn</span><span class="ptag">Pandas</span><span class="ptag">Healthcare</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/heart-disease-ml" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Activity Recognition -->
+      <div class="proj-card project" data-t="Python,ML" style="position:relative">
+        <div class="proj-chess">&#9816;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#127939;</div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">activity-recognition</div>
+          <div class="proj-desc">LSTM deep learning model for real-time human activity classification from wearable sensor time-series data.</div>
+          <div class="proj-stats"><span>&#11088; 58</span><span>&#8921; 18</span></div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">LSTM</span><span class="ptag">TensorFlow</span><span class="ptag">PyTorch</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/activity-recognition" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Wine Quality -->
+      <div class="proj-card project" data-t="Python,ML" style="position:relative">
+        <div class="proj-chess">&#9817;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#127863;</div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">wine-quality</div>
+          <div class="proj-desc">Ridge / Lasso / PCA regression pipeline for wine quality scoring. Complete preprocessing, tuning and visualization.</div>
+          <div class="proj-stats"><span>&#11088; 42</span><span>&#8921; 12</span></div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">Ridge</span><span class="ptag">Lasso</span><span class="ptag">PCA</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/wine-quality" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Java HPC -->
+      <div class="proj-card project" data-t="Java" style="position:relative">
+        <div class="proj-chess">&#9812;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#9889;</div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#ED8B00"></div>Java</div>
+          <div class="proj-title">matrix-java &mdash; HPC</div>
+          <div class="proj-desc">Parallel matrix multiplication &amp; 2D convolution on 4096x4096 matrices. Java multithreading, HPC-optimized concurrent processing.</div>
+          <div class="proj-stats"><span>&#11088; 40</span><span>&#8921; 15</span></div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">Java</span><span class="ptag">Multithreading</span><span class="ptag">HPC</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/matrix-java" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Drowsiness Detection -->
+      <div class="proj-card project" data-t="Python,ML" style="position:relative">
+        <div class="proj-chess">&#9813;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#128065;</div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">drowsiness-detection</div>
+          <div class="proj-desc">Real-time OpenCV driver drowsiness detection on Raspberry Pi. Eye-aspect ratio algorithm with buzzer alert system.</div>
+          <div class="proj-stats"><span>&#11088; 60</span><span>&#8921; 20</span></div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">OpenCV</span><span class="ptag">RPi</span><span class="ptag">IoT</span></div>
+          <a href="https://github.com/KUPPIREDDYBHAGEERATHAREDDY11/ECS-1-DROWSINESS-DETECTION-SYSTEM.git" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BADGES -->
+<section id="badges-sec" class="above">
+  <div class="wrap">
+    <div class="sec-tag fade">$ cat ~/.credentials/badges.json</div>
+    <div class="sec-h fade"><span class="sec-chess">&#9816;</span>Certifications</div>
+    <div class="badges-grid fade">
+      <div class="badge-card"><img src="./applied-data-science-with-python-level-2.png" alt="DS" onerror="this.style.display='none'"/><div><h3>Data Science with Python</h3><p>Level 2 &bull; IBM</p></div></div>
+      <div class="badge-card"><img src="./deep-learning-using-tensorflow (1).png" alt="DL" onerror="this.style.display='none'"/><div><h3>Deep Learning &mdash; TensorFlow</h3><p>IBM Certified</p></div></div>
+      <div class="badge-card"><img src="./data-visualization-with-r.png" alt="R" onerror="this.style.display='none'"/><div><h3>Data Visualization with R</h3><p>IBM Certified</p></div></div>
+      <div class="badge-card"><img src="./aws-academy-graduate-aws-academy-cloud-architecting.png" alt="AWS" onerror="this.style.display='none'"/><div><h3>AWS Cloud Architecting</h3><p>Amazon Web Services</p></div></div>
+      <div class="badge-card"><img src="./Adobe Express - file.png" alt="OCI AI" onerror="this.style.display='none'"/><div><h3>OCI Gen AI Professional</h3><p>Oracle Cloud 2025</p></div></div>
+      <div class="badge-card"><img src="./OCI25DSOCP-Photoroom.png" alt="OCI DS" onerror="this.style.display='none'"/><div><h3>OCI Data Science Pro</h3><p>Oracle Cloud 2025</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE CHESSBOARD -->
+<section class="above" style="padding:60px 0">
+  <div class="wrap">
+    <div class="sec-tag fade">$ ./chess_engine.py --board --animate</div>
+    <div class="sec-h fade"><span class="sec-chess">&#9812;</span>Chess &amp; Code &mdash; Strategic Thinking</div>
+    <div class="fade" style="display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;flex-wrap:wrap">
+
+      <!-- ANIMATED CHESSBOARD CANVAS -->
+      <div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:16px;display:inline-block">
+          <div style="font-family:var(--mono);font-size:.7rem;color:var(--text2);margin-bottom:10px;display:flex;justify-content:space-between">
+            <span>&#9812; chess_engine.py</span>
+            <span style="color:var(--green)">live</span>
+          </div>
+          <canvas id="chess-board" width="304" height="304" style="display:block;border-radius:6px;cursor:pointer" title="Click a piece to select, click a square to move"></canvas>
+          <div id="chess-status" style="font-family:var(--mono);font-size:.7rem;color:var(--text2);margin-top:10px;text-align:center;min-height:1.2em"></div>
+          <div style="display:flex;justify-content:center;gap:8px;margin-top:8px">
+            <button id="chess-reset" style="font-family:var(--mono);font-size:.68rem;padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text2);cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">&#9850; reset</button>
+            <button id="chess-auto" style="font-family:var(--mono);font-size:.68rem;padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text2);cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">&#9654; auto-play</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHESS PIECE LEGEND -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-family:var(--mono);font-size:.78rem;color:var(--text2);line-height:1.8">
+          <div style="color:var(--text);font-weight:600;margin-bottom:12px">// chess_philosophy.md</div>
+          <div><span style="color:var(--orange);font-size:1.1rem">&#9812;</span> <strong style="color:var(--text)">King</strong> &mdash; Python. Protect it, everything revolves around it.</div>
+          <div><span style="color:var(--purple);font-size:1.1rem">&#9813;</span> <strong style="color:var(--text)">Queen</strong> &mdash; AutoML + SHAP. Most powerful, most versatile.</div>
+          <div><span style="color:var(--cyan);font-size:1.1rem">&#9814;</span> <strong style="color:var(--text)">Rook</strong> &mdash; FastAPI + Flask. Straight-line backend power.</div>
+          <div><span style="color:var(--green);font-size:1.1rem">&#9815;</span> <strong style="color:var(--text)">Bishop</strong> &mdash; TensorFlow + PyTorch. Diagonal deep learning.</div>
+          <div><span style="color:var(--orange);font-size:1.1rem">&#9816;</span> <strong style="color:var(--text)">Knight</strong> &mdash; Java HPC. L-shaped, unpredictable, powerful.</div>
+          <div><span style="color:var(--text2);font-size:1.1rem">&#9817;</span> <strong style="color:var(--text)">Pawn</strong> &mdash; Git + Docker. Ground troops &mdash; can become a Queen.</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:14px;font-family:var(--mono);font-size:.75rem;line-height:1.9">
+          <div style="color:var(--green);margin-bottom:4px">$ python3 -c "print(chess_quote)"</div>
+          <div style="color:var(--text2);font-style:italic">"Chess is not about memorizing moves.<br>It's about understanding positions.<br>Same with code &mdash; understand the system,<br>not just the syntax."</div>
+          <div style="color:var(--text3);margin-top:6px">&mdash; bhageeratha@arch:~$</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <div class="chess-stat"><span class="p">&#9812;</span> King &bull; Python</div>
+          <div class="chess-stat"><span class="p">&#9813;</span> Queen &bull; AutoML</div>
+          <div class="chess-stat"><span class="p">&#9814;</span> Rook &bull; API</div>
+          <div class="chess-stat"><span class="p">&#9815;</span> Bishop &bull; ML</div>
+          <div class="chess-stat"><span class="p">&#9816;</span> Knight &bull; HPC</div>
+          <div class="chess-stat"><span class="p">&#9817;</span> Pawn &bull; DevOps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi-sec" class="above">
+  <div class="wrap">
+    <div class="sec-tag fade">$ git notes list --ref=reviews</div>
+    <div class="sec-h fade"><span class="sec-chess">&#9817;</span>Testimonials</div>
+    <div class="fade">
+      <div class="swiper" style="padding-bottom:40px">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="text-center">
-              <p class="text-lg italic mb-4">"Bhageeratha's sentiment analysis app was a game-changer for our client feedback system!"</p>
-              <p class="font-bold text-[#2a9d8f]">- Client A, Tech Startup</p>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="text-center">
-              <p class="text-lg italic mb-4">"The medical chatbot delivered accurate responses, showcasing deep NLP expertise."</p>
-              <p class="font-bold text-[#2a9d8f]">- Client B, Healthcare</p>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="text-center">
-              <p class="text-lg italic mb-4">"Innovative and reliable – Bhageeratha's projects always exceed expectations."</p>
-              <p class="font-bold text-[#2a9d8f]">- Collaborator C, AI Research</p>
-            </div>
-          </div>
+          <div class="swiper-slide"><div class="tcard"><p>"Bhageeratha's sentiment analysis app was a game-changer for our client feedback system. The LIME explainability gave us real actionable insights."</p><div class="author">&mdash; Client A &bull; Tech Startup</div></div></div>
+          <div class="swiper-slide"><div class="tcard"><p>"The medical chatbot delivered surprisingly accurate responses. Deep NLP expertise with BioBERT integration that impressed our healthcare team."</p><div class="author">&mdash; Client B &bull; Healthcare</div></div></div>
+          <div class="swiper-slide"><div class="tcard"><p>"Innovative and reliable. Bhageeratha's projects always exceed expectations &mdash; clean code, great documentation, on-time delivery."</p><div class="author">&mdash; Collaborator C &bull; AI Research</div></div></div>
         </div>
-        <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
         <div class="swiper-pagination"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- GitHub Activity -->
-  <section id="github-activity" class="max-w-5xl mx-auto px-4 py-20 fade-section" data-transition-delay="1.5">
-    <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Recent GitHub Activity</h2>
-    <div class="glass rounded-lg p-10 shadow-xl">
-      <div id="github-feed" class="grid grid-cols-1 gap-4">
-        <p class="text-center">Loading GitHub activity...</p>
-      </div>
+<!-- GITHUB ACTIVITY -->
+<section class="above" style="padding:20px 0 40px">
+  <div class="wrap fade">
+    <div class="sec-tag">$ git log --author=bhageeratha --since=90.days.ago --format="%h %s"</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;margin-top:12px">
+      <div class="act-item"><div class="act-dot" style="background:var(--green)"></div>Pushed to AutoML-STUDIO &mdash; feat: SHAP explainability &amp; Optuna tuning &bull; Dec 2024</div>
+      <div class="act-item"><div class="act-dot" style="background:var(--cyan)"></div>Pushed to sentiment-analysis-app &mdash; fix: LIME visual rendering &bull; Nov 2024</div>
+      <div class="act-item"><div class="act-dot" style="background:var(--purple)"></div>Created medical-chatbot repository &bull; Oct 2024</div>
+      <div class="act-item"><div class="act-dot" style="background:var(--orange)"></div>Starred transformers, pytorch, xgboost repos &bull; Sep 2024</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Newsletter Subscription -->
-  <section id="newsletter" class="max-w-5xl mx-auto px-4 py-20 fade-section" data-transition-delay="1.7">
-    <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Stay Updated</h2>
-    <div class="glass rounded-lg p-10 shadow-xl">
-      <p class="mb-6">Subscribe to my newsletter for updates on AI, Data Science, and new projects!</p>
-      <form id="newsletter-form" class="flex flex-col md:flex-row gap-4">
-        <input type="email" id="newsletter-email" placeholder="Your Email" class="p-3 rounded-lg bg-[#2d3748] text-[#f5f6f5] border border-[#2a9d8f]/30 focus:outline-none focus:ring-2 focus:ring-[#4ecdc4]" required aria-label="Your Email" />
-        <button type="submit" class="neumorph px-6 py-3 font-bold text-lg text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition" tabindex="0">Subscribe</button>
+<!-- POSTS -->
+<section id="posts-sec" class="above">
+  <div class="wrap">
+    <div class="sec-tag fade">$ cat ~/linkedin_posts/* | head</div>
+    <div class="sec-h fade">Recent Posts</div>
+    <div class="posts-grid fade">
+      <a href="https://linkedin.com/in/bhageerathareddykuppireddy" class="post-card" target="_blank" rel="noopener">
+        <div class="post-date">&#128197; Oct 2024</div>
+        <div class="post-title">Exploring NLP in Healthcare</div>
+        <div class="post-desc">Insights on SBERT &amp; BioBERT for medical chatbots &mdash; how transformers changed clinical Q&amp;A and why explainability matters.</div>
+      </a>
+      <a href="https://linkedin.com/in/bhageerathareddykuppireddy" class="post-card" target="_blank" rel="noopener">
+        <div class="post-date">&#128197; Sep 2024</div>
+        <div class="post-title">Real-Time Sentiment Analysis</div>
+        <div class="post-desc">Built a Flask app with VADER and LIME &mdash; making NLP explainable for non-technical stakeholders with interactive visualizations.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="nl-sec" class="above">
+  <div class="wrap fade">
+    <div class="nl-box">
+      <div><h3>$ subscribe --newsletter</h3><p>AI, Data Science &amp; project updates</p></div>
+      <form class="nl-form" id="nl-form" onsubmit="return false">
+        <input type="email" id="nl-email" placeholder="you@example.com" required/>
+        <button type="submit" class="btn btn-g">Subscribe</button>
       </form>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Posts -->
-  <section id="posts" class="max-w-5xl mx-auto px-4 py-20 fade-section parallax" style="background-image: url('https://images.unsplash.com/photo-1516321310766-66f1f1c6e351');" data-transition-delay="1.6">
-    <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Recent LinkedIn Posts</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <a href="https://linkedin.com/in/bhageerathareddykuppireddy" target="_blank" rel="noopener" class="glass rounded-lg p-6 shadow-lg tilt neumorph" data-tilt data-tilt-max="10" tabindex="0">
-        <h3 class="text-xl font-bold mb-3 text-[#2a9d8f]">Exploring NLP in Healthcare</h3>
-        <p class="text-sm">Insights on SBERT & BioBERT for medical chatbots. [Oct 2024]</p>
-      </a>
-      <a href="https://linkedin.com/in/bhageerathareddykuppireddy" target="_blank" rel="noopener" class="glass rounded-lg p-6 shadow-lg tilt neumorph" data-tilt data-tilt-max="10" tabindex="0">
-        <h3 class="text-xl font-bold mb-3 text-[#2a9d8f]">Real-Time Sentiment Analysis</h3>
-        <p class="text-sm">Built a Flask app with VADER and LIME. [Sep 2024]</p>
-      </a>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="max-w-5xl mx-auto px-4 py-20 fade-section" data-transition-delay="1.8">
-    <h2 class="text-4xl font-extrabold mb-8 text-[#4ecdc4]">Let’s Connect</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="glass rounded-lg p-8 shadow-lg">
-        <h3 class="text-xl font-bold mb-4 text-[#2a9d8f]">Send a Message</h3>
-        <form id="contact-form" class="flex flex-col gap-4">
-          <input type="text" id="name" placeholder="Your Name" class="p-3 rounded-lg bg-[#2d3748] text-[#f5f6f5] border border-[#2a9d8f]/30 focus:outline-none focus:ring-2 focus:ring-[#4ecdc4]" required aria-label="Your Name" />
-          <input type="email" id="email" placeholder="Your Email" class="p-3 rounded-lg bg-[#2d3748] text-[#f5f6f5] border border-[#2a9d8f]/30 focus:outline-none focus:ring-2 focus:ring-[#4ecdc4]" required aria-label="Your Email" />
-          <textarea id="message" placeholder="Your Message" rows="5" class="p-3 rounded-lg bg-[#2d3748] text-[#f5f6f5] border border-[#2a9d8f]/30 focus:outline-none focus:ring-2 focus:ring-[#4ecdc4]" required aria-label="Your Message"></textarea>
-          <button type="submit" class="neumorph px-6 py-3 font-bold text-lg text-[#4ecdc4] hover:bg-[#2a9d8f] hover:text-[#f5f6f5] transition" tabindex="0">Send Message</button>
-        </form>
-      </div>
-      <div class="glass rounded-lg p-8 shadow-lg flex flex-col gap-4">
-        <a class="flex items-center gap-4 text-lg font-semibold tilt neumorph p-4" data-tilt data-tilt-max="10" href="mailto:bhageerathareddykuppireddy@gmail.com" tabindex="0">
-          <svg width="24" height="24" fill="currentColor" class="text-[#4ecdc4]"><path d="M4 4h16v16H4V4zm8 7l8-5H4l8 5zm0 2.236l-8-5.236V20h16V8.236l-8 5.236z"/></svg>
-          <span>bhageerathareddykuppireddy@gmail.com</span>
+<!-- CONTACT -->
+<section id="contact-sec" class="above">
+  <div class="wrap">
+    <div class="sec-tag fade">$ ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d2b0bab3b5b7b7a0b3a6bab392b1bdbcbcb7b1a6fcb6b7a4">[email&#160;protected]</a></div>
+    <div class="sec-h fade"><span class="sec-chess">&#9812;</span>Let's Connect</div>
+    <div class="contact-layout fade">
+      <form class="cform" id="contact-form">
+        <input type="text" id="cname" placeholder="Your Name" required/>
+        <input type="email" id="cemail" placeholder="Your Email" required/>
+        <textarea id="cmsg" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn btn-g">&#9671; Send Message</button>
+      </form>
+      <div class="clinks">
+        <a class="clink" href="/cdn-cgi/l/email-protection#97f5fff6f0f2f2e5f6e3fff6e5f2f3f3eefce2e7e7fee5f2f3f3eed7f0faf6fefbb9f4f8fa">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span class="__cf_email__" data-cfemail="7c1e141d1b19190e1d08141d0e1918180517090c0c150e191818053c1b111d1510521f1311">[email&#160;protected]</span>
         </a>
-        <a class="flex items-center gap-4 text-lg font-semibold tilt neumorph p-4" data-tilt data-tilt-max="10" href="https://linkedin.com/in/bhageerathareddykuppireddy" target="_blank" rel="noopener" tabindex="0">
-          <svg width="24" height="24" fill="currentColor" class="text-[#4ecdc4]"><path d="M4 4h16v16H4V4zm3.5 13V10.5H5.5V17.5H7.5zm-1-8a1 1 0 1 1-.001-2.001A1 1 0 0 1 6.5 9.5zm9 8h-2v-3c0-.8-.3-1.5-1.1-1.5-.9 0-1.1.7-1.1 1.5v3h-2V10.5h2v1c.5-.7 1.3-1.2 2.1-1.2 1.5 0 2.1.9 2.1 2.3v4.4z"/></svg>
-          <span>/bhageerathareddykuppireddy</span>
+        <a class="clink" href="https://linkedin.com/in/bhageerathareddykuppireddy" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16v16H4V4zm3.5 13V10.5H5.5V17h2zm-1-7.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM15.5 17h-2v-3c0-.8-.3-1.5-1.1-1.5-.9 0-1.1.7-1.1 1.5v3h-2v-6.5h2v1c.5-.7 1.3-1.2 2.1-1.2 1.5 0 2.1.9 2.1 2.3V17z"/></svg>
+          /bhageerathareddykuppireddy
         </a>
-        <a class="flex items-center gap-4 text-lg font-semibold tilt neumorph p-4" data-tilt data-tilt-max="10" href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" rel="noopener" tabindex="0">
-          <svg width="24" height="24" fill="currentColor" class="text-[#4ecdc4]"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
-          <span>/kuppireddybhageerathareddy1110</span>
+        <a class="clink" href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+          /kuppireddybhageerathareddy1110
+        </a>
+        <a class="clink" href="https://automl-studio.netlify.app/" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+          automl-studio.netlify.app
         </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="text-center py-12 text-sm fade-section" data-transition-delay="2.0">
-    © 2025 Bhageeratha Reddy. All rights reserved. Last updated: Monday, July 14, 2025, 10:25 PM IST.
-    <span class="block mt-2">
-      <a href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" rel="noopener" class="text-[#4ecdc4] hover:text-[#2a9d8f] underline" tabindex="0">Source on GitHub</a>
-    </span>
-  </footer>
+<footer class="above">
+  <div>&copy; 2025 Kuppireddy Bhageeratha Reddy &bull; <a href="https://github.com/kuppireddybhageerathareddy1110">github</a> &bull; <a href="https://automl-studio.netlify.app/">portfolio</a></div>
+  <div style="margin-top:4px;color:var(--text3)">$ echo "Thanks for visiting" | cowsay | lolcat</div>
+</footer>
 
-
-
-  <script>
-    // Preloader
-    window.addEventListener('load', () => {
-      const preloader = document.getElementById('preloader');
-      preloader.classList.add('hidden');
-    });
-    
-    // Custom Cursor
-    const cursor = document.getElementById('custom-cursor');
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-    });
-
-    // Enhanced fade-in for elements
-    const fadeElements = document.querySelectorAll('.fade-in-on-scroll');
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.3 });
-    fadeElements.forEach(el => fadeObserver.observe(el));
-
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-theme');
-      themeIcon.innerHTML = document.body.classList.contains('light-theme') ?
-        '<path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8z"/>' :
-        '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>';
-    });
-
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', () => {
-      const nav = document.querySelector('nav');
-      if (window.scrollY > 50) nav.classList.add('backdrop-blur', 'bg-[#1a202c]/95');
-      else nav.classList.remove('backdrop-blur', 'bg-[#1a202c]/95');
-    });
-
-    // Back to Top Button
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) backToTop.classList.add('visible');
-      else backToTop.classList.remove('visible');
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Resume Modal
-    const resumeButton = document.getElementById('resume-preview');
-    const resumeModal = document.getElementById('resume-modal');
-    const closeModal = resumeModal.querySelector('.close');
-    resumeButton.addEventListener('click', () => {
-      resumeModal.classList.add('visible');
-      resumeModal.setAttribute('aria-hidden', 'false');
-    });
-    closeModal.addEventListener('click', () => {
-      resumeModal.classList.remove('visible');
-      resumeModal.setAttribute('aria-hidden', 'true');
-    });
-    resumeModal.addEventListener('click', (e) => {
-      if (e.target === resumeModal) {
-        resumeModal.classList.remove('visible');
-        resumeModal.setAttribute('aria-hidden', 'true');
-      }
-    });
-
-    // Section Transitions
-    const fadeSections = document.querySelectorAll('.fade-section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const delay = entry.target.dataset.transitionDelay || '0';
-          entry.target.style.transitionDelay = `${delay}s`;
-          entry.target.classList.add('visible');
-          if (entry.target.id === 'skills') {
-            document.querySelectorAll('.progress-bar').forEach(bar => {
-              bar.classList.add('animate');
-              bar.style.width = bar.style.getPropertyValue('--progress-width');
-            });
-          }
-        } else {
-          entry.target.classList.remove('visible');
-          entry.target.style.transitionDelay = '0s';
-        }
-      });
-    }, { threshold: 0.2 });
-    fadeSections.forEach(section => observer.observe(section));
-
-    // Timeline Animation
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    const timelineObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-        else entry.target.classList.remove('visible');
-      });
-    }, { threshold: 0.5 });
-    timelineItems.forEach(item => timelineObserver.observe(item));
-
-    // Vanilla Tilt
-    VanillaTilt.init(document.querySelectorAll('.tilt'), {
-      max: 10,
-      speed: 400,
-      glare: true,
-      'max-glare': 0.3
-    });
-
-    
-    // Typed.js for Data Science Code Typing
-    new Typed('#typed', {
-      strings: [
-        '<span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf<br><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing<br><span class="keyword">model</span> = tf.keras.Sequential([...])<br><span class="keyword">def</span> train_model(data):<br>    <span class="comment"># Neural Network for Sentiment Analysis</span>',
-        '<span class="keyword">from</span> transformers <span class="keyword">import</span> pipeline<br><span class="keyword">nlp</span> = pipeline(<span class="string">"question-answering"</span>, model=<span class="string">"BioBERT"</span>)<br><span class="keyword">def</span> medical_chatbot(question):<br>    <span class="keyword">return</span> nlp(question=question, context=<span class="string">"medical_data"</span>)<br><span class="comment"># AI-Powered Medical Chatbot</span>',
-        '<span class="keyword">import</span> torch<br><span class="keyword">model</span> = torch.nn.LSTM(input_size=128, hidden_size=64)<br><span class="keyword">def</span> process_sequence(data):<br>    <span class="keyword">return</span> model(data)<br><span class="comment"># LSTM for Time-Series Analysis</span>'
-      ],
-      typeSpeed: 50,
-      backSpeed: 30,
-      backDelay: 2000,
-      loop: true,
-      showCursor: true,
-      cursorChar: '|'
-    });
-// Project Filter
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projects = document.querySelectorAll('.project');
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        const filter = button.dataset.filter;
-        projects.forEach(project => {
-          const tags = project.dataset.tags.split(',');
-          if (filter === 'all' || tags.includes(filter)) {
-            project.style.display = 'block';
-            setTimeout(() => project.classList.add('visible'), 10);
-          } else {
-            project.classList.remove('visible');
-            setTimeout(() => project.style.display = 'none', 300);
-          }
-        });
-      });
-    });
-     // Particles.js (Peacock Feather Effect)
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 100, density: { enable: true, value_area: 800 } },
-        color: { value: ['#4ecdc4', '#1a535c', '#2a9d8f'] },
-        shape: { type: 'circle' },
-        opacity: { value: 0.6, random: true },
-        size: { value: 3, random: true },
-        line_linked: { enable: true, distance: 120, color: '#4ecdc4', opacity: 0.3, width: 1 },
-        move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out' }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } },
-        modes: { grab: { distance: 140, line_linked: { opacity: 0.5 } }, push: { particles_nb: 4 } }
-      },
-      retina_detect: true
-    });
-
-    // Analytics Chart
-    const ctx = document.getElementById('analytics-chart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Sentiment Analysis', 'Medical Chatbot', 'Drowsiness Detection', 'Gas Detection'],
-        datasets: [{
-          label: 'GitHub Stars',
-          data: [120, 80, 60, 40],
-          backgroundColor: '#4ecdc4',
-          borderColor: '#2a9d8f',
-          borderWidth: 1
-        }, {
-          label: 'Forks',
-          data: [50, 30, 20, 15],
-          backgroundColor: '#1a535c',
-          borderColor: '#2a9d8f',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: { y: { beginAtZero: true } }
-      }
-    });
-
-    // Swiper.js for Testimonials
-    new Swiper('.swiper', {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      loop: true,
-      autoplay: { delay: 5000 },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      pagination: { el: '.swiper-pagination', clickable: true }
-    });
-
-    // Contact Form Validation
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      if (name && email && message) {
-        alert('Message sent successfully! (This is a demo; actual submission requires a backend.)');
-        document.getElementById('contact-form').reset();
-      } else {
-        alert('Please fill out all fields.');
-      }
-    });
-
-    // Newsletter Form Validation
-    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = document.getElementById('newsletter-email').value.trim();
-      if (email) {
-        alert('Subscribed successfully! (This is a demo; actual subscription requires a backend.)');
-        document.getElementById('newsletter-form').reset();
-      } else {
-        alert('Please enter a valid email address.');
-      }
-    });
-
-    // GitHub Activity Feed (Mock)
-    const githubFeed = document.getElementById('github-feed');
-    const mockActivity = [
-      { event: 'Pushed to Sentiment Analysis Web App', date: 'Nov 2024' },
-      { event: 'Created Medical Chatbot repository', date: 'Oct 2024' },
-      { event: 'Starred a Deep Learning project', date: 'Sep 2024' }
-    ];
-    githubFeed.innerHTML = mockActivity.map(activity => `
-      <div class="glass p-4 rounded-lg">
-        <p>${activity.event}</p>
-        <p class="text-[#4ecdc4] text-sm">${activity.date}</p>
-      </div>
-    `).join('');
-
-    // Keyboard Accessibility
-    document.querySelectorAll('a, button, input, textarea').forEach(el => {
-      el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          el.click();
-        }
-      });
-    });
-    // F1 Emoji Scroll Animation
-let lastScrollTop = 0;
-const f1Emoji = document.getElementById('f1-emoji');
-
-window.addEventListener('scroll', () => {
-  const currentScrollTop = window.scrollY;
-  if (currentScrollTop > lastScrollTop) {
-    // Scrolling down
-    f1Emoji.classList.remove('moving-down');
-    f1Emoji.classList.add('moving-up');
-  } else {
-    // Scrolling up
-    f1Emoji.classList.remove('moving-up');
-    f1Emoji.classList.add('moving-down');
-  }
-  lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+<!-- RESUME MODAL -->
+<div class="overlay" id="resume-modal">
+  <div class="modal">
+    <button class="modal-x" id="modal-x">x</button>
+    <h2 style="font-family:var(--mono);color:var(--green);margin-bottom:12px;font-size:.95rem">$ cat ~/resume.pdf</h2>
+    <p style="color:var(--text2);font-size:.78rem;margin-bottom:16px;font-family:var(--mono)">Preview unavailable in demo. Download directly:</p>
+    <a href="./resume_bhagi.pdf" download class="btn btn-g">&#8615; Download Resume</a>
+  </div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// === PRELOADER ===
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const pl=document.getElementById('preloader');
+    pl.classList.add('done');
+    setTimeout(()=>pl.style.display='none',700);
+  },2100);
 });
 
+// === CURSOR ===
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function animCur(){
+  rx+=(mx-rx)*.13;ry+=(my-ry)*.13;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animCur);
+})();
 
-  </script>
+// === BACKGROUND GRAPH NETWORK ===
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let W,H,nodes=[];
+  const N=60,LINK=170;
+  const CATS=['63,185,80','88,166,255','188,140,255','227,179,65'];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function Node(){
+    this.x=Math.random()*W;this.y=Math.random()*H;
+    this.vx=(Math.random()-.5)*.28;this.vy=(Math.random()-.5)*.28;
+    this.r=1.4+Math.random()*1.4;this.p=Math.random()*Math.PI*2;
+    this.cat=CATS[Math.floor(Math.random()*CATS.length)];
+  }
+  Node.prototype.update=function(){
+    this.p+=.014;this.x+=this.vx;this.y+=this.vy;
+    if(this.x<0||this.x>W)this.vx*=-1;
+    if(this.y<0||this.y>H)this.vy*=-1;
+  };
+  function init(){nodes=[];for(let i=0;i<N;i++)nodes.push(new Node());}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<LINK){
+          ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);
+          ctx.strokeStyle=`rgba(${nodes[i].cat},${(1-d/LINK)*.1})`;
+          ctx.lineWidth=.7;ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n=>{
+      n.update();
+      const a=.15+Math.sin(n.p)*.07;
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${n.cat},${a+.1})`;ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();init();});
+  resize();init();draw();
+})();
+
+// === HERO NETWORK CANVAS ===
+(function(){
+  const c=document.getElementById('hero-net'),ctx=c.getContext('2d');
+  let pts=[];const N=30;
+  for(let i=0;i<N;i++)pts.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.0003,vy:(Math.random()-.5)*.0003});
+  function draw(){
+    const rect=c.parentElement.getBoundingClientRect();
+    c.width=rect.width||innerWidth;c.height=rect.height||innerHeight;
+    ctx.clearRect(0,0,c.width,c.height);
+    const W=c.width,H=c.height;
+    pts.forEach(p=>{p.x=(p.x+p.vx+1)%1;p.y=(p.y+p.vy+1)%1;});
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx=(pts[i].x-pts[j].x)*W,dy=(pts[i].y-pts[j].y)*H;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<180){
+          ctx.beginPath();ctx.moveTo(pts[i].x*W,pts[i].y*H);ctx.lineTo(pts[j].x*W,pts[j].y*H);
+          ctx.strokeStyle=`rgba(63,185,80,${(1-d/180)*.12})`;ctx.lineWidth=.6;ctx.stroke();
+        }
+      }
+    }
+    pts.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x*W,p.y*H,1.8,0,Math.PI*2);
+      ctx.fillStyle='rgba(63,185,80,.22)';ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// === GITHUB CONTRIBUTION GRAPH ===
+(function(){
+  const c=document.getElementById('contrib-canvas'),ctx=c.getContext('2d');
+  const WEEKS=52,DAYS=7,CELL=13,GAP=3;
+  c.width=WEEKS*(CELL+GAP);c.height=DAYS*(CELL+GAP);
+  const data=[];let total=0;
+  for(let w=0;w<WEEKS;w++){
+    const row=[];
+    for(let d=0;d<DAYS;d++){
+      const base=w>44?.6:w>35?.4:w>25?.25:.12;
+      const v=Math.random()<base?Math.floor(Math.random()*9):0;
+      row.push(v);total+=v;
+    }
+    data.push(row);
+  }
+  document.getElementById('contrib-count').textContent=total;
+  const cols=['#161b22','#006d32','#26a641','#3fb950','#56d364'];
+  function gc(v){if(!v)return cols[0];if(v<=1)return cols[1];if(v<=3)return cols[2];if(v<=5)return cols[3];return cols[4];}
+  for(let w=0;w<WEEKS;w++){
+    for(let d=0;d<DAYS;d++){
+      ctx.fillStyle=gc(data[w][d]);
+      ctx.beginPath();
+      if(ctx.roundRect){ctx.roundRect(w*(CELL+GAP),d*(CELL+GAP),CELL,CELL,2);ctx.fill();}
+      else{ctx.fillRect(w*(CELL+GAP),d*(CELL+GAP),CELL,CELL);}
+    }
+  }
+})();
+
+// === SNAKE ANIMATION — eats commit cells ===
+(function(){
+  const c=document.getElementById('snake-canvas'),ctx=c.getContext('2d');
+  const CELL=12,GAP=2,COLS=52,ROWS=5;
+  const TW=COLS*(CELL+GAP),TH=ROWS*(CELL+GAP);
+  c.width=TW;c.height=TH;
+
+  // Build grid of commit cells with random activity
+  const grid=[];
+  for(let r=0;r<ROWS;r++){
+    for(let col=0;col<COLS;col++){
+      const v=Math.random()<.55?Math.floor(Math.random()*5):0;
+      grid.push({col,row:r,v,eaten:false});
+    }
+  }
+
+  const C5=['#161b22','#006d32','#26a641','#3fb950','#56d364'];
+  function gc(v){if(!v)return C5[0];if(v<=1)return C5[1];if(v<=2)return C5[2];if(v<=3)return C5[3];return C5[4];}
+
+  // Snake state
+  let snake=[{col:0,row:0}];
+  let dir={dc:1,dr:0};
+  let target=null;
+  let frameCount=0;
+  const SPEED=4; // frames per move
+
+  function findNext(){
+    // Find nearest uneaten cell with value > 0
+    let best=null,bestD=Infinity;
+    const head=snake[0];
+    grid.forEach(cell=>{
+      if(!cell.eaten&&cell.v>0){
+        const d=Math.abs(cell.col-head.col)+Math.abs(cell.row-head.row);
+        if(d<bestD){bestD=d;best=cell;}
+      }
+    });
+    if(!best){
+      // Reset all cells
+      grid.forEach(g=>{g.eaten=false;g.v=Math.random()<.55?Math.floor(Math.random()*5):0;});
+      return grid.find(g=>g.v>0&&!g.eaten)||grid[0];
+    }
+    return best;
+  }
+
+  function moveSnake(){
+    if(!target||target.eaten)target=findNext();
+    const head=snake[0];
+    // Move toward target
+    const dc=Math.sign(target.col-head.col);
+    const dr=Math.sign(target.row-head.row);
+    let nc,nr;
+    if(dc!==0&&(dir.dr!==0||Math.random()<.5)){nc=head.col+dc;nr=head.row;}
+    else if(dr!==0){nc=head.col;nr=head.row+dr;}
+    else{nc=head.col+dc;nr=head.row;}
+    // Clamp
+    nc=Math.max(0,Math.min(COLS-1,nc));
+    nr=Math.max(0,Math.min(ROWS-1,nr));
+    snake.unshift({col:nc,row:nr});
+    // Eat?
+    if(nc===target.col&&nr===target.row){
+      target.eaten=true;
+      // Keep tail (grow a bit)
+      if(snake.length>18)snake.pop();
+    } else {
+      if(snake.length>12)snake.pop();
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,TW,TH);
+    // Draw grid
+    grid.forEach(g=>{
+      const x=g.col*(CELL+GAP),y=g.row*(CELL+GAP);
+      ctx.fillStyle=g.eaten?'#0d1117':gc(g.v);
+      ctx.beginPath();
+      if(ctx.roundRect){ctx.roundRect(x,y,CELL,CELL,2);ctx.fill();}
+      else{ctx.fillRect(x,y,CELL,CELL);}
+    });
+    // Draw snake body
+    snake.forEach((seg,i)=>{
+      const x=seg.col*(CELL+GAP),y=seg.row*(CELL+GAP);
+      const t=i/snake.length;
+      ctx.fillStyle=`rgba(63,${185-Math.floor(t*80)},80,${1-t*.4})`;
+      ctx.shadowBlur=i===0?10:0;
+      ctx.shadowColor='#3fb950';
+      ctx.beginPath();
+      if(ctx.roundRect){ctx.roundRect(x,y,CELL,CELL,3);ctx.fill();}
+      else{ctx.fillRect(x,y,CELL,CELL);}
+    });
+    ctx.shadowBlur=0;
+    // Draw eyes on head
+    const hx=snake[0].col*(CELL+GAP),hy=snake[0].row*(CELL+GAP);
+    ctx.fillStyle='#0d1117';
+    ctx.beginPath();ctx.arc(hx+3,hy+3,1.5,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(hx+9,hy+3,1.5,0,Math.PI*2);ctx.fill();
+  }
+
+  function loop(){
+    frameCount++;
+    if(frameCount%SPEED===0)moveSnake();
+    draw();
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// === SKILLS NETWORK GRAPH ===
+(function(){
+  const c=document.getElementById('sk-canvas'),ctx=c.getContext('2d');
+  const NODES=[
+    {id:0,label:'Python',cat:'g',size:27},
+    {id:1,label:'TypeScript',cat:'g',size:19},
+    {id:2,label:'JavaScript',cat:'g',size:17},
+    {id:3,label:'Java',cat:'g',size:18},
+    {id:4,label:'C++',cat:'g',size:14},
+    {id:5,label:'R',cat:'g',size:13},
+    {id:6,label:'TensorFlow',cat:'p',size:22},
+    {id:7,label:'PyTorch',cat:'p',size:21},
+    {id:8,label:'Scikit',cat:'p',size:18},
+    {id:9,label:'XGBoost',cat:'p',size:17},
+    {id:10,label:'LightGBM',cat:'p',size:15},
+    {id:11,label:'SHAP',cat:'p',size:14},
+    {id:12,label:'Transformers',cat:'p',size:17},
+    {id:13,label:'FastAPI',cat:'c',size:20},
+    {id:14,label:'Flask',cat:'c',size:20},
+    {id:15,label:'Next.js',cat:'c',size:18},
+    {id:16,label:'React',cat:'c',size:16},
+    {id:17,label:'Git',cat:'o',size:19},
+    {id:18,label:'Linux',cat:'o',size:20},
+    {id:19,label:'Docker',cat:'o',size:16},
+    {id:20,label:'MongoDB',cat:'r',size:16},
+    {id:21,label:'AWS',cat:'r',size:15},
+    {id:22,label:'Vercel',cat:'r',size:13},
+  ];
+  const EDGES=[[0,1],[0,2],[0,3],[0,6],[0,7],[0,8],[0,9],[0,13],[0,14],[0,17],[0,18],[0,20],
+    [1,15],[1,16],[2,15],[3,4],[6,8],[7,12],[8,9],[9,10],[9,11],[13,20],[13,21],
+    [14,20],[15,16],[17,18],[17,19],[18,19],[20,21],[21,22],[0,21]];
+  const CC={g:'63,185,80',c:'88,166,255',p:'188,140,255',o:'227,179,65',r:'248,81,73'};
+  let W,H,nodes=[];
+  let mouse={x:-9999,y:-9999};
+  function resize(){
+    const r=c.parentElement.getBoundingClientRect();
+    W=c.width=r.width||500;H=c.height=400;
+    const n=NODES.length;
+    nodes=NODES.map((s,i)=>{
+      const a=(i/n)*Math.PI*2-Math.PI/2;
+      const rf=i===0?0:(s.size>20?.28:s.size>16?.37:.46);
+      return{...s,x:W/2+Math.cos(a)*W*rf,y:H/2+Math.sin(a)*H*rf,
+        tx:W/2+Math.cos(a)*W*rf,ty:H/2+Math.sin(a)*H*rf,
+        vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,p:Math.random()*Math.PI*2};
+    });
+  }
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
+  c.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999;});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    nodes.forEach(n=>{
+      n.p+=.016;
+      n.x+=(n.tx-n.x)*.025+n.vx*.4;
+      n.y+=(n.ty-n.y)*.025+n.vy*.4;
+      n.vx+=(Math.random()-.5)*.03;n.vx*=.98;
+      n.vy+=(Math.random()-.5)*.03;n.vy*=.98;
+      const dx=n.x-mouse.x,dy=n.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<65){n.vx+=dx/d*.7;n.vy+=dy/d*.7;}
+    });
+    EDGES.forEach(([a,b])=>{
+      const na=nodes[a],nb=nodes[b];
+      const dx=na.x-nb.x,dy=na.y-nb.y,d=Math.sqrt(dx*dx+dy*dy);
+      ctx.beginPath();ctx.moveTo(na.x,na.y);ctx.lineTo(nb.x,nb.y);
+      ctx.strokeStyle=`rgba(${CC[na.cat]},${Math.max(0,.18-d/1800)})`;
+      ctx.lineWidth=1;ctx.stroke();
+    });
+    nodes.forEach(n=>{
+      const dx=n.x-mouse.x,dy=n.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy);
+      const hov=d<n.size+12;
+      const cc=CC[n.cat];
+      const pulse=.82+Math.sin(n.p)*.12;
+      const r=n.size*pulse*.88;
+      if(hov){ctx.beginPath();ctx.arc(n.x,n.y,r+9,0,Math.PI*2);ctx.fillStyle=`rgba(${cc},.1)`;ctx.fill();}
+      ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${cc},${hov?.25:.12})`;
+      ctx.strokeStyle=`rgba(${cc},${hov?.85:.38})`;
+      ctx.lineWidth=hov?1.5:1;ctx.fill();ctx.stroke();
+      ctx.font=`${hov?600:400} ${Math.max(8,n.size*.55)}px JetBrains Mono,monospace`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillStyle=`rgba(${cc},${hov?1:.72})`;
+      ctx.fillText(n.label,n.x,n.y);
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();});
+  resize();draw();
+})();
+
+// === SKILL CHIPS ===
+(function(){
+  const container=document.getElementById('skill-chips');
+  const skills=[
+    {n:'Python',p:94,c:'g'},{n:'NumPy',p:92,c:'g'},{n:'Pandas',p:91,c:'g'},
+    {n:'Git',p:92,c:'o'},{n:'Linux',p:90,c:'o'},{n:'Scikit-learn',p:90,c:'p'},
+    {n:'Flask',p:90,c:'c'},{n:'TensorFlow',p:88,c:'p'},{n:'Matplotlib',p:85,c:'g'},
+    {n:'FastAPI',p:86,c:'c'},{n:'PyTorch',p:85,c:'p'},{n:'Scikit',p:90,c:'p'},
+    {n:'XGBoost',p:84,c:'p'},{n:'TypeScript',p:82,c:'g'},{n:'TailwindCSS',p:82,c:'c'},
+    {n:'Transformers',p:82,c:'p'},{n:'JavaScript',p:80,c:'g'},{n:'Django',p:80,c:'c'},
+    {n:'LightGBM',p:80,c:'p'},{n:'NLTK',p:80,c:'p'},{n:'SHAP',p:78,c:'p'},
+    {n:'OpenCV',p:79,c:'p'},{n:'MongoDB',p:78,c:'r'},{n:'Next.js',p:78,c:'c'},
+    {n:'Netlify',p:78,c:'r'},{n:'Java',p:78,c:'g'},{n:'MySQL',p:76,c:'r'},
+    {n:'React',p:76,c:'c'},{n:'Optuna',p:74,c:'p'},{n:'Vercel',p:80,c:'r'},
+    {n:'AWS',p:73,c:'r'},{n:'PostgreSQL',p:70,c:'r'},{n:'Docker',p:72,c:'o'},
+    {n:'Firebase',p:68,c:'r'},{n:'C++',p:68,c:'g'},{n:'R',p:72,c:'g'},
+  ];
+  const COLS={g:'63,185,80',c:'88,166,255',p:'188,140,255',o:'227,179,65',r:'248,81,73'};
+  skills.forEach(s=>{
+    const t=s.p/100,col=COLS[s.c];
+    const d=document.createElement('div');
+    d.style.cssText=`font-family:JetBrains Mono,monospace;font-size:.7rem;padding:4px 11px;border-radius:6px;border:1px solid rgba(${col},${.18+t*.38});background:rgba(${col},${.04+t*.1});color:rgba(${col},${.55+t*.45});cursor:default;transition:transform .15s,box-shadow .15s;user-select:none;`;
+    d.textContent=`${s.n} ${s.p}%`;
+    d.onmouseenter=()=>{d.style.transform='scale(1.1)';d.style.boxShadow=`0 4px 14px rgba(${col},.2)`;};
+    d.onmouseleave=()=>{d.style.transform='';d.style.boxShadow='';};
+    container.appendChild(d);
+  });
+})();
+
+// === TYPED ===
+new Typed('#typed-role',{
+  strings:['Data Scientist & AI Engineer','AutoML Full-Stack Developer','NLP & Deep Learning Engineer','&#127823; Linux Power User','FastAPI · Next.js · React Dev','Java HPC Engineer','Open Source · 53 repos'],
+  typeSpeed:55,backSpeed:35,backDelay:1800,loop:true,showCursor:false
+});
+new Typed('#typed-term',{
+  strings:['git log --oneline | head -5','python3 train_model.py --epochs 50','uvicorn main:app --reload','npm run dev','htop','docker ps -a','nvidia-smi'],
+  typeSpeed:60,backSpeed:40,backDelay:1400,loop:true,showCursor:true,cursorChar:'&#9610;'
+});
+
+// === SCROLL FADE ===
+const fobs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.08});
+document.querySelectorAll('.fade').forEach(el=>fobs.observe(el));
+
+// === PROJECT FILTER ===
+document.querySelectorAll('.fbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    const f=btn.dataset.f;
+    document.querySelectorAll('.project').forEach(p=>{
+      const t=p.dataset.t||'';
+      p.style.display=(f==='all'||t.includes(f))?'':'none';
+    });
+  });
+});
+
+// === SHUFFLE ===
+const shufBtn=document.getElementById('shuf-btn');
+function shuffleCards(){
+  const grid=document.getElementById('proj-grid');
+  const cards=[...grid.querySelectorAll('.project')];
+  const eligible=cards.filter(c=>!c.classList.contains('featured'));
+  if(eligible.length<2)return;
+  shufBtn.classList.add('spin');
+  setTimeout(()=>shufBtn.classList.remove('spin'),560);
+  let a=Math.floor(Math.random()*eligible.length);
+  let b=Math.floor(Math.random()*(eligible.length-1));
+  if(b>=a)b++;
+  [eligible[a],eligible[b]].forEach(el=>el.classList.add('shuf-out'));
+  setTimeout(()=>{
+    [eligible[a],eligible[b]].forEach(el=>el.classList.remove('shuf-out'));
+    const tmp=document.createElement('span');
+    eligible[a].before(tmp);eligible[b].before(eligible[a]);tmp.before(eligible[b]);tmp.remove();
+    [eligible[a],eligible[b]].forEach(el=>el.classList.add('shuf-in'));
+    setTimeout(()=>[eligible[a],eligible[b]].forEach(el=>el.classList.remove('shuf-in')),500);
+  },400);
+}
+shufBtn.addEventListener('click',shuffleCards);
+new IntersectionObserver(e=>{if(e[0].isIntersecting){setTimeout(shuffleCards,900);}},{threshold:.3}).observe(document.getElementById('proj-sec'));
+
+// === SWIPER ===
+new Swiper('.swiper',{slidesPerView:1,spaceBetween:20,loop:true,autoplay:{delay:4500},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},pagination:{el:'.swiper-pagination',clickable:true}});
+
+// === BACK TO TOP ===
+const btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>btt.classList.toggle('show',scrollY>400));
+btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// === THEME ===
+const tb=document.getElementById('theme-btn');
+tb.addEventListener('click',()=>{document.body.classList.toggle('light');tb.textContent=document.body.classList.contains('light')?'&#127769; dark':'&#9728; light';});
+
+// === RESUME MODAL ===
+document.getElementById('resume-btn').addEventListener('click',()=>document.getElementById('resume-modal').classList.add('open'));
+document.getElementById('modal-x').addEventListener('click',()=>document.getElementById('resume-modal').classList.remove('open'));
+document.getElementById('resume-modal').addEventListener('click',e=>{if(e.target===document.getElementById('resume-modal'))document.getElementById('resume-modal').classList.remove('open');});
+
+// === FORMS ===
+document.getElementById('contact-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=document.getElementById('cname').value.trim(),em=document.getElementById('cemail').value.trim(),m=document.getElementById('cmsg').value.trim();
+  if(n&&em&&m){alert('[OK] Message queued. (Demo mode)');e.target.reset();}
+  else alert('[ERR] Fill all fields.');
+});
+document.getElementById('nl-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const em=document.getElementById('nl-email').value.trim();
+  if(em){alert('[OK] Subscribed!');e.target.reset();}
+  else alert('[ERR] Invalid email.');
+});
+
+// === PROJ GRID SPAN FIX ===
+(function(){
+  const grid=document.getElementById('proj-grid');
+  if(!grid)return;
+  const featured=grid.querySelector('.featured');
+  if(featured){
+    const check=()=>{featured.style.gridColumn=innerWidth<=640?'span 1':'span 2';};
+    check();window.addEventListener('resize',check);
+  }
+})();
+
+// === INTERACTIVE CHESSBOARD ENGINE ===
+(function(){
+  const canvas=document.getElementById('chess-board');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const SZ=38; // square size
+  const BOARD_SZ=8;
+
+  // White pieces unicode (white = player)
+  const WP=['&#9817;','&#9816;','&#9815;','&#9814;','&#9813;','&#9812;']; // pawn,knight,bishop,rook,queen,king
+  // Black pieces unicode (black = AI)
+  const BP=['&#9823;','&#9822;','&#9821;','&#9820;','&#9819;','&#9818;'];
+  const PIECE_CHARS={
+    wP:'♙',wN:'♘',wB:'♗',wR:'♖',wQ:'♕',wK:'♔',
+    bP:'♟',bN:'♞',bB:'♝',bR:'♜',bQ:'♛',bK:'♚'
+  };
+
+  // Board state: null or {color:'w'|'b', type:'P'|'N'|'B'|'R'|'Q'|'K'}
+  let board=Array(8).fill(null).map(()=>Array(8).fill(null));
+  let selected=null;
+  let validMoves=[];
+  let turn='w';
+  let autoPlay=false;
+  let autoTimer=null;
+  let moveHistory=[];
+
+  function initBoard(){
+    board=Array(8).fill(null).map(()=>Array(8).fill(null));
+    // Black pieces (top)
+    const backRow=['R','N','B','Q','K','B','N','R'];
+    backRow.forEach((t,c)=>{board[0][c]={color:'b',type:t};});
+    for(let c=0;c<8;c++)board[1][c]={color:'b',type:'P'};
+    // White pieces (bottom)
+    backRow.forEach((t,c)=>{board[7][c]={color:'w',type:t};});
+    for(let c=0;c<8;c++)board[6][c]={color:'w',type:'P'};
+    selected=null;validMoves=[];turn='w';moveHistory=[];
+    updateStatus('Your turn (White). Click a piece.');
+  }
+
+  function updateStatus(msg){
+    const el=document.getElementById('chess-status');
+    if(el)el.textContent=msg;
+  }
+
+  function drawBoard(){
+    const LIGHT='#f0d9b5',DARK='#b58863';
+    const LIGHT_D='#0d1117',DARK_D='#161b22';
+    const isLight=document.body.classList.contains('light');
+    const lc=isLight?LIGHT:'#2d3748', dc=isLight?DARK:'#1a2332';
+    const hlc='rgba(63,185,80,0.45)', mvc='rgba(63,185,80,0.25)';
+
+    for(let r=0;r<8;r++){
+      for(let c=0;c<8;c++){
+        const x=c*SZ,y=r*SZ;
+        // Base square
+        ctx.fillStyle=(r+c)%2===0?lc:dc;
+        ctx.fillRect(x,y,SZ,SZ);
+        // Highlight selected
+        if(selected&&selected[0]===r&&selected[1]===c){
+          ctx.fillStyle=hlc;ctx.fillRect(x,y,SZ,SZ);
+        }
+        // Highlight valid moves
+        if(validMoves.some(m=>m[0]===r&&m[1]===c)){
+          ctx.fillStyle=mvc;ctx.fillRect(x,y,SZ,SZ);
+          // Dot indicator
+          ctx.beginPath();ctx.arc(x+SZ/2,y+SZ/2,5,0,Math.PI*2);
+          ctx.fillStyle='rgba(63,185,80,0.7)';ctx.fill();
+        }
+        // Draw piece
+        const p=board[r][c];
+        if(p){
+          const char=PIECE_CHARS[(p.color)+p.type];
+          ctx.font=`${SZ*0.7}px serif`;
+          ctx.textAlign='center';ctx.textBaseline='middle';
+          // Shadow for depth
+          ctx.shadowColor=p.color==='w'?'rgba(0,0,0,0.5)':'rgba(255,255,255,0.1)';
+          ctx.shadowBlur=3;
+          ctx.fillStyle=p.color==='w'?'#fff':'#1a1a1a';
+          ctx.fillText(char,x+SZ/2,y+SZ/2+1);
+          ctx.shadowBlur=0;
+        }
+      }
+    }
+    // Coordinates
+    ctx.font='9px JetBrains Mono,monospace';ctx.fillStyle='rgba(255,255,255,0.3)';
+    'abcdefgh'.split('').forEach((l,i)=>{ctx.textAlign='center';ctx.fillText(l,i*SZ+SZ/2,SZ*8-3);});
+    '87654321'.split('').forEach((n,i)=>{ctx.textAlign='left';ctx.fillText(n,2,i*SZ+10);});
+  }
+
+  function getValidMoves(r,c){
+    const p=board[r][c];if(!p)return[];
+    const moves=[];
+    const inBounds=(rr,cc)=>rr>=0&&rr<8&&cc>=0&&cc<8;
+    const enemy=(rr,cc)=>inBounds(rr,cc)&&board[rr][cc]&&board[rr][cc].color!==p.color;
+    const empty=(rr,cc)=>inBounds(rr,cc)&&!board[rr][cc];
+    const emptyOrEnemy=(rr,cc)=>inBounds(rr,cc)&&(!board[rr][cc]||board[rr][cc].color!==p.color);
+
+    if(p.type==='P'){
+      const dir=p.color==='w'?-1:1;
+      if(empty(r+dir,c))moves.push([r+dir,c]);
+      if((p.color==='w'&&r===6)||(p.color==='b'&&r===1))if(empty(r+dir,c)&&empty(r+2*dir,c))moves.push([r+2*dir,c]);
+      if(enemy(r+dir,c-1))moves.push([r+dir,c-1]);
+      if(enemy(r+dir,c+1))moves.push([r+dir,c+1]);
+    } else if(p.type==='N'){
+      [[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[1,-2],[-1,2],[-1,-2]].forEach(([dr,dc])=>{
+        if(emptyOrEnemy(r+dr,c+dc))moves.push([r+dr,c+dc]);
+      });
+    } else if(p.type==='B'||p.type==='Q'){
+      [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([dr,dc])=>{
+        let rr=r+dr,cc=c+dc;
+        while(inBounds(rr,cc)){
+          if(board[rr][cc]){if(board[rr][cc].color!==p.color)moves.push([rr,cc]);break;}
+          moves.push([rr,cc]);rr+=dr;cc+=dc;
+        }
+      });
+    }
+    if(p.type==='R'||p.type==='Q'){
+      [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dr,dc])=>{
+        let rr=r+dr,cc=c+dc;
+        while(inBounds(rr,cc)){
+          if(board[rr][cc]){if(board[rr][cc].color!==p.color)moves.push([rr,cc]);break;}
+          moves.push([rr,cc]);rr+=dr;cc+=dc;
+        }
+      });
+    }
+    if(p.type==='K'){
+      for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){
+        if(dr===0&&dc===0)continue;
+        if(emptyOrEnemy(r+dr,c+dc))moves.push([r+dr,c+dc]);
+      }
+    }
+    return moves;
+  }
+
+  function makeMove(fr,fc,tr,tc){
+    const captured=board[tr][tc];
+    board[tr][tc]=board[fr][fc];
+    board[fr][fc]=null;
+    // Pawn promotion
+    if(board[tr][tc].type==='P'&&(tr===0||tr===7))board[tr][tc].type='Q';
+    moveHistory.push({from:[fr,fc],to:[tr,tc],captured});
+  }
+
+  function aiMove(){
+    // Simple AI: prioritize captures, then random moves
+    const allMoves=[];
+    for(let r=0;r<8;r++)for(let c=0;c<8;c++){
+      if(board[r][c]&&board[r][c].color==='b'){
+        getValidMoves(r,c).forEach(([tr,tc])=>{
+          const score=board[tr][tc]?({P:1,N:3,B:3,R:5,Q:9,K:100}[board[tr][tc].type]||0):0;
+          allMoves.push({fr:r,fc:c,tr,tc,score});
+        });
+      }
+    }
+    if(!allMoves.length){updateStatus('White wins! ♔');return;}
+    allMoves.sort((a,b)=>b.score-a.score);
+    // Pick from top moves with some randomness
+    const top=allMoves.filter(m=>m.score===allMoves[0].score);
+    const mv=top[Math.floor(Math.random()*Math.min(top.length,3))];
+    makeMove(mv.fr,mv.fc,mv.tr,mv.tc);
+    turn='w';
+    const cap=mv.score>0?` captures ${['','Pawn','','Knight/Bishop','','Rook','','','','Queen'][mv.score]||'piece'}!`:'';
+    updateStatus('Your turn (White).'+cap);
+    drawBoard();
+  }
+
+  canvas.addEventListener('click',e=>{
+    if(turn!=='w')return;
+    const rect=canvas.getBoundingClientRect();
+    const scaleX=canvas.width/rect.width, scaleY=canvas.height/rect.height;
+    const x=(e.clientX-rect.left)*scaleX, y=(e.clientY-rect.top)*scaleY;
+    const c=Math.floor(x/SZ), r=Math.floor(y/SZ);
+    if(r<0||r>=8||c<0||c>=8)return;
+
+    if(selected){
+      // Try to make move
+      if(validMoves.some(m=>m[0]===r&&m[1]===c)){
+        const captured=board[r][c];
+        makeMove(selected[0],selected[1],r,c);
+        selected=null;validMoves=[];
+        const cap=captured?` captures ${captured.type}!`:'';
+        updateStatus('AI thinking...'+cap);
+        drawBoard();
+        setTimeout(()=>{aiMove();},400);
+        return;
+      }
+      // Select another own piece
+      if(board[r][c]&&board[r][c].color==='w'){
+        selected=[r,c];validMoves=getValidMoves(r,c);
+        updateStatus(`Selected ${board[r][c].type} at ${'abcdefgh'[c]}${8-r}`);
+      } else {
+        selected=null;validMoves=[];
+        updateStatus('Your turn (White). Click a piece.');
+      }
+    } else {
+      if(board[r][c]&&board[r][c].color==='w'){
+        selected=[r,c];validMoves=getValidMoves(r,c);
+        updateStatus(`Selected ${board[r][c].type} at ${'abcdefgh'[c]}${8-r} — ${validMoves.length} moves`);
+      }
+    }
+    drawBoard();
+  });
+
+  document.getElementById('chess-reset').addEventListener('click',()=>{
+    clearInterval(autoTimer);autoPlay=false;
+    document.getElementById('chess-auto').textContent='▶ auto-play';
+    initBoard();drawBoard();
+  });
+
+  document.getElementById('chess-auto').addEventListener('click',function(){
+    autoPlay=!autoPlay;
+    this.textContent=autoPlay?'⏹ stop':'▶ auto-play';
+    if(autoPlay){
+      autoTimer=setInterval(()=>{
+        // Make a random move for both sides
+        const color=turn;
+        const allMoves=[];
+        for(let r=0;r<8;r++)for(let c=0;c<8;c++){
+          if(board[r][c]&&board[r][c].color===color){
+            getValidMoves(r,c).forEach(([tr,tc])=>allMoves.push({fr:r,fc:c,tr,tc}));
+          }
+        }
+        if(!allMoves.length){clearInterval(autoTimer);autoPlay=false;return;}
+        const mv=allMoves[Math.floor(Math.random()*allMoves.length)];
+        makeMove(mv.fr,mv.fc,mv.tr,mv.tc);
+        turn=turn==='w'?'b':'w';
+        drawBoard();
+        updateStatus(`${turn==='w'?'White':'Black'} to move...`);
+      },600);
+    } else {
+      clearInterval(autoTimer);
+      turn='w';updateStatus('Your turn (White). Click a piece.');
+    }
+  });
+
+  initBoard();drawBoard();
+})();
+</script>
 </body>
 </html>
