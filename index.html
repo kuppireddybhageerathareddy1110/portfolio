@@ -249,25 +249,6 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(13,17,23,
 .act-item:last-child{border:none}
 .act-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 
-/* ===== NEWSLETTER ===== */
-#nl-sec{padding:60px 0}
-.nl-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-.nl-box h3{font-size:1rem;font-weight:700;margin-bottom:3px}
-.nl-box p{color:var(--text2);font-size:.82rem}
-.nl-form{display:flex;gap:9px;flex:1;min-width:220px;flex-wrap:wrap}
-.nl-form input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:9px 13px;color:var(--text);font-family:var(--mono);font-size:.78rem;outline:none;min-width:160px;transition:border-color .15s}
-.nl-form input:focus{border-color:var(--green)}
-
-/* ===== POSTS ===== */
-#posts-sec{padding:60px 0}
-.posts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:540px){.posts-grid{grid-template-columns:1fr}}
-.post-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s;display:block}
-.post-card:hover{border-color:rgba(88,166,255,.35);transform:translateY(-2px)}
-.post-date{font-family:var(--mono);font-size:.7rem;color:var(--text2);margin-bottom:7px}
-.post-title{font-weight:700;font-size:.88rem;color:var(--cyan);margin-bottom:5px}
-.post-desc{font-size:.78rem;color:var(--text2);line-height:1.6}
-
 /* ===== FOOTER ===== */
 footer{border-top:1px solid var(--border);padding:20px;text-align:center;font-family:var(--mono);font-size:.72rem;color:var(--text2)}
 footer a{color:var(--green);text-decoration:none}
@@ -405,7 +386,7 @@ body.light::after{opacity:.15}
       <a href="#contact-sec">contact</a>
     </div>
     <div class="nav-r">
-      <button class="nav-btn" id="theme-btn">&#9728; light</button>
+      <button class="nav-btn" id="theme-btn">light mode</button>
       <button class="nav-btn hamburger" onclick="document.getElementById('mob-menu').classList.toggle('open')">&#9776; menu</button>
     </div>
   </div>
@@ -444,17 +425,44 @@ body.light::after{opacity:.15}
         </div>
         <div class="hero-role"><span id="typed-role"></span><span class="cursor-b"></span></div>
         <div class="hero-chips">
-          <span class="chip chip-g">&#9817; Linux</span>
-          <span class="chip chip-b">&#9816; Python &bull; TS &bull; Java</span>
-          <span class="chip chip-p">&#9815; NLP &bull; Deep Learning</span>
-          <span class="chip chip-o">&#9814; FastAPI &bull; Next.js &bull; React</span>
-          <span class="chip chip-g">&#9813; 53 Repos &bull; Open Source</span>
-          <span class="chip chip-b">&#9812; AWS &bull; Vercel &bull; Netlify</span>
+          <span class="chip chip-g">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Linux
+          </span>
+          <span class="chip chip-b">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Python &bull; TS &bull; Java
+          </span>
+          <span class="chip chip-p">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+            NLP &bull; Deep Learning
+          </span>
+          <span class="chip chip-o">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            FastAPI &bull; Next.js &bull; React
+          </span>
+          <span class="chip chip-g">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            53 Repos &bull; Open Source
+          </span>
+          <span class="chip chip-b">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            AWS &bull; Vercel &bull; Netlify
+          </span>
         </div>
         <div class="hero-btns">
-          <a href="#proj-sec" class="btn btn-g">&#9638; View Repos</a>
-          <button class="btn btn-o" id="resume-btn">&#8615; Resume</button>
-          <a href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" class="btn btn-o">&#9671; GitHub</a>
+          <a href="#proj-sec" class="btn btn-g">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            View Repos
+          </a>
+          <button class="btn btn-o" id="resume-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Resume
+          </button>
+          <a href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" class="btn btn-o">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub
+          </a>
         </div>
       </div>
     </div>
@@ -472,7 +480,7 @@ body.light::after{opacity:.15}
         <span class="to to-i">&#8594; Role : AI Engineer | Full-Stack Dev | Java HPC</span>
         <span class="to to-i">&#8594; Focus: NLP, Deep Learning, AutoML, Computer Vision</span>
         <span class="to to-ok">&#10003; Flagship: AutoML-STUDIO &mdash; live @ automl-studio.netlify.app</span>
-        <span class="to to-ok">&#10003; CGPA 8.84 &mdash; VIT-AP University 2022-2026 &mdash; 53 repos</span>
+        <span class="to to-ok">&#10003; CGPA 8.87 &mdash; VIT-AP University 2022-2026 &mdash; 53 repos</span>
         <div style="margin-top:8px"><span class="tp">bhageeratha@arch</span><span class="tsym">:</span><span class="tpath">~/</span><span class="tsym">$ </span><span id="typed-term"></span></div>
       </div>
     </div>
@@ -499,7 +507,10 @@ body.light::after{opacity:.15}
     <div class="snake-box fade" style="transition-delay:.45s">
       <div class="snake-top">
         <span>Contribution Snake &mdash; eating commits</span>
-        <strong>&#128027; live</strong>
+        <strong style="display:inline-flex;align-items:center;gap:5px;color:var(--orange)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          live
+        </strong>
       </div>
       <canvas id="snake-canvas" height="80"></canvas>
     </div>
@@ -563,14 +574,14 @@ body.light::after{opacity:.15}
         <div class="file-tree">
 <span class="ft-dir">bhageeratha@arch</span>:<span class="ft-dir">~/skills</span>$ tree .<br>
 <span class="ft-dir">.</span><br>
-<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; languages/</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">📁#128193; languages/</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">python3.12*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">typescript5*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">javascript-es2024*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">java17-openjdk*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">cpp17*</span><br>
 <span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-lib">r-4.3.whl</span><br>
-<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; ai_ml/</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">📁#128193; ai_ml/</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">tensorflow2.16*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">pytorch2.3*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">scikit-learn.whl</span><br>
@@ -581,7 +592,7 @@ body.light::after{opacity:.15}
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">transformers.whl</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">opencv-python.whl</span><br>
 <span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-lib">nltk.whl</span><br>
-<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; web_stack/</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">📁#128193; web_stack/</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">fastapi*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">flask-3.0*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">django-5*</span><br>
@@ -589,18 +600,18 @@ body.light::after{opacity:.15}
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">react-18*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-lib">tailwindcss.css</span><br>
 <span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-lib">vite.config.ts</span><br>
-<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; databases/</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">📁#128193; databases/</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">mongodb.conf</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">mysql.conf</span><br>
 <span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-cfg">postgresql.conf</span><br>
-<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">&#128193; devops_cloud/</span><br>
+<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-dir">📁#128193; devops_cloud/</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">docker*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-exe">git*</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">aws.key</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">vercel.json</span><br>
 <span class="ft-c">&#9474;   &#9500;&#9472;&#9472;</span> <span class="ft-cfg">netlify.toml</span><br>
 <span class="ft-c">&#9474;   &#9492;&#9472;&#9472;</span> <span class="ft-cfg">firebase.json</span><br>
-<span class="ft-c">&#9492;&#9472;&#9472;</span> <span class="ft-dir">&#128193; data_science/</span><br>
+<span class="ft-c">&#9492;&#9472;&#9472;</span> <span class="ft-dir">📁#128193; data_science/</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-lib">pandas.whl</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-lib">numpy.whl</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="ft-c">&#9500;&#9472;&#9472;</span> <span class="ft-lib">matplotlib.whl</span><br>
@@ -645,7 +656,10 @@ body.light::after{opacity:.15}
         <div class="gl-body">
           <div class="gl-hash">3fb950a</div>
           <div class="gl-title">feat: AI-driven freelance &mdash; 90%+ NLP accuracy, cloud deployments</div>
-          <div class="gl-meta"><span>&#128100; Bhageeratha Reddy</span><span>&#128197; 2023 &ndash; Present</span></div>
+          <div class="gl-meta">
+            <span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Bhageeratha Reddy</span>
+            <span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2023 &ndash; Present</span>
+          </div>
           <div class="gl-desc">Developed full-stack AI web apps (sentiment analysis, chatbots, AutoML) using Flask, FastAPI &amp; deep learning. Deployed to AWS, Vercel &amp; Netlify. Clients across tech &amp; healthcare domains.</div>
           <div class="gl-tags">
             <span class="gl-tag chip-g">FastAPI</span><span class="gl-tag chip-b">Flask</span><span class="gl-tag chip-p">Deep Learning</span><span class="gl-tag chip-o">Cloud</span>
@@ -661,7 +675,11 @@ body.light::after{opacity:.15}
         <div class="gl-body">
           <div class="gl-hash">58a6ff2</div>
           <div class="gl-title">init: B.Tech Computer Science @ VIT-AP University</div>
-          <div class="gl-meta"><span>&#127963; VIT-AP University</span><span>&#128197; 2022 &ndash; 2026</span><span style="color:var(--green)">CGPA: 8.84</span></div>
+          <div class="gl-meta">
+            <span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>VIT-AP University</span>
+            <span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2022 &ndash; 2026</span>
+            <span style="color:var(--green)">CGPA: 8.87</span>
+          </div>
           <div class="gl-desc">Specialization in AI/ML. Built AutoML-STUDIO, medical chatbots, drowsiness detection systems, and HPC matrix engines. Consistent top performer.</div>
           <div class="gl-tags"><span class="gl-tag chip-b">CS</span><span class="gl-tag chip-p">AI/ML</span><span class="gl-tag chip-g">HPC</span></div>
         </div>
@@ -675,7 +693,11 @@ body.light::after{opacity:.15}
         <div class="gl-body">
           <div class="gl-hash">e3b341c</div>
           <div class="gl-title">score: Sri Chaitanya Junior College &mdash; 96.7%</div>
-          <div class="gl-meta"><span>&#127979; Sri Chaitanya Junior College</span><span>&#128197; 2020 &ndash; 2022</span><span style="color:var(--green)">96.7%</span></div>
+          <div class="gl-meta">
+            <span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Sri Chaitanya Junior College</span>
+            <span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2020 &ndash; 2022</span>
+            <span style="color:var(--green)">96.7%</span>
+          </div>
           <div class="gl-desc">Top-tier academic performance in Mathematics, Physics &amp; Chemistry. Foundation for computational thinking.</div>
         </div>
       </div>
@@ -687,7 +709,11 @@ body.light::after{opacity:.15}
         <div class="gl-body">
           <div class="gl-hash">bc8cff9</div>
           <div class="gl-title">init: Sri Chaitanya School &mdash; 99.6%</div>
-          <div class="gl-meta"><span>&#127979; Sri Chaitanya School</span><span>&#128197; 2020</span><span style="color:var(--green)">99.6%</span></div>
+          <div class="gl-meta">
+            <span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Sri Chaitanya School</span>
+            <span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2020</span>
+            <span style="color:var(--green)">99.6%</span>
+          </div>
           <div class="gl-desc">Perfect academic foundation. Top performer across all subjects.</div>
         </div>
       </div>
@@ -715,7 +741,8 @@ body.light::after{opacity:.15}
       <button class="fbtn" data-f="Python">Python</button>
       <button class="fbtn" data-f="ML">ML/AI</button>
       <button class="fbtn" data-f="FullStack">Full Stack</button>
-      <button class="fbtn" data-f="Java">Java/HPC</button>
+      <button class="fbtn" data-f="Web">Web</button>
+      <button class="fbtn" data-f="NLP">NLP</button>
       <button id="shuf-btn"><span class="shuf-icon">&#8644;</span> git reorder</button>
     </div>
     <div class="proj-grid" id="proj-grid">
@@ -723,10 +750,13 @@ body.light::after{opacity:.15}
       <!-- AutoML Studio FLAGSHIP -->
       <div class="proj-card featured project" data-t="Python,ML,FullStack" style="grid-column:span 2">
         <div class="proj-featured-hero">
-          <div class="proj-featured-badge">&#9813; Flagship &bull; 5 stars</div>
+          <div class="proj-featured-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Flagship &bull; Deployed
+          </div>
           <div style="text-align:center;position:relative;z-index:1">
-            <div style="font-size:2.8rem">&#129302;</div>
-            <div style="font-family:var(--mono);font-size:.88rem;color:var(--green);font-weight:700;margin-top:5px">AutoML Studio</div>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 10px"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+            <div style="font-family:var(--mono);font-size:.88rem;color:var(--green);font-weight:700">AutoML Studio</div>
             <div style="font-family:var(--mono);font-size:.68rem;color:var(--text2);margin-top:3px">Full-Stack &bull; Deployed &bull; Live</div>
           </div>
           <div style="text-align:left;position:relative;z-index:1;font-family:var(--mono);font-size:.7rem;color:var(--text2);line-height:1.9">
@@ -740,123 +770,179 @@ body.light::after{opacity:.15}
           <div class="proj-lang"><div class="lang-dot" style="background:#3178C6"></div>TypeScript &bull; Python</div>
           <div class="proj-title">AutoML-STUDIO</div>
           <div class="proj-desc">Production-ready full-stack AutoML platform. Upload CSV/XLSX, run EDA, statistical tests, automated ML with XGBoost/LightGBM, SHAP explainability, Optuna tuning. FastAPI backend on Render + Next.js frontend on Netlify.</div>
-          <div class="proj-stats"><span>&#11088; 5</span><span>&#8921; 0</span><span>&#127760; <a href="https://automl-studio.netlify.app/" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">Live Demo</a></span></div>
+          <div class="proj-stats">
+            <span style="display:flex;align-items:center;gap:5px">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <a href="https://automl-studio.netlify.app/" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">Live Demo</a>
+            </span>
+          </div>
         </div>
         <div class="proj-foot">
           <div class="proj-tags"><span class="ptag">FastAPI</span><span class="ptag">Next.js</span><span class="ptag">XGBoost</span><span class="ptag">SHAP</span><span class="ptag">Optuna</span><span class="ptag">TailwindCSS</span></div>
-          <a href="https://github.com/kuppireddybhageerathareddy1110/AutoML-STUDIO" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/AutoML-STUDIO" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
         </div>
       </div>
 
       <!-- Sentiment Analysis -->
-      <div class="proj-card project" data-t="Python,ML" style="position:relative">
+      <div class="proj-card project" data-t="Python,ML,NLP" style="position:relative">
         <div class="proj-chess">&#9813;</div>
-        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#128172;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#0d1117,#162032)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="13" y2="14"/></svg>
+        </div>
         <div class="proj-body">
           <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
-          <div class="proj-title">sentiment-analysis-app</div>
-          <div class="proj-desc">Flask app using VADER + LIME for real-time sentiment analysis with explainability. 90%+ NLP accuracy.</div>
-          <div class="proj-stats"><span>&#11088; 120</span><span>&#8921; 50</span></div>
+          <div class="proj-title">Sentiment Analysis</div>
+          <div class="proj-desc">Real-time sentiment analysis web app using NLP techniques. Classifies text sentiment with explainability and live prediction.</div>
         </div>
         <div class="proj-foot">
-          <div class="proj-tags"><span class="ptag">Flask</span><span class="ptag">VADER</span><span class="ptag">LIME</span></div>
-          <a href="https://github.com/kuppireddybhageerathareddy1110/sentiment-analysis-app.git" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+          <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">NLP</span><span class="ptag">Flask</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/mm" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- AI Doc -->
+      <div class="proj-card project" data-t="Python,ML,FullStack" style="position:relative">
+        <div class="proj-chess">&#9814;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#0d1117,#1a1232)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="14" r="2"/><path d="M12 12v-2M12 16v-2"/></svg>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">AI-Doc</div>
+          <div class="proj-desc">AI-powered document intelligence platform. Analyze, summarize and extract insights from documents using large language models.</div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">LLM</span><span class="ptag">FastAPI</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/ai-doc" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Car Rental -->
+      <div class="proj-card project" data-t="Web,FullStack" style="position:relative">
+        <div class="proj-chess">&#9815;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#0d1117,#1a2212)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#f0db4f"></div>JavaScript</div>
+          <div class="proj-title">CAR-rental</div>
+          <div class="proj-desc">Full-stack car rental web application with booking system, fleet management, user authentication and payment integration.</div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">JavaScript</span><span class="ptag">Web</span><span class="ptag">Full Stack</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/CAR-rental" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Text2Image -->
+      <div class="proj-card project" data-t="Python,ML,NLP" style="position:relative">
+        <div class="proj-chess">&#9816;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#0d1117,#201232)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">Text-to-Image (Multimodal AI)</div>
+          <div class="proj-desc">Realistic and consistent text-to-image generation using multimodal AI. Bridges language and vision with transformer-based architecture.</div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">PyTorch</span><span class="ptag">Multimodal</span><span class="ptag">Diffusion</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/Towards-Realistic-and-Consistent-Text-to-Image-Generation-with-Multimodal-AI" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
         </div>
       </div>
 
       <!-- Medical Chatbot -->
-      <div class="proj-card project" data-t="Python,ML" style="position:relative">
-        <div class="proj-chess">&#9814;</div>
-        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#127973;</div>
-        <div class="proj-body">
-          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
-          <div class="proj-title">medical-chatbot</div>
-          <div class="proj-desc">Deep learning chatbot using SBERT + BioBERT for medical Q&amp;A. Contextual understanding with medical knowledge base.</div>
-          <div class="proj-stats"><span>&#11088; 80</span><span>&#8921; 30</span></div>
-        </div>
-        <div class="proj-foot">
-          <div class="proj-tags"><span class="ptag">SBERT</span><span class="ptag">BioBERT</span></div>
-          <a href="https://github.com/kuppireddybhageerathareddy1110/bot1.git" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Heart Disease -->
-      <div class="proj-card project" data-t="Python,ML" style="position:relative">
-        <div class="proj-chess">&#9815;</div>
-        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#129728;</div>
-        <div class="proj-body">
-          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
-          <div class="proj-title">heart-disease-ml</div>
-          <div class="proj-desc">Ensemble ML (Random Forest + Bagging) for clinical heart disease classification. 81%+ accuracy, ROC curve &amp; cross-validation analysis.</div>
-          <div class="proj-stats"><span>&#11088; 65</span><span>&#8921; 22</span></div>
-        </div>
-        <div class="proj-foot">
-          <div class="proj-tags"><span class="ptag">Sklearn</span><span class="ptag">Pandas</span><span class="ptag">Healthcare</span></div>
-          <a href="https://github.com/kuppireddybhageerathareddy1110/heart-disease-ml" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Activity Recognition -->
-      <div class="proj-card project" data-t="Python,ML" style="position:relative">
-        <div class="proj-chess">&#9816;</div>
-        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#127939;</div>
-        <div class="proj-body">
-          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
-          <div class="proj-title">activity-recognition</div>
-          <div class="proj-desc">LSTM deep learning model for real-time human activity classification from wearable sensor time-series data.</div>
-          <div class="proj-stats"><span>&#11088; 58</span><span>&#8921; 18</span></div>
-        </div>
-        <div class="proj-foot">
-          <div class="proj-tags"><span class="ptag">LSTM</span><span class="ptag">TensorFlow</span><span class="ptag">PyTorch</span></div>
-          <a href="https://github.com/kuppireddybhageerathareddy1110/activity-recognition" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Wine Quality -->
-      <div class="proj-card project" data-t="Python,ML" style="position:relative">
+      <div class="proj-card project" data-t="Python,ML,NLP" style="position:relative">
         <div class="proj-chess">&#9817;</div>
-        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#127863;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#0d1117,#1a1a2e)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.32h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
         <div class="proj-body">
           <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
-          <div class="proj-title">wine-quality</div>
-          <div class="proj-desc">Ridge / Lasso / PCA regression pipeline for wine quality scoring. Complete preprocessing, tuning and visualization.</div>
-          <div class="proj-stats"><span>&#11088; 42</span><span>&#8921; 12</span></div>
+          <div class="proj-title">Medical Chatbot</div>
+          <div class="proj-desc">Deep learning chatbot using SBERT + BioBERT for medical Q&amp;A. Contextual understanding with medical knowledge base.</div>
         </div>
         <div class="proj-foot">
-          <div class="proj-tags"><span class="ptag">Ridge</span><span class="ptag">Lasso</span><span class="ptag">PCA</span></div>
-          <a href="https://github.com/kuppireddybhageerathareddy1110/wine-quality" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+          <div class="proj-tags"><span class="ptag">SBERT</span><span class="ptag">BioBERT</span><span class="ptag">NLP</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/bot1" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
         </div>
       </div>
 
-      <!-- Java HPC -->
-      <div class="proj-card project" data-t="Java" style="position:relative">
-        <div class="proj-chess">&#9812;</div>
-        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#9889;</div>
-        <div class="proj-body">
-          <div class="proj-lang"><div class="lang-dot" style="background:#ED8B00"></div>Java</div>
-          <div class="proj-title">matrix-java &mdash; HPC</div>
-          <div class="proj-desc">Parallel matrix multiplication &amp; 2D convolution on 4096x4096 matrices. Java multithreading, HPC-optimized concurrent processing.</div>
-          <div class="proj-stats"><span>&#11088; 40</span><span>&#8921; 15</span></div>
-        </div>
-        <div class="proj-foot">
-          <div class="proj-tags"><span class="ptag">Java</span><span class="ptag">Multithreading</span><span class="ptag">HPC</span></div>
-          <a href="https://github.com/kuppireddybhageerathareddy1110/matrix-java" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Drowsiness Detection -->
+      <!-- Biomass -->
       <div class="proj-card project" data-t="Python,ML" style="position:relative">
-        <div class="proj-chess">&#9813;</div>
-        <div class="proj-hero" style="background:linear-gradient(135deg,#161b22,#1c2128)">&#128065;</div>
+        <div class="proj-chess">&#9812;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#0d1117,#0f1f0f)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 7 5a5 5 0 0 1 10 0c0 5-5 7-5 7z"/><path d="M12 12c0 0-5 2-5 7h10c0-5-5-7-5-7z"/></svg>
+        </div>
         <div class="proj-body">
           <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
-          <div class="proj-title">drowsiness-detection</div>
-          <div class="proj-desc">Real-time OpenCV driver drowsiness detection on Raspberry Pi. Eye-aspect ratio algorithm with buzzer alert system.</div>
-          <div class="proj-stats"><span>&#11088; 60</span><span>&#8921; 20</span></div>
+          <div class="proj-title">Biomass</div>
+          <div class="proj-desc">Biomass prediction and analysis system using machine learning. Estimates biomass yield from environmental and sensor data inputs.</div>
         </div>
         <div class="proj-foot">
-          <div class="proj-tags"><span class="ptag">OpenCV</span><span class="ptag">RPi</span><span class="ptag">IoT</span></div>
-          <a href="https://github.com/KUPPIREDDYBHAGEERATHAREDDY11/ECS-1-DROWSINESS-DETECTION-SYSTEM.git" target="_blank" rel="noopener" class="proj-link">&#9671; GitHub &rarr;</a>
+          <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">ML</span><span class="ptag">Regression</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/biomass" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- SmartMart -->
+      <div class="proj-card project" data-t="Web,FullStack" style="position:relative">
+        <div class="proj-chess">&#9813;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#0d1117,#1a2212)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#f0db4f"></div>JavaScript</div>
+          <div class="proj-title">SmartMart</div>
+          <div class="proj-desc">Smart e-commerce marketplace with product recommendations, cart management, order tracking and responsive modern UI.</div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">JavaScript</span><span class="ptag">E-commerce</span><span class="ptag">Web</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/SmartMart" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- TexFlow -->
+      <div class="proj-card project" data-t="Python,NLP,ML" style="position:relative">
+        <div class="proj-chess">&#9814;</div>
+        <div class="proj-hero" style="background:linear-gradient(135deg,#0d1117,#1a1232)">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang"><div class="lang-dot" style="background:#3572A5"></div>Python</div>
+          <div class="proj-title">TexFlow</div>
+          <div class="proj-desc">Text processing and NLP pipeline system. Handles text extraction, transformation, classification and flow automation at scale.</div>
+        </div>
+        <div class="proj-foot">
+          <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">NLP</span><span class="ptag">Pipeline</span></div>
+          <a href="https://github.com/kuppireddybhageerathareddy1110/TexFlow" target="_blank" rel="noopener" class="proj-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.37-2.22-.26-4.56-1.13-4.56-5a4.02 4.02 0 0 1 1.07-2.79c-.11-.27-.47-1.35.1-2.8 0 0 .89-.29 2.9 1.08a10.3 10.3 0 0 1 2.64-.36c.9.004 1.81.12 2.64.36 2.01-1.37 2.9-1.08 2.9-1.08.57 1.45.21 2.53.1 2.8A4.02 4.02 0 0 1 22 12.2c0 3.88-2.35 4.74-4.59 4.99.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.18 10.18 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub &rarr;
+          </a>
         </div>
       </div>
 
@@ -932,68 +1018,27 @@ body.light::after{opacity:.15}
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section id="testi-sec" class="above">
-  <div class="wrap">
-    <div class="sec-tag fade">$ git notes list --ref=reviews</div>
-    <div class="sec-h fade"><span class="sec-chess">&#9817;</span>Testimonials</div>
-    <div class="fade">
-      <div class="swiper" style="padding-bottom:40px">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><div class="tcard"><p>"Bhageeratha's sentiment analysis app was a game-changer for our client feedback system. The LIME explainability gave us real actionable insights."</p><div class="author">&mdash; Client A &bull; Tech Startup</div></div></div>
-          <div class="swiper-slide"><div class="tcard"><p>"The medical chatbot delivered surprisingly accurate responses. Deep NLP expertise with BioBERT integration that impressed our healthcare team."</p><div class="author">&mdash; Client B &bull; Healthcare</div></div></div>
-          <div class="swiper-slide"><div class="tcard"><p>"Innovative and reliable. Bhageeratha's projects always exceed expectations &mdash; clean code, great documentation, on-time delivery."</p><div class="author">&mdash; Collaborator C &bull; AI Research</div></div></div>
-        </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- GITHUB ACTIVITY -->
 <section class="above" style="padding:20px 0 40px">
   <div class="wrap fade">
     <div class="sec-tag">$ git log --author=bhageeratha --since=90.days.ago --format="%h %s"</div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;margin-top:12px">
-      <div class="act-item"><div class="act-dot" style="background:var(--green)"></div>Pushed to AutoML-STUDIO &mdash; feat: SHAP explainability &amp; Optuna tuning &bull; Dec 2024</div>
-      <div class="act-item"><div class="act-dot" style="background:var(--cyan)"></div>Pushed to sentiment-analysis-app &mdash; fix: LIME visual rendering &bull; Nov 2024</div>
-      <div class="act-item"><div class="act-dot" style="background:var(--purple)"></div>Created medical-chatbot repository &bull; Oct 2024</div>
-      <div class="act-item"><div class="act-dot" style="background:var(--orange)"></div>Starred transformers, pytorch, xgboost repos &bull; Sep 2024</div>
-    </div>
-  </div>
-</section>
-
-<!-- POSTS -->
-<section id="posts-sec" class="above">
-  <div class="wrap">
-    <div class="sec-tag fade">$ cat ~/linkedin_posts/* | head</div>
-    <div class="sec-h fade">Recent Posts</div>
-    <div class="posts-grid fade">
-      <a href="https://linkedin.com/in/bhageerathareddykuppireddy" class="post-card" target="_blank" rel="noopener">
-        <div class="post-date">&#128197; Oct 2024</div>
-        <div class="post-title">Exploring NLP in Healthcare</div>
-        <div class="post-desc">Insights on SBERT &amp; BioBERT for medical chatbots &mdash; how transformers changed clinical Q&amp;A and why explainability matters.</div>
-      </a>
-      <a href="https://linkedin.com/in/bhageerathareddykuppireddy" class="post-card" target="_blank" rel="noopener">
-        <div class="post-date">&#128197; Sep 2024</div>
-        <div class="post-title">Real-Time Sentiment Analysis</div>
-        <div class="post-desc">Built a Flask app with VADER and LIME &mdash; making NLP explainable for non-technical stakeholders with interactive visualizations.</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section id="nl-sec" class="above">
-  <div class="wrap fade">
-    <div class="nl-box">
-      <div><h3>$ subscribe --newsletter</h3><p>AI, Data Science &amp; project updates</p></div>
-      <form class="nl-form" id="nl-form" onsubmit="return false">
-        <input type="email" id="nl-email" placeholder="you@example.com" required/>
-        <button type="submit" class="btn btn-g">Subscribe</button>
-      </form>
+      <div class="act-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+        Pushed to AutoML-STUDIO &mdash; feat: SHAP explainability &amp; Optuna tuning &bull; Dec 2024
+      </div>
+      <div class="act-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Pushed to sentiment-analysis-app &mdash; fix: LIME visual rendering &bull; Nov 2024
+      </div>
+      <div class="act-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        Created medical-chatbot repository &bull; Oct 2024
+      </div>
+      <div class="act-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Starred transformers, pytorch, xgboost repos &bull; Sep 2024
+      </div>
     </div>
   </div>
 </section>
@@ -1001,19 +1046,22 @@ body.light::after{opacity:.15}
 <!-- CONTACT -->
 <section id="contact-sec" class="above">
   <div class="wrap">
-    <div class="sec-tag fade">$ ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d2b0bab3b5b7b7a0b3a6bab392b1bdbcbcb7b1a6fcb6b7a4">[email&#160;protected]</a></div>
+    <div class="sec-tag fade">$ ssh bhageerathareddykuppireddy@gmail.com</div>
     <div class="sec-h fade"><span class="sec-chess">&#9812;</span>Let's Connect</div>
     <div class="contact-layout fade">
       <form class="cform" id="contact-form">
         <input type="text" id="cname" placeholder="Your Name" required/>
         <input type="email" id="cemail" placeholder="Your Email" required/>
         <textarea id="cmsg" placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn btn-g">&#9671; Send Message</button>
+        <button type="submit" class="btn btn-g">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message
+        </button>
       </form>
       <div class="clinks">
-        <a class="clink" href="/cdn-cgi/l/email-protection#97f5fff6f0f2f2e5f6e3fff6e5f2f3f3eefce2e7e7fee5f2f3f3eed7f0faf6fefbb9f4f8fa">
+        <a class="clink" href="mailto:bhageerathareddykuppireddy@gmail.com">
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          <span class="__cf_email__" data-cfemail="7c1e141d1b19190e1d08141d0e1918180517090c0c150e191818053c1b111d1510521f1311">[email&#160;protected]</span>
+          bhageerathareddykuppireddy@gmail.com
         </a>
         <a class="clink" href="https://linkedin.com/in/bhageerathareddykuppireddy" target="_blank" rel="noopener">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16v16H4V4zm3.5 13V10.5H5.5V17h2zm-1-7.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM15.5 17h-2v-3c0-.8-.3-1.5-1.1-1.5-.9 0-1.1.7-1.1 1.5v3h-2v-6.5h2v1c.5-.7 1.3-1.2 2.1-1.2 1.5 0 2.1.9 2.1 2.3V17z"/></svg>
@@ -1046,7 +1094,7 @@ body.light::after{opacity:.15}
     <a href="./resume_bhagi.pdf" download class="btn btn-g">&#8615; Download Resume</a>
   </div>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // === PRELOADER ===
 window.addEventListener('load',()=>{
   setTimeout(()=>{
@@ -1394,7 +1442,7 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
 
 // === TYPED ===
 new Typed('#typed-role',{
-  strings:['Data Scientist & AI Engineer','AutoML Full-Stack Developer','NLP & Deep Learning Engineer','&#127823; Linux Power User','FastAPI · Next.js · React Dev','Java HPC Engineer','Open Source · 53 repos'],
+  strings:['Data Scientist & AI Engineer','AutoML Full-Stack Developer','NLP & Deep Learning Engineer','Linux Power User','FastAPI · Next.js · React Dev','Java HPC Engineer','Open Source · 53 repos'],
   typeSpeed:55,backSpeed:35,backDelay:1800,loop:true,showCursor:false
 });
 new Typed('#typed-term',{
@@ -1444,7 +1492,7 @@ shufBtn.addEventListener('click',shuffleCards);
 new IntersectionObserver(e=>{if(e[0].isIntersecting){setTimeout(shuffleCards,900);}},{threshold:.3}).observe(document.getElementById('proj-sec'));
 
 // === SWIPER ===
-new Swiper('.swiper',{slidesPerView:1,spaceBetween:20,loop:true,autoplay:{delay:4500},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},pagination:{el:'.swiper-pagination',clickable:true}});
+// Swiper removed (testimonials section removed)
 
 // === BACK TO TOP ===
 const btt=document.getElementById('btt');
@@ -1453,7 +1501,7 @@ btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
 // === THEME ===
 const tb=document.getElementById('theme-btn');
-tb.addEventListener('click',()=>{document.body.classList.toggle('light');tb.textContent=document.body.classList.contains('light')?'&#127769; dark':'&#9728; light';});
+tb.addEventListener('click',()=>{document.body.classList.toggle('light');tb.textContent=document.body.classList.contains('light')?'dark mode':'light mode';});
 
 // === RESUME MODAL ===
 document.getElementById('resume-btn').addEventListener('click',()=>document.getElementById('resume-modal').classList.add('open'));
@@ -1467,12 +1515,7 @@ document.getElementById('contact-form').addEventListener('submit',e=>{
   if(n&&em&&m){alert('[OK] Message queued. (Demo mode)');e.target.reset();}
   else alert('[ERR] Fill all fields.');
 });
-document.getElementById('nl-form').addEventListener('submit',e=>{
-  e.preventDefault();
-  const em=document.getElementById('nl-email').value.trim();
-  if(em){alert('[OK] Subscribed!');e.target.reset();}
-  else alert('[ERR] Invalid email.');
-});
+// Newsletter removed
 
 // === PROJ GRID SPAN FIX ===
 (function(){
