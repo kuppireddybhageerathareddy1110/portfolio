@@ -42,8 +42,8 @@ function CopilotGLB() {
       >
         <primitive
           object={scene}
-          scale={2.2}
-          position={[0, -0.5, 0]}
+          scale={4.8}
+          position={[0, 0.1, 0]}
         />
       </Float>
     </group>
@@ -117,7 +117,7 @@ export default function CopilotModel3D({
 
           {/* Subtle ground shadow */}
           <ContactShadows
-            position={[0, -1.8, 0]}
+            position={[0, -0.8, 0]}
             opacity={0.45}
             scale={8}
             blur={2.2}

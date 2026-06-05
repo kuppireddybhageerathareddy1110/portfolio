@@ -1,11 +1,56 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { OrbitControls, Stars, useGLTF, Float, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
 import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
 import LazyCanvas from "./LazyCanvas";
+
+// Preload the GLB assets
+useGLTF.preload("/arthur.glb");
+useGLTF.preload("/knight.glb");
+
+function LoadingModel() {
+  return (
+    <mesh>
+      <sphereGeometry args={[0.5, 16, 16]} />
+      <meshBasicMaterial color="#3fb950" wireframe />
+    </mesh>
+  );
+}
+
+function GLBModel({ url, scale, position }: { url: string; scale: number; position: [number, number, number] }) {
+  const { scene } = useGLTF(url);
+  const groupRef = useRef<THREE.Group>(null!);
+
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.15;
+    }
+  });
+
+  // Traverse model to cast and receive shadows
+  scene.traverse((child) => {
+    if ((child as THREE.Mesh).isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      <Float
+        speed={1.5}
+        rotationIntensity={0.1}
+        floatIntensity={0.4}
+        floatingRange={[-0.08, 0.08]}
+      >
+        <primitive object={scene} scale={scale} position={position} />
+      </Float>
+    </group>
+  );
+}
 
 interface HeroSceneProps {
   theme: "chess" | "knight" | "poet" | "king";
@@ -327,13 +372,37 @@ export default function HeroScene({ theme = "chess" }: HeroSceneProps) {
         <Canvas
           camera={{ position: [0, 0.5, 7.5], fov: 46 }}
           style={{ background: "transparent" }}
+          shadows
         >
           <ambientLight intensity={0.65} />
           <pointLight position={[10, 10, 10]} intensity={1.3} color="#ffffff" />
           <pointLight position={[-8, -6, -4]} intensity={0.7} color="#58a6ff" />
           <pointLight position={[0, 4, -4]} intensity={0.5} color={theme === "knight" ? "#ff4a4a" : theme === "king" ? "#ffd700" : "#3fb950"} />
 
-          <MorphingVoxelScene theme={theme} />
+          {/* HDR environment for realistic reflections when rendering GLB models */}
+          {(theme === "king" || theme === "knight") && <Environment preset="city" />}
+
+          {/* Subtle ground shadow for GLBs */}
+          {(theme === "king" || theme === "knight") && (
+            <ContactShadows
+              position={[0, -0.2, 0]}
+              opacity={0.5}
+              scale={6}
+              blur={1.8}
+              far={3}
+              color="#000000"
+            />
+          )}
+
+          <Suspense fallback={<LoadingModel />}>
+            {theme === "king" ? (
+              <GLBModel url="/arthur.glb" scale={4.5} position={[0, -0.2, 0]} />
+            ) : theme === "knight" ? (
+              <GLBModel url="/knight.glb" scale={4.5} position={[0, -0.2, 0]} />
+            ) : (
+              <MorphingVoxelScene theme={theme} />
+            )}
+          </Suspense>
 
           <Stars
             radius={120}
@@ -356,7 +425,9 @@ export default function HeroScene({ theme = "chess" }: HeroSceneProps) {
           />
         </Canvas>
       </LazyCanvas>
-      <div className="floating-3d-hint">Drag to orbit • 3D Voxel Core</div>
+      <div className="floating-3d-hint">
+        {theme === "king" || theme === "knight" ? "Drag to orbit • 3D GLB Model" : "Drag to orbit • 3D Voxel Core"}
+      </div>
     </div>
   );
 }
