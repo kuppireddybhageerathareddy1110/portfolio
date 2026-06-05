@@ -195,7 +195,7 @@ export default function SkillsOrb({ theme = "chess" }: SkillsOrbProps) {
   return (
     <div className="skills-3d">
       <Canvas
-        camera={{ position: [0, 4.5, 9.5], fof: 46 }}
+        camera={{ position: [0, 4.5, 9.5], fov: 46 }}
         style={{ background: "#05070a" }}
       >
         <ambientLight intensity={0.65} />
