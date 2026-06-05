@@ -11,7 +11,11 @@ import {
   X, 
   Code2, 
   Brain, 
-  Zap 
+  Zap,
+  Crown,
+  Shield,
+  BookOpen,
+  Compass
 } from "lucide-react";
 import { toast } from "sonner";
 import HeroScene from "./components/HeroScene";
@@ -20,6 +24,7 @@ import Playground3D from "./components/Playground3D";
 import ProjectPreview3D from "./components/ProjectPreview3D";
 import ContributionGlobe from "./components/ContributionGlobe";
 import BackgroundCanvas from "./components/BackgroundCanvas";
+import ParallaxCard from "./components/ParallaxCard";
 
 const navItems = [
   { label: "skills", href: "#skills" },
@@ -162,6 +167,7 @@ const badges = [
 ];
 
 export default function Portfolio() {
+  const [theme, setTheme] = useState<"chess" | "knight" | "poet" | "king">("chess");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("all");
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -195,7 +201,7 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0c10] text-[#e6edf3] overflow-x-hidden">
+    <div className={`theme-${theme} theme-container min-h-screen overflow-x-hidden relative`}>
       <BackgroundCanvas />
 
       {/* Preloader */}
@@ -356,21 +362,35 @@ export default function Portfolio() {
 
           {/* 3D HERO SCENE */}
           <div className="relative">
-            <HeroScene />
+            <HeroScene theme={theme} />
           </div>
         </div>
       </section>
 
       {/* ABOUT / INTRO */}
       <section className="section max-w-5xl mx-auto px-6">
-        <div className="max-w-3xl">
-          <div className="section-tag">WHO I AM</div>
-          <h2 className="section-title mb-6">I turn data into <span>deployed intelligence</span>.</h2>
-          <p className="text-lg text-[#8b949e] leading-relaxed">
-            Data Scientist and AI Engineer with a strong foundation in building end-to-end intelligent systems. 
-            I love the intersection of research-grade models and polished, production-ready products. 
-            Currently exploring advanced AutoML workflows, multimodal models, and 3D visualization of ML pipelines.
-          </p>
+        <div className="grid md:grid-cols-[1fr_auto] gap-12 items-center">
+          <div className="max-w-2xl">
+            <div className="section-tag">WHO I AM</div>
+            <h2 className="section-title mb-6">I turn data into <span>deployed intelligence</span>.</h2>
+            <p className="text-lg text-[#8b949e] leading-relaxed">
+              Data Scientist and AI Engineer with a strong foundation in building end-to-end intelligent systems. 
+              I love the intersection of research-grade models and polished, production-ready products. 
+              Currently exploring advanced AutoML workflows, multimodal models, and 3D visualization of ML pipelines.
+            </p>
+          </div>
+          <div className="flex justify-center md:justify-end">
+            <div className="about-photo-wrapper">
+              <Image 
+                src="/bhageeratha_profile.jpg" 
+                alt="Kuppireddy Bhageeratha Reddy" 
+                width={280} 
+                height={280} 
+                className="object-cover w-full h-full"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -399,12 +419,12 @@ export default function Portfolio() {
           <div>
             <div className="flex items-center justify-between mb-4 px-1">
               <div>
-                <span className="text-sm text-[#8b949e] mono">INTERACTIVE 3D CONSTELLATION</span>
+                <span className="text-sm text-[#8b949e] mono">INTERACTIVE 3D ORBITAL SYSTEM</span>
                 <div className="text-xl font-semibold tracking-tight">Skill Graph • Drag to explore</div>
               </div>
               <div className="text-xs text-[#8b949e] mono hidden md:block">Powered by React Three Fiber</div>
             </div>
-            <SkillsOrb />
+            <SkillsOrb theme={theme} />
           </div>
         </div>
       </section>
@@ -555,8 +575,8 @@ export default function Portfolio() {
           </div>
 
           <div className="lab-feature">
-            <div className="lab-feature-image">
-              <Image src="/lotm-fool-chess.png" alt="Chess themed project artwork" fill sizes="(max-width: 900px) 100vw, 60vw" />
+            <div className="lab-feature-image relative overflow-hidden h-[260px] min-h-[260px] w-full">
+              <ParallaxCard src="/lotm-fool-chess.png" alt="Chess themed project artwork" />
             </div>
             <div>
               <div className="section-tag">FEATURED VISUAL</div>
@@ -713,6 +733,35 @@ export default function Portfolio() {
           <a href="https://github.com/kuppireddybhageerathareddy1110" className="hover:text-white ml-1">Source on GitHub</a>
         </div>
       </footer>
+
+      {/* Floating Theme Switcher */}
+      <div className="theme-switcher">
+        {[
+          { id: "chess" as const, label: "Chess", icon: Compass },
+          { id: "knight" as const, label: "Knight", icon: Shield },
+          { id: "poet" as const, label: "Poet", icon: BookOpen },
+          { id: "king" as const, label: "King", icon: Crown },
+        ].map((t) => {
+          const Icon = t.icon;
+          return (
+            <button
+              key={t.id}
+              onClick={() => {
+                setTheme(t.id);
+                toast.success(`Switched to ${t.label} Theme`, {
+                  description: `Enjoy the custom 3D models and layout style!`,
+                  duration: 2000,
+                });
+              }}
+              className={`theme-btn ${theme === t.id ? "active" : ""}`}
+              aria-label={`Switch to ${t.label} theme`}
+            >
+              <Icon size={14} />
+              <span className="hidden sm:inline">{t.label}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

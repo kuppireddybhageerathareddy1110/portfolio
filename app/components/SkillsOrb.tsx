@@ -3,59 +3,109 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
 
-type Skill = {
+type SkillOrbitData = {
   name: string;
   color: string;
   size: number;
-  pos: [number, number, number];
+  radius: number;
+  speed: number;
+  inclination: number; // angle in radians to tilt the orbital plane
+  phase: number; // initial starting angle offset
 };
 
-const skillsData: Skill[] = [
-  { name: "Python", color: "#3fb950", size: 0.65, pos: [0, 2.8, 0] },
-  { name: "PyTorch", color: "#bc8cff", size: 0.55, pos: [-2.6, 1.4, 1.2] },
-  { name: "TensorFlow", color: "#58a6ff", size: 0.55, pos: [2.5, 1.6, -0.8] },
-  { name: "Next.js", color: "#e3b341", size: 0.48, pos: [-1.8, -0.8, 2.4] },
-  { name: "FastAPI", color: "#3fb950", size: 0.5, pos: [2.2, -1.2, 1.6] },
-  { name: "SHAP", color: "#bc8cff", size: 0.42, pos: [-2.4, -1.6, -1.8] },
-  { name: "Docker", color: "#f85149", size: 0.46, pos: [1.4, 2.2, -2.2] },
-  { name: "AWS", color: "#58a6ff", size: 0.44, pos: [-0.8, -2.8, 0.6] },
+const skillsOrbitData: SkillOrbitData[] = [
+  { name: "Python", color: "#3fb950", size: 0.33, radius: 2.0, speed: 0.52, inclination: 0.12, phase: 0 },
+  { name: "PyTorch", color: "#bc8cff", size: 0.28, radius: 2.7, speed: 0.42, inclination: -0.16, phase: 1.2 },
+  { name: "TensorFlow", color: "#58a6ff", size: 0.28, radius: 3.4, speed: 0.36, inclination: 0.24, phase: 2.8 },
+  { name: "Next.js", color: "#e3b341", size: 0.25, radius: 4.1, speed: 0.30, inclination: -0.08, phase: 4.1 },
+  { name: "FastAPI", color: "#3fb950", size: 0.25, radius: 4.8, speed: 0.26, inclination: 0.15, phase: 0.8 },
+  { name: "SHAP", color: "#bc8cff", size: 0.23, radius: 5.5, speed: 0.22, inclination: -0.28, phase: 5.3 },
+  { name: "Docker", color: "#f85149", size: 0.23, radius: 6.2, speed: 0.19, inclination: 0.1, phase: 2.1 },
+  { name: "AWS", color: "#58a6ff", size: 0.23, radius: 6.9, speed: 0.16, inclination: -0.2, phase: 3.5 },
 ];
 
-function SkillNode({ skill, index }: { skill: Skill; index: number }) {
+interface SkillsOrbProps {
+  theme?: "chess" | "knight" | "poet" | "king";
+}
+
+function OrbitLine({ radius, inclination, color }: { radius: number; inclination: number; color: string }) {
+  const points = useMemo(() => {
+    const pts = [];
+    const segments = 64;
+    for (let i = 0; i <= segments; i++) {
+      const angle = (i / segments) * Math.PI * 2;
+      const x = Math.cos(angle) * radius;
+      const z = Math.sin(angle) * radius;
+      // Orbit tilt around the X-axis
+      const rotatedY = z * Math.sin(inclination);
+      const rotatedZ = z * Math.cos(inclination);
+      pts.push(new THREE.Vector3(x, rotatedY, rotatedZ));
+    }
+    return pts;
+  }, [radius, inclination]);
+
+  return (
+    <lineLoop>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          args={[new Float32Array(points.flatMap(p => [p.x, p.y, p.z])), 3]}
+        />
+      </bufferGeometry>
+      <lineBasicMaterial color={color} transparent opacity={0.16} />
+    </lineLoop>
+  );
+}
+
+function SkillPlanet({ data, index }: { data: SkillOrbitData; index: number }) {
+  const groupRef = useRef<THREE.Group>(null!);
   const meshRef = useRef<THREE.Mesh>(null!);
   const [hovered, setHovered] = useState(false);
 
   useFrame((state) => {
+    if (groupRef.current) {
+      // If hovered, slow down orbit to let the user view/interact
+      const speedFactor = hovered ? 0.05 : 1.0;
+      const angle = state.clock.elapsedTime * data.speed * speedFactor + data.phase;
+      
+      const x = Math.cos(angle) * data.radius;
+      const z = Math.sin(angle) * data.radius;
+      
+      // Calculate coordinates on the tilted orbital plane
+      const y = z * Math.sin(data.inclination);
+      const rotatedZ = z * Math.cos(data.inclination);
+      
+      groupRef.current.position.set(x, y, rotatedZ);
+    }
+    
     if (meshRef.current) {
-      // Gentle floating + rotation
-      meshRef.current.position.y = skill.pos[1] + Math.sin(state.clock.elapsedTime * 1.2 + index) * 0.12;
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.4 + index;
+      // Rotation on its own axis
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.8 + index;
     }
   });
 
   return (
-    <group>
+    <group ref={groupRef}>
       <mesh
         ref={meshRef}
-        position={skill.pos as [number, number, number]}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
-        <sphereGeometry args={[skill.size]} />
+        <sphereGeometry args={[data.size * (hovered ? 1.35 : 1.0)]} />
         <meshPhongMaterial
-          color={skill.color}
-          emissive={skill.color}
-          emissiveIntensity={hovered ? 0.45 : 0.15}
-          shininess={100}
+          color={data.color}
+          emissive={data.color}
+          emissiveIntensity={hovered ? 0.55 : 0.18}
+          shininess={90}
         />
       </mesh>
 
-      {/* Label */}
+      {/* Dynamic Tag Label */}
       <Html
-        position={[skill.pos[0], skill.pos[1] + skill.size + 0.55, skill.pos[2]]}
+        position={[0, data.size + 0.35, 0]}
         style={{
           pointerEvents: "none",
           userSelect: "none",
@@ -63,91 +113,81 @@ function SkillNode({ skill, index }: { skill: Skill; index: number }) {
         center
       >
         <div
-          className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/70 text-white border border-white/20 whitespace-nowrap"
+          className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/80 text-white border border-white/10 whitespace-nowrap"
           style={{
-            transform: hovered ? "scale(1.1)" : "scale(1)",
-            transition: "transform 0.1s",
-            color: skill.color,
+            transform: hovered ? "scale(1.15)" : "scale(1)",
+            transition: "transform 0.15s ease",
+            color: data.color,
+            boxShadow: hovered ? `0 0 10px ${data.color}44` : "none",
           }}
         >
-          {skill.name}
+          {data.name}
         </div>
       </Html>
     </group>
   );
 }
 
-function CentralCore() {
-  const coreRef = useRef<THREE.Group>(null!);
+function SunStar({ theme = "chess" }: SkillsOrbProps) {
+  const sunRef = useRef<THREE.Mesh>(null!);
+  const glowRef = useRef<THREE.Mesh>(null!);
 
   useFrame((state) => {
-    if (coreRef.current) {
-      coreRef.current.rotation.y = state.clock.elapsedTime * 0.25;
-      coreRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.15) * 0.3;
+    if (sunRef.current) {
+      sunRef.current.rotation.y = state.clock.elapsedTime * 0.15;
+    }
+    if (glowRef.current) {
+      glowRef.current.rotation.z = -state.clock.elapsedTime * 0.25;
+      const pulse = 1.0 + Math.sin(state.clock.elapsedTime * 2.2) * 0.08;
+      glowRef.current.scale.set(pulse, pulse, pulse);
     }
   });
 
+  // Coordinate color with theme
+  const sunColor = useMemo(() => {
+    switch (theme) {
+      case "knight": return "#ff4a4a";
+      case "poet": return "#e3a95d";
+      case "king": return "#ffd700";
+      default: return "#3fb950";
+    }
+  }, [theme]);
+
   return (
-    <group ref={coreRef}>
-      {/* Core sphere */}
-      <mesh>
-        <sphereGeometry args={[0.95]} />
+    <group>
+      {/* Glowing core sphere */}
+      <mesh ref={sunRef}>
+        <sphereGeometry args={[0.75]} />
         <meshPhongMaterial
-          color="#1a1f28"
-          emissive="#3fb950"
-          emissiveIntensity={0.3}
-          shininess={60}
+          color="#161b22"
+          emissive={sunColor}
+          emissiveIntensity={0.4}
+          shininess={100}
         />
       </mesh>
-      {/* Inner glow ring */}
-      <mesh>
-        <torusGeometry args={[1.35, 0.06, 14, 42]} />
-        <meshBasicMaterial color="#3fb950" transparent opacity={0.25} />
+      
+      {/* Core ring */}
+      <mesh ref={glowRef}>
+        <torusGeometry args={[0.95, 0.05, 8, 48]} />
+        <meshBasicMaterial color={sunColor} transparent opacity={0.35} />
+      </mesh>
+      
+      {/* Secondary ring */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[1.2, 0.02, 6, 32]} />
+        <meshBasicMaterial color={sunColor} transparent opacity={0.15} />
       </mesh>
     </group>
   );
 }
 
-function ConnectionLines() {
-  const linesRef = useRef<THREE.Group>(null!);
-
-  useFrame((state) => {
-    if (linesRef.current) {
-      linesRef.current.rotation.y = state.clock.elapsedTime * 0.05;
-    }
-  });
-
-  return (
-    <group ref={linesRef}>
-      {skillsData.map((skill, i) => (
-        <line key={i}>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              args={[new Float32Array([
-                0, 0, 0,
-                ...skill.pos,
-              ]), 3]}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial
-            color="#58a6ff"
-            transparent
-            opacity={0.18}
-          />
-        </line>
-      ))}
-    </group>
-  );
-}
-
-export default function SkillsOrb() {
+export default function SkillsOrb({ theme = "chess" }: SkillsOrbProps) {
   const webglAvailable = useWebGLAvailable();
 
   if (webglAvailable !== true) {
     return (
       <div className="skills-3d">
-        <SceneFallback label="SKILL GRAPH" detail="Python, PyTorch, TensorFlow, Next.js, FastAPI, SHAP, Docker, and AWS connected as a portfolio constellation." />
+        <SceneFallback label="SKILL SYSTEM" detail="Python, PyTorch, TensorFlow, Next.js, FastAPI, SHAP, Docker, and AWS connected as a solar system orbit model." />
       </div>
     );
   }
@@ -155,27 +195,35 @@ export default function SkillsOrb() {
   return (
     <div className="skills-3d">
       <Canvas
-        camera={{ position: [0, 0, 9.5], fov: 46 }}
-        style={{ background: "transparent" }}
+        camera={{ position: [0, 4.5, 9.5], fof: 46 }}
+        style={{ background: "#05070a" }}
       >
-        <ambientLight intensity={0.5} />
-        <pointLight position={[8, 10, 6]} intensity={1.4} />
-        <pointLight position={[-9, -8, -5]} intensity={0.8} color="#bc8cff" />
+        <ambientLight intensity={0.65} />
+        <pointLight position={[10, 12, 8]} intensity={1.5} />
+        <pointLight position={[-10, -10, -8]} intensity={0.7} color="#bc8cff" />
 
-        <CentralCore />
-        <ConnectionLines />
+        <SunStar theme={theme} />
 
-        {skillsData.map((skill, index) => (
-          <SkillNode key={index} skill={skill} index={index} />
+        {/* Orbits and planet nodes */}
+        {skillsOrbitData.map((skill, index) => (
+          <group key={index}>
+            <OrbitLine
+              radius={skill.radius}
+              inclination={skill.inclination}
+              color={skill.color}
+            />
+            <SkillPlanet
+              data={skill}
+              index={index}
+            />
+          </group>
         ))}
 
         <OrbitControls
           enablePan={false}
           enableZoom={true}
-          minDistance={4.5}
-          maxDistance={14}
-          autoRotate
-          autoRotateSpeed={0.2}
+          minDistance={3.5}
+          maxDistance={15}
         />
       </Canvas>
     </div>
