@@ -31,6 +31,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import GitHubStats from "./components/GitHubStats";
 import Reveal from "./components/Reveal";
 import LazyCanvas from "./components/LazyCanvas";
+import CopilotModel3D from "./components/CopilotModel3D";
 
 const navItems = [
   { label: "skills", href: "#skills" },
@@ -508,6 +509,13 @@ export default function Portfolio() {
                 </div>
                 <div className="relative mt-6">
                   <ContributionGlobe />
+                </div>
+                {/* Copilot 3D Model down of global impact (desktop only) */}
+                <div className="hidden lg:block mt-8 p-4 border border-[#30363d] bg-[#05070a] rounded-xl relative overflow-hidden h-[300px]">
+                  <div className="absolute top-3 left-3 text-[9px] mono text-[#8b949e] tracking-widest z-10 px-2.5 py-0.5 border border-white/5 rounded-full bg-black/40">
+                    COPILOT AI • 3D MODEL
+                  </div>
+                  <CopilotModel3D heightClass="h-full" showHint={true} />
                 </div>
               </div>
 

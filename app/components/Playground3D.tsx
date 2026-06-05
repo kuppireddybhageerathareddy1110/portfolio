@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { useMemo, useRef, useState } from "react";
 import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
 import LazyCanvas from "./LazyCanvas";
+import CopilotModel3D from "./CopilotModel3D";
 
 interface SceneProps {
   mode: "workflow" | "chess" | "particles";
@@ -218,12 +219,12 @@ function ParticleNetwork() {
 }
 
 export default function Playground3D() {
-  type SceneMode = "workflow" | "chess" | "particles";
+  type SceneMode = "workflow" | "chess" | "particles" | "copilot";
   const [mode, setMode] = useState<SceneMode>("workflow");
   const webglAvailable = useWebGLAvailable();
 
-  const scenes = {
-    workflow: <AIWorkflow mode={mode} />,
+  const scenes: Record<Exclude<SceneMode, "copilot">, React.ReactNode> = {
+    workflow: <AIWorkflow mode={mode === "copilot" ? "workflow" : mode} />,
     chess: <ChessBrain />,
     particles: <ParticleNetwork />,
   };
@@ -236,11 +237,12 @@ export default function Playground3D() {
           <div className="text-2xl font-semibold">Explore the 3D AI Universe</div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {[
             { id: "workflow" as const, label: "Workflow" },
             { id: "chess" as const, label: "Chess Brain" },
             { id: "particles" as const, label: "Network" },
+            { id: "copilot" as const, label: "Copilot AI" },
           ].map((s) => (
             <button
               key={s.id}
@@ -258,7 +260,10 @@ export default function Playground3D() {
       </div>
 
       <div className="playground-3d relative">
-        {webglAvailable !== true ? (
+        {mode === "copilot" ? (
+          /* Copilot GLB model — has its own Canvas + lighting inside */
+          <CopilotModel3D heightClass="h-full" showHint={true} />
+        ) : webglAvailable !== true ? (
           <SceneFallback label="INTERACTIVE LAB" detail={`${mode} mode selected. WebGL is disabled in this browser, so this fallback keeps the layout usable.`} />
         ) : (
           <LazyCanvas className="w-full h-full" fallback={<div className="w-full h-full bg-[#05070a] animate-pulse rounded-xl" />}>
@@ -284,9 +289,11 @@ export default function Playground3D() {
           </LazyCanvas>
         )}
 
-        <div className="absolute bottom-4 right-4 text-[10px] mono px-3 py-1 bg-black/60 rounded-full border border-white/10 text-muted-foreground">
-          Drag • Scroll to zoom • {mode === "workflow" ? "Data flow visualization" : mode === "chess" ? "Strategic 3D core" : "Live particle graph"}
-        </div>
+        {mode !== "copilot" && (
+          <div className="absolute bottom-4 right-4 text-[10px] mono px-3 py-1 bg-black/60 rounded-full border border-white/10 text-muted-foreground">
+            Drag • Scroll to zoom • {mode === "workflow" ? "Data flow visualization" : mode === "chess" ? "Strategic 3D core" : "Live particle graph"}
+          </div>
+        )}
       </div>
 
       <p className="text-center text-xs text-muted mt-4 mono tracking-widest">
