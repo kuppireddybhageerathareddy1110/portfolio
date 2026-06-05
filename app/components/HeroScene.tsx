@@ -10,6 +10,8 @@ import LazyCanvas from "./LazyCanvas";
 // Preload the GLB assets
 useGLTF.preload("/arthur.glb");
 useGLTF.preload("/knight.glb");
+useGLTF.preload("/poet.glb");
+useGLTF.preload("/chess.glb");
 
 function LoadingModel() {
   return (
@@ -374,10 +376,9 @@ export default function HeroScene({ theme = "chess" }: HeroSceneProps) {
           style={{ background: "transparent" }}
           shadows
         >
-          <ambientLight intensity={0.65} />
+          <ambientLight intensity={theme === "poet" || theme === "chess" ? 1.5 : 0.65} />
           <pointLight position={[10, 10, 10]} intensity={1.3} color="#ffffff" />
-          <pointLight position={[-8, -6, -4]} intensity={0.7} color="#58a6ff" />
-          <pointLight position={[0, 4, -4]} intensity={0.5} color={theme === "knight" ? "#ff4a4a" : theme === "king" ? "#ffd700" : "#3fb950"} />
+          <pointLight position={[0, 4, -4]} intensity={theme === "knight" ? 1.3 : theme === "king" ? 1.3 : (theme === "poet" || theme === "chess") ? 2.5 : 0.8} color={theme === "knight" ? "#ff4a4a" : theme === "king" ? "#ffd700" : (theme === "poet" || theme === "chess") ? "#ffffff" : "#3fb950"} />
 
           {/* HDR environment for realistic reflections when rendering GLB models */}
           {(theme === "king" || theme === "knight") && <Environment preset="city" />}
@@ -396,12 +397,16 @@ export default function HeroScene({ theme = "chess" }: HeroSceneProps) {
 
           <Suspense fallback={<LoadingModel />}>
             {theme === "king" ? (
-              <GLBModel url="/arthur.glb" scale={4.5} position={[0, -0.2, 0]} />
-            ) : theme === "knight" ? (
-              <GLBModel url="/knight.glb" scale={4.5} position={[0, -0.2, 0]} />
-            ) : (
-              <MorphingVoxelScene theme={theme} />
-            )}
+                <GLBModel url="/arthur.glb" scale={4.5} position={[0, -0.2, 0]} />
+              ) : theme === "knight" ? (
+                <GLBModel url="/knight.glb" scale={4.5} position={[0, -0.2, 0]} />
+              ) : theme === "poet" ? (
+                <GLBModel url="/poet.glb" scale={4.5} position={[0, -0.2, 0]} />
+              ) : theme === "chess" ? (
+                <GLBModel url="/chess.glb" scale={4.5} position={[0, -0.2, 0]} />
+              ) : (
+                <MorphingVoxelScene theme={theme} />
+              )}
           </Suspense>
 
           <Stars
