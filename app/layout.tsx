@@ -43,21 +43,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${jetbrains.variable} dark h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#0a0c10] text-[#e6edf3]">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            tailwind.config = {
-              theme: {
-                extend: {
-                  fontFamily: {
-                    sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-                    mono: ['var(--font-jetbrains)', 'monospace'],
-                  }
-                }
-              }
-            };
-          `
-        }} />
         {children}
         <Toaster position="top-center" richColors closeButton />
       </body>

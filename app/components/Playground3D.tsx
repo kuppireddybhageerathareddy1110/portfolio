@@ -1,13 +1,13 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useMemo, useRef, useState } from "react";
+import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
 
 interface SceneProps {
-  mode: string;
+  mode: "workflow" | "chess" | "particles";
 }
 
 function AIWorkflow({ mode }: SceneProps) {
@@ -15,7 +15,7 @@ function AIWorkflow({ mode }: SceneProps) {
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.12;
+      groupRef.current.rotation.y = state.clock.elapsedTime * (mode === "workflow" ? 0.12 : 0.08);
     }
   });
 
@@ -140,31 +140,41 @@ function ParticleNetwork() {
   const linesRef = useRef<THREE.Group>(null!);
 
   const count = 42;
-  const positions = new Float32Array(count * 3);
-  const velocities: number[] = [];
+  const { positions, velocities } = useMemo(() => {
+    const seeded = (index: number) => {
+      const value = Math.sin(index * 12.9898) * 43758.5453;
+      return value - Math.floor(value);
+    };
+    const nextPositions = new Float32Array(count * 3);
+    const nextVelocities = new Float32Array(count * 3);
 
-  for (let i = 0; i < count * 3; i += 3) {
-    positions[i] = (Math.random() - 0.5) * 14;
-    positions[i + 1] = (Math.random() - 0.5) * 9;
-    positions[i + 2] = (Math.random() - 0.5) * 12;
-    velocities.push((Math.random() - 0.5) * 0.012);
-    velocities.push((Math.random() - 0.5) * 0.012);
-    velocities.push((Math.random() - 0.5) * 0.012);
-  }
+    for (let i = 0; i < count * 3; i += 3) {
+      nextPositions[i] = (seeded(i + 1) - 0.5) * 14;
+      nextPositions[i + 1] = (seeded(i + 2) - 0.5) * 9;
+      nextPositions[i + 2] = (seeded(i + 3) - 0.5) * 12;
+      nextVelocities[i] = (seeded(i + 4) - 0.5) * 0.012;
+      nextVelocities[i + 1] = (seeded(i + 5) - 0.5) * 0.012;
+      nextVelocities[i + 2] = (seeded(i + 6) - 0.5) * 0.012;
+    }
+
+    return { positions: nextPositions, velocities: nextVelocities };
+  }, []);
+  const velocitiesRef = useRef(velocities);
 
   useFrame((state) => {
     if (pointsRef.current) {
       const pos = pointsRef.current.geometry.attributes.position as THREE.BufferAttribute;
+      const velocity = velocitiesRef.current;
 
       for (let i = 0; i < count * 3; i += 3) {
-        pos.array[i] += velocities[i];
-        pos.array[i + 1] += velocities[i + 1];
-        pos.array[i + 2] += velocities[i + 2];
+        pos.array[i] += velocity[i];
+        pos.array[i + 1] += velocity[i + 1];
+        pos.array[i + 2] += velocity[i + 2];
 
         // bounce
-        if (Math.abs(pos.array[i]) > 7) velocities[i] *= -1;
-        if (Math.abs(pos.array[i + 1]) > 4.5) velocities[i + 1] *= -1;
-        if (Math.abs(pos.array[i + 2]) > 6) velocities[i + 2] *= -1;
+        if (Math.abs(pos.array[i]) > 7) velocity[i] *= -1;
+        if (Math.abs(pos.array[i + 1]) > 4.5) velocity[i + 1] *= -1;
+        if (Math.abs(pos.array[i + 2]) > 6) velocity[i + 2] *= -1;
       }
       pos.needsUpdate = true;
     }
@@ -207,7 +217,9 @@ function ParticleNetwork() {
 }
 
 export default function Playground3D() {
-  const [mode, setMode] = useState<"workflow" | "chess" | "particles">("workflow");
+  type SceneMode = "workflow" | "chess" | "particles";
+  const [mode, setMode] = useState<SceneMode>("workflow");
+  const webglAvailable = useWebGLAvailable();
 
   const scenes = {
     workflow: <AIWorkflow mode={mode} />,
@@ -225,13 +237,13 @@ export default function Playground3D() {
 
         <div className="flex gap-2">
           {[
-            { id: "workflow", label: "Workflow" },
-            { id: "chess", label: "Chess Brain" },
-            { id: "particles", label: "Network" },
+            { id: "workflow" as const, label: "Workflow" },
+            { id: "chess" as const, label: "Chess Brain" },
+            { id: "particles" as const, label: "Network" },
           ].map((s) => (
             <button
               key={s.id}
-              onClick={() => setMode(s.id as any)}
+              onClick={() => setMode(s.id)}
               className={`mono px-4 py-1.5 text-sm rounded-full border transition-all ${
                 mode === s.id
                   ? "bg-accent text-[#0a0c10] border-accent"
@@ -245,25 +257,29 @@ export default function Playground3D() {
       </div>
 
       <div className="playground-3d relative">
-        <Canvas
-          camera={{ position: [0, 1.5, 11], fov: 52 }}
-          style={{ background: "#05070a" }}
-        >
-          <ambientLight intensity={0.7} />
-          <pointLight position={[12, 18, 8]} intensity={1.5} />
-          <pointLight position={[-12, -10, -6]} intensity={0.7} color="#bc8cff" />
+        {webglAvailable !== true ? (
+          <SceneFallback label="INTERACTIVE LAB" detail={`${mode} mode selected. WebGL is disabled in this browser, so this fallback keeps the layout usable.`} />
+        ) : (
+          <Canvas
+            camera={{ position: [0, 1.5, 11], fov: 52 }}
+            style={{ background: "#05070a" }}
+          >
+            <ambientLight intensity={0.7} />
+            <pointLight position={[12, 18, 8]} intensity={1.5} />
+            <pointLight position={[-12, -10, -6]} intensity={0.7} color="#bc8cff" />
 
-          {scenes[mode]}
+            {scenes[mode]}
 
-          <OrbitControls
-            enablePan={true}
-            enableZoom={true}
-            minDistance={3}
-            maxDistance={22}
-            autoRotate={mode === "particles"}
-            autoRotateSpeed={0.25}
-          />
-        </Canvas>
+            <OrbitControls
+              enablePan={true}
+              enableZoom={true}
+              minDistance={3}
+              maxDistance={22}
+              autoRotate={mode === "particles"}
+              autoRotateSpeed={0.25}
+            />
+          </Canvas>
+        )}
 
         <div className="absolute bottom-4 right-4 text-[10px] mono px-3 py-1 bg-black/60 rounded-full border border-white/10 text-muted-foreground">
           Drag • Scroll to zoom • {mode === "workflow" ? "Data flow visualization" : mode === "chess" ? "Strategic 3D core" : "Live particle graph"}

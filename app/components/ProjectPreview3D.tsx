@@ -3,6 +3,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useRef } from "react";
+import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
 
 interface PreviewProps {
   type: string;
@@ -76,6 +77,16 @@ function PreviewMesh({ type, color = "#3fb950" }: PreviewProps) {
 }
 
 export default function ProjectPreview3D({ type, color }: PreviewProps) {
+  const webglAvailable = useWebGLAvailable();
+
+  if (webglAvailable !== true) {
+    return (
+      <div className="project-3d-preview">
+        <SceneFallback label={type.toUpperCase()} detail="3D preview fallback" />
+      </div>
+    );
+  }
+
   return (
     <div className="project-3d-preview">
       <Canvas camera={{ position: [0, 0, 4.2], fov: 52 }} style={{ background: "transparent" }}>

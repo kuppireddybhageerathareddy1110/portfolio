@@ -4,8 +4,16 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef, useState } from "react";
+import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
 
-const skillsData = [
+type Skill = {
+  name: string;
+  color: string;
+  size: number;
+  pos: [number, number, number];
+};
+
+const skillsData: Skill[] = [
   { name: "Python", color: "#3fb950", size: 0.65, pos: [0, 2.8, 0] },
   { name: "PyTorch", color: "#bc8cff", size: 0.55, pos: [-2.6, 1.4, 1.2] },
   { name: "TensorFlow", color: "#58a6ff", size: 0.55, pos: [2.5, 1.6, -0.8] },
@@ -16,7 +24,7 @@ const skillsData = [
   { name: "AWS", color: "#58a6ff", size: 0.44, pos: [-0.8, -2.8, 0.6] },
 ];
 
-function SkillNode({ skill, index }: { skill: any; index: number }) {
+function SkillNode({ skill, index }: { skill: Skill; index: number }) {
   const meshRef = useRef<THREE.Mesh>(null!);
   const [hovered, setHovered] = useState(false);
 
@@ -134,6 +142,16 @@ function ConnectionLines() {
 }
 
 export default function SkillsOrb() {
+  const webglAvailable = useWebGLAvailable();
+
+  if (webglAvailable !== true) {
+    return (
+      <div className="skills-3d">
+        <SceneFallback label="SKILL GRAPH" detail="Python, PyTorch, TensorFlow, Next.js, FastAPI, SHAP, Docker, and AWS connected as a portfolio constellation." />
+      </div>
+    );
+  }
+
   return (
     <div className="skills-3d">
       <Canvas

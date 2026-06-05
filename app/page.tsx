@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { 
   ArrowUpRight, 
   Download, 
@@ -13,12 +14,12 @@ import {
   Zap 
 } from "lucide-react";
 import { toast } from "sonner";
-import { motion } from "framer-motion";
 import HeroScene from "./components/HeroScene";
 import SkillsOrb from "./components/SkillsOrb";
 import Playground3D from "./components/Playground3D";
 import ProjectPreview3D from "./components/ProjectPreview3D";
 import ContributionGlobe from "./components/ContributionGlobe";
+import BackgroundCanvas from "./components/BackgroundCanvas";
 
 const navItems = [
   { label: "skills", href: "#skills" },
@@ -128,12 +129,36 @@ const projects = [
 ];
 
 const badges = [
-  "Applied Data Science with Python (IBM)",
-  "AWS Cloud Architecting",
-  "Deep Learning with TensorFlow (IBM)",
-  "Data Visualization with R",
-  "Oracle Cloud Data Science Professional",
-  "OCI GenAI Professional",
+  {
+    title: "Applied Data Science with Python",
+    issuer: "IBM Skills Network",
+    image: "/applied-data-science-with-python-level-2.png",
+  },
+  {
+    title: "AWS Academy Cloud Architecting",
+    issuer: "AWS Academy",
+    image: "/aws-academy-graduate-aws-academy-cloud-architecting.png",
+  },
+  {
+    title: "Deep Learning using TensorFlow",
+    issuer: "IBM Skills Network",
+    image: "/deep-learning-using-tensorflow.png",
+  },
+  {
+    title: "Data Visualization with R",
+    issuer: "IBM Skills Network",
+    image: "/data-visualization-with-r.png",
+  },
+  {
+    title: "Oracle Cloud Infrastructure Data Science",
+    issuer: "Oracle Certified Professional",
+    image: "/oci-data-science.png",
+  },
+  {
+    title: "Adobe Express",
+    issuer: "Adobe",
+    image: "/adobe-express.png",
+  },
 ];
 
 export default function Portfolio() {
@@ -171,6 +196,8 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-[#0a0c10] text-[#e6edf3] overflow-x-hidden">
+      <BackgroundCanvas />
+
       {/* Preloader */}
       {!booted && (
         <div className="fixed inset-0 z-[9999] bg-[#0a0c10] flex flex-col items-center justify-center gap-3 font-mono text-[#3fb950] text-sm">
@@ -252,6 +279,14 @@ export default function Portfolio() {
       <section id="hero" className="hero">
         <div className="hero-grid">
           <div className="hero-content">
+            <div className="profile-lockup">
+              <Image src="/bhageeratha_profile.jpg" alt="Kuppireddy Bhageeratha Reddy" width={96} height={96} priority />
+              <div>
+                <div className="mono text-xs text-[#3fb950]">online / available</div>
+                <div className="text-sm text-[#8b949e]">AI Engineer Portfolio</div>
+              </div>
+            </div>
+
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#30363d] px-3 py-1 text-xs text-[#8b949e] mono">
               <div className="w-1.5 h-1.5 rounded-full bg-[#3fb950] animate-pulse" />
               OPEN TO OPPORTUNITIES • 2026
@@ -301,6 +336,21 @@ export default function Portfolio() {
               <div>VIT-AP • CGPA 8.87</div>
               <div className="w-px h-3 bg-[#30363d]" />
               <div>AutoML-STUDIO live</div>
+            </div>
+
+            <div className="term">
+              <div className="term-bar">
+                <span className="td td-r" />
+                <span className="td td-y" />
+                <span className="td td-g" />
+                <span className="term-title">~/portfolio/boot.sh</span>
+              </div>
+              <div className="term-body">
+                <span className="tp">bhageeratha@portfolio</span><span className="tsym">:</span><span className="tpath">~/ai-lab</span><span className="tsym">$</span> npm run build<br />
+                <span className="to to-ok">[OK] Next.js + Three.js portfolio compiled</span>
+                <span className="to to-i">[INFO] AutoML, NLP, CV, cloud systems loaded</span>
+                <span className="to to-ok">[READY] open to AI engineering opportunities</span>
+              </div>
             </div>
           </div>
 
@@ -504,6 +554,19 @@ export default function Portfolio() {
             <p className="max-w-md text-[#8b949e] mt-2">Fully interactive Three.js experiences. Orbit, zoom, switch modes. This is what modern portfolios can feel like.</p>
           </div>
 
+          <div className="lab-feature">
+            <div className="lab-feature-image">
+              <Image src="/lotm-fool-chess.png" alt="Chess themed project artwork" fill sizes="(max-width: 900px) 100vw, 60vw" />
+            </div>
+            <div>
+              <div className="section-tag">FEATURED VISUAL</div>
+              <h3>Chess AI concept board</h3>
+              <p>
+                Visual asset from the source portfolio folder, paired with the interactive Three.js lab below.
+              </p>
+            </div>
+          </div>
+
           <Playground3D />
         </div>
       </section>
@@ -515,11 +578,14 @@ export default function Portfolio() {
           <h2 className="section-title">Certifications &amp; Badges</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="badges-grid">
           {badges.map((badge, i) => (
-            <div key={i} className="glass px-5 py-4 rounded-xl border border-[#30363d] flex items-center gap-3 text-sm mono hover:border-[#3fb950]/50 transition-colors">
-              <div className="w-2 h-2 rounded-full bg-[#3fb950] flex-shrink-0" />
-              {badge}
+            <div key={i} className="badge-card">
+              <Image src={badge.image} alt={`${badge.title} badge`} width={92} height={92} />
+              <div>
+                <h3>{badge.title}</h3>
+                <p>{badge.issuer}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -631,7 +697,9 @@ export default function Portfolio() {
 
             <div className="mt-8 flex gap-3">
               <a href="#contact" onClick={() => setShowResume(false)} className="btn btn-primary flex-1 justify-center">Hire me for your next project</a>
-              <a href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" className="btn btn-secondary flex-1 justify-center">View full GitHub</a>
+              <a href="/resume_bhagi.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary flex-1 justify-center">
+                <Download size={16} /> Open resume
+              </a>
             </div>
             <p className="text-[10px] text-[#8b949e] mt-4 text-center mono">Download available on request • 3D portfolio experience included</p>
           </div>

@@ -4,6 +4,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef } from "react";
+import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
 
 function FloatingCubes() {
   const groupRef = useRef<THREE.Group>(null!);
@@ -64,7 +65,7 @@ function NeuralNodes() {
         (i - 6) * 0.7,
         Math.sin(angle) * radius * 0.6,
       ] as [number, number, number],
-      size: 0.18 + Math.random() * 0.08,
+      size: 0.18 + ((Math.sin(i * 12.9898) + 1) / 2) * 0.08,
     };
   });
 
@@ -98,6 +99,16 @@ function NeuralNodes() {
 }
 
 export default function HeroScene() {
+  const webglAvailable = useWebGLAvailable();
+
+  if (webglAvailable !== true) {
+    return (
+      <div className="three-container h-[420px] md:h-[520px] lg:h-[580px] w-full">
+        <SceneFallback label="3D AI CORE" detail="WebGL is disabled in this browser, so the portfolio is showing a styled fallback instead of a blank canvas." />
+      </div>
+    );
+  }
+
   return (
     <div className="three-container h-[420px] md:h-[520px] lg:h-[580px] w-full">
       <Canvas

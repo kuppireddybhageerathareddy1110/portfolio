@@ -4,6 +4,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef, useMemo } from "react";
+import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
 
 interface Contribution {
   lat: number;
@@ -21,13 +22,26 @@ const contributions: Contribution[] = [
   { lat: 1, lon: 103, count: 65, label: "Singapore" },
 ];
 
+type GlobePoint = {
+  position: [number, number, number];
+  size: number;
+  color: string;
+  count: number;
+  label: string;
+};
+
+type GlobeLine = {
+  start: [number, number, number];
+  end: [number, number, number];
+};
+
 function Globe() {
   const globeRef = useRef<THREE.Group>(null!);
   const pointsRef = useRef<THREE.Group>(null!);
 
   const { points, lines } = useMemo(() => {
-    const pts: any[] = [];
-    const lns: any[] = [];
+    const pts: GlobePoint[] = [];
+    const lns: GlobeLine[] = [];
 
     contributions.forEach((c, i) => {
       const phi = (90 - c.lat) * (Math.PI / 180);
@@ -36,11 +50,12 @@ function Globe() {
       const x = -Math.sin(phi) * Math.cos(theta) * 2.8;
       const y = Math.cos(phi) * 2.8;
       const z = Math.sin(phi) * Math.sin(theta) * 2.8;
+      const position: [number, number, number] = [x, y, z];
 
       const intensity = Math.min(c.count / 400, 1);
 
       pts.push({
-        position: [x, y, z],
+        position,
         size: 0.12 + intensity * 0.18,
         color: intensity > 0.6 ? "#3fb950" : "#58a6ff",
         count: c.count,
@@ -141,6 +156,16 @@ function Globe() {
 }
 
 export default function ContributionGlobe() {
+  const webglAvailable = useWebGLAvailable();
+
+  if (webglAvailable !== true) {
+    return (
+      <div className="w-full h-[420px] md:h-[480px] rounded-2xl overflow-hidden border border-[#30363d] bg-[#05070a]">
+        <SceneFallback label="GLOBAL IMPACT" detail="1,248+ contributions across India, USA, Germany, Japan, Australia, and Singapore." />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-[420px] md:h-[480px] rounded-2xl overflow-hidden border border-[#30363d] bg-[#05070a]">
       <Canvas camera={{ position: [0, 0, 9], fov: 48 }}>
