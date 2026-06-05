@@ -5,6 +5,7 @@ import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef, useMemo } from "react";
 import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
+import LazyCanvas from "./LazyCanvas";
 
 interface Contribution {
   lat: number;
@@ -168,22 +169,24 @@ export default function ContributionGlobe() {
 
   return (
     <div className="w-full h-[420px] md:h-[480px] rounded-2xl overflow-hidden border border-[#30363d] bg-[#05070a]">
-      <Canvas camera={{ position: [0, 0, 9], fov: 48 }}>
-        <ambientLight intensity={0.6} />
-        <pointLight position={[8, 6, 4]} intensity={1.2} />
-        <pointLight position={[-6, -4, -8]} intensity={0.6} color="#bc8cff" />
+      <LazyCanvas className="w-full h-full" fallback={<div className="w-full h-full bg-[#05070a] animate-pulse rounded-xl" />}>
+        <Canvas camera={{ position: [0, 0, 9], fov: 48 }}>
+          <ambientLight intensity={0.6} />
+          <pointLight position={[8, 6, 4]} intensity={1.2} />
+          <pointLight position={[-6, -4, -8]} intensity={0.6} color="#bc8cff" />
 
-        <Globe />
+          <Globe />
 
-        <OrbitControls
-          enablePan={false}
-          enableZoom={true}
-          minDistance={4}
-          maxDistance={13}
-          autoRotate
-          autoRotateSpeed={0.15}
-        />
-      </Canvas>
+          <OrbitControls
+            enablePan={false}
+            enableZoom={true}
+            minDistance={4}
+            maxDistance={13}
+            autoRotate
+            autoRotateSpeed={0.15}
+          />
+        </Canvas>
+      </LazyCanvas>
       <div className="absolute bottom-3 right-3 text-[10px] mono px-3 py-1 bg-black/70 rounded-full border border-white/10 text-[#8b949e]">
         1,248 contributions • Global reach
       </div>

@@ -25,6 +25,12 @@ import ProjectPreview3D from "./components/ProjectPreview3D";
 import ContributionGlobe from "./components/ContributionGlobe";
 import BackgroundCanvas from "./components/BackgroundCanvas";
 import ParallaxCard from "./components/ParallaxCard";
+import ProfilePokerCard from "./components/ProfilePokerCard";
+import FloatingChess from "./components/FloatingChess";
+import ScrollProgress from "./components/ScrollProgress";
+import GitHubStats from "./components/GitHubStats";
+import Reveal from "./components/Reveal";
+import LazyCanvas from "./components/LazyCanvas";
 
 const navItems = [
   { label: "skills", href: "#skills" },
@@ -202,7 +208,9 @@ export default function Portfolio() {
 
   return (
     <div className={`theme-${theme} theme-container min-h-screen overflow-x-hidden relative`}>
+      <ScrollProgress />
       <BackgroundCanvas />
+      <FloatingChess theme={theme} />
 
       {/* Preloader */}
       {!booted && (
@@ -369,322 +377,346 @@ export default function Portfolio() {
 
       {/* ABOUT / INTRO */}
       <section className="section max-w-5xl mx-auto px-6">
-        <div className="grid md:grid-cols-[1fr_auto] gap-12 items-center">
-          <div className="max-w-2xl">
-            <div className="section-tag">WHO I AM</div>
-            <h2 className="section-title mb-6">I turn data into <span>deployed intelligence</span>.</h2>
-            <p className="text-lg text-[#8b949e] leading-relaxed">
-              Data Scientist and AI Engineer with a strong foundation in building end-to-end intelligent systems. 
-              I love the intersection of research-grade models and polished, production-ready products. 
-              Currently exploring advanced AutoML workflows, multimodal models, and 3D visualization of ML pipelines.
-            </p>
-          </div>
-          <div className="flex justify-center md:justify-end">
-            <div className="about-photo-wrapper">
-              <Image 
-                src="/bhageeratha_profile.jpg" 
-                alt="Kuppireddy Bhageeratha Reddy" 
-                width={280} 
-                height={280} 
-                className="object-cover w-full h-full"
-                priority
-              />
+        <Reveal>
+          <div className="grid md:grid-cols-[1fr_auto] gap-12 items-center">
+            <div className="max-w-2xl">
+              <div className="section-tag">WHO I AM</div>
+              <h2 className="section-title mb-6">I turn data into <span>deployed intelligence</span>.</h2>
+              <p className="text-lg text-[#8b949e] leading-relaxed">
+                Data Scientist and AI Engineer with a strong foundation in building end-to-end intelligent systems. 
+                I love the intersection of research-grade models and polished, production-ready products. 
+                Currently exploring advanced AutoML workflows, multimodal models, and 3D visualization of ML pipelines.
+              </p>
+            </div>
+            <div className="flex justify-center md:justify-end">
+              <ProfilePokerCard />
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* SKILLS */}
       <section id="skills" className="section bg-[#0a0c10]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="section-header">
-            <div className="section-tag">$ ls ~/skills</div>
-            <h2 className="section-title">Skills &amp; Stack</h2>
-          </div>
-
-          <div className="skills-grid mb-8">
-            {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="skill-card card-hover">
-                <h3 className="capitalize">{category.replace("_", " ")}</h3>
-                <div className="skill-tags">
-                  {items.map((skill) => (
-                    <span key={skill} className="skill-tag">{skill}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* 3D SKILLS ORB — THE STAR FEATURE */}
-          <div>
-            <div className="flex items-center justify-between mb-4 px-1">
-              <div>
-                <span className="text-sm text-[#8b949e] mono">INTERACTIVE 3D ORBITAL SYSTEM</span>
-                <div className="text-xl font-semibold tracking-tight">Skill Graph • Drag to explore</div>
-              </div>
-              <div className="text-xs text-[#8b949e] mono hidden md:block">Powered by React Three Fiber</div>
+          <Reveal>
+            <div className="section-header">
+              <div className="section-tag">$ ls ~/skills</div>
+              <h2 className="section-title">Skills &amp; Stack</h2>
             </div>
-            <SkillsOrb theme={theme} />
-          </div>
+
+            <div className="skills-grid mb-8">
+              {Object.entries(skills).map(([category, items]) => (
+                <div key={category} className="skill-card card-hover">
+                  <h3 className="capitalize">{category.replace("_", " ")}</h3>
+                  <div className="skill-tags">
+                    {items.map((skill) => (
+                      <span key={skill} className="skill-tag">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 3D SKILLS ORB — THE STAR FEATURE */}
+            <div>
+              <div className="flex items-center justify-between mb-4 px-1">
+                <div>
+                  <span className="text-sm text-[#8b949e] mono">INTERACTIVE 3D ORBITAL SYSTEM</span>
+                  <div className="text-xl font-semibold tracking-tight">Skill Graph • Drag to explore</div>
+                </div>
+                <div className="text-xs text-[#8b949e] mono hidden md:block">Powered by React Three Fiber</div>
+              </div>
+              <SkillsOrb theme={theme} />
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* WORKFLOWS + 3D */}
       <section id="workflows" className="section">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="section-header">
-            <div className="section-tag">$ watch -n 1 ./ml_pipeline.sh</div>
-            <h2 className="section-title">Realtime Workflows</h2>
-          </div>
+          <Reveal>
+            <div className="section-header">
+              <div className="section-tag">$ watch -n 1 ./ml_pipeline.sh</div>
+              <h2 className="section-title">Realtime Workflows</h2>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-5 mb-10">
-            {[
-              { icon: Brain, title: "Ingest & EDA", desc: "Live data pipelines feeding into statistical profiling and feature engineering." },
-              { icon: Zap, title: "Train & Explain", desc: "AutoML + SHAP. Every model is interpretable by default." },
-              { icon: Code2, title: "Ship & Monitor", desc: "FastAPI → Docker → Cloud. Dashboards, alerts, and continuous evaluation." },
-            ].map((item, idx) => (
-              <div key={idx} className="glass p-7 rounded-2xl border border-[#30363d]">
-                <div className="w-10 h-10 rounded-xl bg-[#3fb950]/10 text-[#3fb950] flex items-center justify-center mb-5">
-                  <item.icon size={20} />
+            <div className="grid md:grid-cols-3 gap-5 mb-10">
+              {[
+                { icon: Brain, title: "Ingest & EDA", desc: "Live data pipelines feeding into statistical profiling and feature engineering." },
+                { icon: Zap, title: "Train & Explain", desc: "AutoML + SHAP. Every model is interpretable by default." },
+                { icon: Code2, title: "Ship & Monitor", desc: "FastAPI → Docker → Cloud. Dashboards, alerts, and continuous evaluation." },
+              ].map((item, idx) => (
+                <div key={idx} className="glass p-7 rounded-2xl border border-[#30363d]">
+                  <div className="w-10 h-10 rounded-xl bg-[#3fb950]/10 text-[#3fb950] flex items-center justify-center mb-5">
+                    <item.icon size={20} />
+                  </div>
+                  <div className="font-semibold text-xl mb-2">{item.title}</div>
+                  <p className="text-[#8b949e] text-[15px] leading-relaxed">{item.desc}</p>
                 </div>
-                <div className="font-semibold text-xl mb-2">{item.title}</div>
-                <p className="text-[#8b949e] text-[15px] leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          {/* 3D Playground teaser */}
-          <div className="text-center mb-6">
-            <span className="mono text-xs tracking-[3px] text-[#3fb950]">NEW</span>
-          </div>
+            {/* 3D Playground teaser */}
+            <div className="text-center mb-6">
+              <span className="mono text-xs tracking-[3px] text-[#3fb950]">NEW</span>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* EXPERIENCE */}
       <section id="experience" className="section">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="section-header text-center">
-            <div className="section-tag">GIT LOG — CAREER</div>
-            <h2 className="section-title">Experience &amp; Milestones</h2>
-          </div>
+          <Reveal>
+            <div className="section-header text-center">
+              <div className="section-tag">GIT LOG — CAREER</div>
+              <h2 className="section-title">Experience &amp; Milestones</h2>
+            </div>
 
-          <div className="timeline">
-            {experience.map((exp, index) => (
-              <div key={index} className="timeline-item">
-                <div className="timeline-dot mono">{exp.hash.slice(0, 4)}</div>
-                <div className="timeline-content">
-                  <h3>{exp.title}</h3>
-                  <div className="timeline-meta">{exp.meta}</div>
-                  <p className="text-[#8b949e] mb-4 leading-relaxed">{exp.desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.tags.map((tag, i) => (
-                      <span key={i} className="text-xs mono px-3 py-px border border-[#30363d] rounded-full text-[#8b949e]">{tag}</span>
-                    ))}
+            <div className="timeline">
+              {experience.map((exp, index) => (
+                <div key={index} className="timeline-item">
+                  <div className="timeline-dot mono">{exp.hash.slice(0, 4)}</div>
+                  <div className="timeline-content">
+                    <h3>{exp.title}</h3>
+                    <div className="timeline-meta">{exp.meta}</div>
+                    <p className="text-[#8b949e] mb-4 leading-relaxed">{exp.desc}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.tags.map((tag, i) => (
+                        <span key={i} className="text-xs mono px-3 py-px border border-[#30363d] rounded-full text-[#8b949e]">{tag}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* GLOBAL IMPACT — 3D GLOBE */}
+      {/* GLOBAL IMPACT & GITHUB LIVE */}
       <section id="impact" className="section bg-[#0a0c10]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="section-header">
-            <div className="section-tag">$ git log --global --oneline | wc -l</div>
-            <h2 className="section-title">Global Impact</h2>
-            <p className="max-w-md text-[#8b949e] mt-2">1,248+ contributions across 6 continents. Drag the globe to explore where the work is happening.</p>
-          </div>
-          <div className="relative">
-            <ContributionGlobe />
-          </div>
+          <Reveal>
+            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-10 items-start">
+              <div>
+                <div className="section-header">
+                  <div className="section-tag">$ git log --global --oneline | wc -l</div>
+                  <h2 className="section-title">Global Impact</h2>
+                  <p className="max-w-md text-[#8b949e] mt-2">1,248+ contributions across 6 continents. Drag the globe to explore where the work is happening.</p>
+                </div>
+                <div className="relative mt-6">
+                  <ContributionGlobe />
+                </div>
+              </div>
+
+              <div>
+                <div className="section-header">
+                  <div className="section-tag">$ curl -s https://api.github.com/users/kuppireddybhageerathareddy1110</div>
+                  <h2 className="section-title">GitHub Live Dashboard</h2>
+                  <p className="max-w-md text-[#8b949e] mt-2">Live metrics, repository status, and language breakdown synced from active code repositories.</p>
+                </div>
+                <GitHubStats theme={theme} />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* PROJECTS — WITH 3D PREVIEWS */}
       <section id="projects" className="section bg-[#0a0c10]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="section-header flex flex-col md:flex-row md:items-end md:justify-between gap-y-4">
-            <div>
-              <div className="section-tag">$ gh repo list --topic ai --limit 12</div>
-              <h2 className="section-title">Featured Repositories</h2>
+          <Reveal>
+            <div className="section-header flex flex-col md:flex-row md:items-end md:justify-between gap-y-4">
+              <div>
+                <div className="section-tag">$ gh repo list --topic ai --limit 12</div>
+                <h2 className="section-title">Featured Repositories</h2>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {["all", "AutoML", "NLP", "CV", "IoT"].map((filter) => (
+                  <button
+                    key={filter}
+                    onClick={() => setActiveFilter(filter)}
+                    className={`mono text-xs px-4 py-1.5 rounded-full border transition ${
+                      activeFilter === filter 
+                        ? "bg-[#3fb950] text-[#0a0c10] border-[#3fb950]" 
+                        : "border-[#30363d] hover:border-[#3fb950] text-[#8b949e]"
+                    }`}
+                  >
+                    {filter}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              {["all", "AutoML", "NLP", "CV", "IoT"].map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`mono text-xs px-4 py-1.5 rounded-full border transition ${
-                    activeFilter === filter 
-                      ? "bg-[#3fb950] text-[#0a0c10] border-[#3fb950]" 
-                      : "border-[#30363d] hover:border-[#3fb950] text-[#8b949e]"
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="projects-grid">
-            {filteredProjects.map((project, index) => (
-              <div key={index} className="project-card group card-hover">
-                <ProjectPreview3D type={project.type} color={project.color} />
-                
-                <div className="project-body">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="project-title">{project.title}</div>
-                    {project.featured && (
-                      <div className="text-[10px] px-2.5 py-px rounded bg-[#3fb950]/10 text-[#3fb950] mono">FLAGSHIP</div>
-                    )}
-                  </div>
-
-                  <p className="project-desc">{project.desc}</p>
-
-                  <div className="flex items-center justify-between mt-auto pt-3 border-t border-[#30363d]">
-                    <div className="project-tags">
-                      {project.tags.slice(0, 3).map((tag, i) => (
-                        <span key={i} className="project-tag">{tag}</span>
-                      ))}
+            <div className="projects-grid">
+              {filteredProjects.map((project, index) => (
+                <div key={index} className="project-card group card-hover">
+                  <ProjectPreview3D type={project.type} color={project.color} />
+                  
+                  <div className="project-body">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="project-title">{project.title}</div>
+                      {project.featured && (
+                        <div className="text-[10px] px-2.5 py-px rounded bg-[#3fb950]/10 text-[#3fb950] mono">FLAGSHIP</div>
+                      )}
                     </div>
-                    <a 
-                      href={project.href} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-[#3fb950] hover:underline flex items-center gap-1 text-xs mono font-medium"
-                    >
-                      OPEN <ArrowUpRight size={13} />
-                    </a>
+
+                    <p className="project-desc">{project.desc}</p>
+
+                    <div className="flex items-center justify-between mt-auto pt-3 border-t border-[#30363d]">
+                      <div className="project-tags">
+                        {project.tags.slice(0, 3).map((tag, i) => (
+                          <span key={i} className="project-tag">{tag}</span>
+                        ))}
+                      </div>
+                      <a 
+                        href={project.href} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-[#3fb950] hover:underline flex items-center gap-1 text-xs mono font-medium"
+                      >
+                        OPEN <ArrowUpRight size={13} />
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* 3D LAB — THE HIGHLIGHT */}
       <section id="lab" className="section">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="section-header">
-            <div className="section-tag">$ ./3d_lab --interactive --mode=full</div>
-            <h2 className="section-title">3D Design Lab</h2>
-            <p className="max-w-md text-[#8b949e] mt-2">Fully interactive Three.js experiences. Orbit, zoom, switch modes. This is what modern portfolios can feel like.</p>
-          </div>
-
-          <div className="lab-feature">
-            <div className="lab-feature-image relative overflow-hidden h-[260px] min-h-[260px] w-full">
-              <ParallaxCard src="/lotm-fool-chess.png" alt="Chess themed project artwork" />
+          <Reveal>
+            <div className="section-header">
+              <div className="section-tag">$ ./3d_lab --interactive --mode=full</div>
+              <h2 className="section-title">3D Design Lab</h2>
+              <p className="max-w-md text-[#8b949e] mt-2">Fully interactive Three.js experiences. Orbit, zoom, switch modes. This is what modern portfolios can feel like.</p>
             </div>
-            <div>
-              <div className="section-tag">FEATURED VISUAL</div>
-              <h3>Chess AI concept board</h3>
-              <p>
-                Visual asset from the source portfolio folder, paired with the interactive Three.js lab below.
-              </p>
-            </div>
-          </div>
 
-          <Playground3D />
+            <div className="lab-feature">
+              <div className="lab-feature-image relative overflow-hidden h-[260px] min-h-[260px] w-full">
+                <ParallaxCard src="/lotm-fool-chess.png" alt="Chess themed project artwork" />
+              </div>
+              <div>
+                <div className="section-tag">FEATURED VISUAL</div>
+                <h3>Chess AI concept board</h3>
+                <p>
+                  Visual asset from the source portfolio folder, paired with the interactive Three.js lab below.
+                </p>
+              </div>
+            </div>
+
+            <Playground3D />
+          </Reveal>
         </div>
       </section>
 
       {/* BADGES */}
       <section className="section max-w-5xl mx-auto px-6">
-        <div className="section-header">
-          <div className="section-tag">$ cat ~/.credentials</div>
-          <h2 className="section-title">Certifications &amp; Badges</h2>
-        </div>
-
-        <div className="badges-grid">
-          {badges.map((badge, i) => (
-            <div key={i} className="badge-card">
-              <Image src={badge.image} alt={`${badge.title} badge`} width={92} height={92} />
-              <div>
-                <h3>{badge.title}</h3>
-                <p>{badge.issuer}</p>
-              </div>
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <div className="section-header">
+              <div className="section-tag">$ cat ~/.credentials</div>
+              <h2 className="section-title">Certifications &amp; Badges</h2>
             </div>
-          ))}
+
+            <div className="badges-grid">
+              {badges.map((badge, i) => (
+                <div key={i} className="badge-card">
+                  <Image src={badge.image} alt={`${badge.title} badge`} width={92} height={92} />
+                  <div>
+                    <h3>{badge.title}</h3>
+                    <p>{badge.issuer}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* CONTACT */}
       <section id="contact" className="section border-t border-[#30363d]">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="section-header">
-            <div className="section-tag">$ ./connect.sh --open</div>
-            <h2 className="section-title">Let&apos;s build something<br />intelligent together.</h2>
-          </div>
-
-          <div className="contact-grid">
-            {/* Form */}
-            <div>
-              <form onSubmit={handleSubmit} className="contact-form">
-                <input 
-                  type="text" 
-                  placeholder="Your name" 
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required 
-                />
-                <input 
-                  type="email" 
-                  placeholder="Email address" 
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required 
-                />
-                <textarea 
-                  placeholder="Tell me about the project or opportunity..." 
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required 
-                />
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="form-btn disabled:opacity-70"
-                >
-                  {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
-                </button>
-              </form>
-              <p className="text-[10px] text-[#8b949e] mt-3 mono">This is a live demo — messages are simulated and not stored.</p>
+          <Reveal>
+            <div className="section-header">
+              <div className="section-tag">$ ./connect.sh --open</div>
+              <h2 className="section-title">Let&apos;s build something<br />intelligent together.</h2>
             </div>
 
-            {/* Info */}
-            <div className="space-y-8 pt-2">
+            <div className="contact-grid">
+              {/* Form */}
               <div>
-                <div className="text-sm text-[#8b949e] mb-2">DIRECT</div>
-                <a href="mailto:bhageerathareddykuppireddy@gmail.com" className="block text-2xl font-medium hover:text-[#3fb950] transition-colors">
-                  bhageerathareddykuppireddy@gmail.com
-                </a>
+                <form onSubmit={handleSubmit} className="contact-form">
+                  <input 
+                    type="text" 
+                    placeholder="Your name" 
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required 
+                  />
+                  <input 
+                    type="email" 
+                    placeholder="Email address" 
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required 
+                  />
+                  <textarea 
+                    placeholder="Tell me about the project or opportunity..." 
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    required 
+                  />
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="form-btn disabled:opacity-70"
+                  >
+                    {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
+                  </button>
+                </form>
+                <p className="text-[10px] text-[#8b949e] mt-3 mono">This is a live demo — messages are simulated and not stored.</p>
               </div>
 
-              <div>
-                <div className="text-sm text-[#8b949e] mb-2">SOCIAL &amp; CODE</div>
-                <div className="space-y-3">
-                  <a href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" className="flex items-center gap-3 text-lg hover:text-[#3fb950] group">
-                    <GitBranch size={21} /> <span>github.com/kuppireddybhageerathareddy1110</span>
-                    <ArrowUpRight className="opacity-0 group-hover:opacity-100 transition" size={15} />
-                  </a>
-                  <a href="https://automl-studio.netlify.app" target="_blank" className="flex items-center gap-3 text-lg hover:text-[#3fb950] group">
-                    <Code2 size={21} /> <span>AutoML-STUDIO — Live Demo</span>
-                    <ArrowUpRight className="opacity-0 group-hover:opacity-100 transition" size={15} />
+              {/* Info */}
+              <div className="space-y-8 pt-2">
+                <div>
+                  <div className="text-sm text-[#8b949e] mb-2">DIRECT</div>
+                  <a href="mailto:bhageerathareddykuppireddy@gmail.com" className="block text-2xl font-medium hover:text-[#3fb950] transition-colors">
+                    bhageerathareddykuppireddy@gmail.com
                   </a>
                 </div>
-              </div>
 
-              <div className="pt-4 border-t border-[#30363d]">
-                <div className="text-xs text-[#8b949e] leading-relaxed">
-                  Available for AI engineering roles, research collaborations, 
-                  consulting on production ML systems, and interesting side quests.
+                <div>
+                  <div className="text-sm text-[#8b949e] mb-2">SOCIAL &amp; CODE</div>
+                  <div className="space-y-3">
+                    <a href="https://github.com/kuppireddybhageerathareddy1110" target="_blank" className="flex items-center gap-3 text-lg hover:text-[#3fb950] group">
+                      <GitBranch size={21} /> <span>github.com/kuppireddybhageerathareddy1110</span>
+                      <ArrowUpRight className="opacity-0 group-hover:opacity-100 transition" size={15} />
+                    </a>
+                    <a href="https://automl-studio.netlify.app" target="_blank" className="flex items-center gap-3 text-lg hover:text-[#3fb950] group">
+                      <Code2 size={21} /> <span>AutoML-STUDIO — Live Demo</span>
+                      <ArrowUpRight className="opacity-0 group-hover:opacity-100 transition" size={15} />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-[#30363d]">
+                  <div className="text-xs text-[#8b949e] leading-relaxed">
+                    Available for AI engineering roles, research collaborations, 
+                    consulting on production ML systems, and interesting side quests.
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 

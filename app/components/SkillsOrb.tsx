@@ -5,6 +5,7 @@ import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef, useState, useMemo } from "react";
 import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
+import LazyCanvas from "./LazyCanvas";
 
 type SkillOrbitData = {
   name: string;
@@ -194,38 +195,40 @@ export default function SkillsOrb({ theme = "chess" }: SkillsOrbProps) {
 
   return (
     <div className="skills-3d">
-      <Canvas
-        camera={{ position: [0, 4.5, 9.5], fov: 46 }}
-        style={{ background: "#05070a" }}
-      >
-        <ambientLight intensity={0.65} />
-        <pointLight position={[10, 12, 8]} intensity={1.5} />
-        <pointLight position={[-10, -10, -8]} intensity={0.7} color="#bc8cff" />
+      <LazyCanvas className="w-full h-full" fallback={<div className="w-full h-full bg-[#05070a] animate-pulse rounded-xl" />}>
+        <Canvas
+          camera={{ position: [0, 4.5, 9.5], fov: 46 }}
+          style={{ background: "#05070a" }}
+        >
+          <ambientLight intensity={0.65} />
+          <pointLight position={[10, 12, 8]} intensity={1.5} />
+          <pointLight position={[-10, -10, -8]} intensity={0.7} color="#bc8cff" />
 
-        <SunStar theme={theme} />
+          <SunStar theme={theme} />
 
-        {/* Orbits and planet nodes */}
-        {skillsOrbitData.map((skill, index) => (
-          <group key={index}>
-            <OrbitLine
-              radius={skill.radius}
-              inclination={skill.inclination}
-              color={skill.color}
-            />
-            <SkillPlanet
-              data={skill}
-              index={index}
-            />
-          </group>
-        ))}
+          {/* Orbits and planet nodes */}
+          {skillsOrbitData.map((skill, index) => (
+            <group key={index}>
+              <OrbitLine
+                radius={skill.radius}
+                inclination={skill.inclination}
+                color={skill.color}
+              />
+              <SkillPlanet
+                data={skill}
+                index={index}
+              />
+            </group>
+          ))}
 
-        <OrbitControls
-          enablePan={false}
-          enableZoom={true}
-          minDistance={3.5}
-          maxDistance={15}
-        />
-      </Canvas>
+          <OrbitControls
+            enablePan={false}
+            enableZoom={true}
+            minDistance={3.5}
+            maxDistance={15}
+          />
+        </Canvas>
+      </LazyCanvas>
     </div>
   );
 }

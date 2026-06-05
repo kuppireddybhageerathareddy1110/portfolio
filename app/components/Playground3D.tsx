@@ -5,6 +5,7 @@ import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useMemo, useRef, useState } from "react";
 import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
+import LazyCanvas from "./LazyCanvas";
 
 interface SceneProps {
   mode: "workflow" | "chess" | "particles";
@@ -260,25 +261,27 @@ export default function Playground3D() {
         {webglAvailable !== true ? (
           <SceneFallback label="INTERACTIVE LAB" detail={`${mode} mode selected. WebGL is disabled in this browser, so this fallback keeps the layout usable.`} />
         ) : (
-          <Canvas
-            camera={{ position: [0, 1.5, 11], fov: 52 }}
-            style={{ background: "#05070a" }}
-          >
-            <ambientLight intensity={0.7} />
-            <pointLight position={[12, 18, 8]} intensity={1.5} />
-            <pointLight position={[-12, -10, -6]} intensity={0.7} color="#bc8cff" />
+          <LazyCanvas className="w-full h-full" fallback={<div className="w-full h-full bg-[#05070a] animate-pulse rounded-xl" />}>
+            <Canvas
+              camera={{ position: [0, 1.5, 11], fov: 52 }}
+              style={{ background: "#05070a" }}
+            >
+              <ambientLight intensity={0.7} />
+              <pointLight position={[12, 18, 8]} intensity={1.5} />
+              <pointLight position={[-12, -10, -6]} intensity={0.7} color="#bc8cff" />
 
-            {scenes[mode]}
+              {scenes[mode]}
 
-            <OrbitControls
-              enablePan={true}
-              enableZoom={true}
-              minDistance={3}
-              maxDistance={22}
-              autoRotate={mode === "particles"}
-              autoRotateSpeed={0.25}
-            />
-          </Canvas>
+              <OrbitControls
+                enablePan={true}
+                enableZoom={true}
+                minDistance={3}
+                maxDistance={22}
+                autoRotate={mode === "particles"}
+                autoRotateSpeed={0.25}
+              />
+            </Canvas>
+          </LazyCanvas>
         )}
 
         <div className="absolute bottom-4 right-4 text-[10px] mono px-3 py-1 bg-black/60 rounded-full border border-white/10 text-muted-foreground">
