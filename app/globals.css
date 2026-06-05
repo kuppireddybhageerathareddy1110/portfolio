@@ -1,0 +1,113 @@
+:root {
+  --font-geist-sans: var(--font-geist-sans);
+  --font-geist-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter);
+  --font-jetbrains: var(--font-jetbrains);
+
+  --bg: #0a0c10;
+  --bg-2: #12151c;
+  --bg-3: #1a1f28;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --border: #30363d;
+  --accent: #3fb950;
+  --accent-2: #56d364;
+  --cyan: #58a6ff;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.mono {
+  font-family: var(--font-jetbrains), var(--font-geist-mono), monospace;
+}
+
+/* Basic overrides for our custom design */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 12, 16, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #0a0c10;
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-2);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.glass {
+  background: #12151c;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.three-container {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #12151c;
+}
+
+.project-card {
+  background: #12151c;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 3rem;
+  }
+}
