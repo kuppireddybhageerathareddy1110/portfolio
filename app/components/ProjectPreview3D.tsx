@@ -3,66 +3,253 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useRef, useState, useEffect } from "react";
-import { SceneFallback, useWebGLAvailable } from "./WebGLGuard";
+import { useWebGLAvailable } from "./WebGLGuard";
 
 interface PreviewProps {
   type: string;
   color?: string;
+  hovered?: boolean;
 }
 
-function PreviewMesh({ type, color = "#3fb950" }: PreviewProps) {
-  const meshRef = useRef<THREE.Mesh>(null!);
+function PreviewMesh({ type, color = "#3fb950", hovered = false }: PreviewProps) {
+  const meshRef = useRef<THREE.Group>(null!);
+  const rotationY = useRef(0);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.6;
-      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.3;
+      // Rotation speed up on hover
+      const speed = hovered ? 1.8 : 0.6;
+      rotationY.current += delta * speed;
+      meshRef.current.rotation.y = rotationY.current;
+
+      // Bobbing animation: more active on hover
+      const bobFreq = hovered ? 3.5 : 2.0;
+      const bobAmp = hovered ? 0.12 : 0.05;
+      const bob = Math.sin(state.clock.elapsedTime * bobFreq) * bobAmp;
+      
+      const defaultY = (type === "flower2" || type === "flower5") ? -0.2 : -0.1;
+      meshRef.current.position.y = defaultY + bob;
+
+      // Scale transition (direct arithmetic lerp)
+      const targetScale = hovered ? 1.35 : 1.0;
+      meshRef.current.scale.x += (targetScale - meshRef.current.scale.x) * 0.1;
+      meshRef.current.scale.y += (targetScale - meshRef.current.scale.y) * 0.1;
+      meshRef.current.scale.z += (targetScale - meshRef.current.scale.z) * 0.1;
+
+      // Pitch tilting animation to lean toward screen on hover
+      const targetX = hovered ? 0.38 : Math.sin(state.clock.elapsedTime * 0.4) * 0.15;
+      meshRef.current.rotation.x += (targetX - meshRef.current.rotation.x) * 0.1;
     }
   });
 
-  if (type === "automl") {
+  // flower1: Sunflower style
+  if (type === "flower1") {
     return (
-      <group ref={meshRef}>
-        <mesh position={[0, 0.3, 0]}>
-          <boxGeometry args={[1.2, 1.2, 1.2]} />
-          <meshPhongMaterial color={color} />
+      <group ref={meshRef} position={[0, -0.1, 0]}>
+        {/* Large golden brown center disc */}
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.42, 0.42, 0.15, 32]} />
+          <meshStandardMaterial color="#5c3a21" roughness={0.9} />
         </mesh>
-        {[ -0.9, 0.9 ].map((x, i) => (
-          <mesh key={i} position={[x, -0.7, 0]}>
-            <boxGeometry args={[0.4, 0.7, 0.4]} />
-            <meshPhongMaterial color="#58a6ff" />
-          </mesh>
-        ))}
+        {/* Yellow Petals Ring */}
+        {Array.from({ length: 16 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 16;
+          return (
+            <mesh 
+              key={i} 
+              position={[Math.sin(angle) * 0.65, 0, Math.cos(angle) * 0.65]} 
+              rotation={[0.1, -angle, 0]}
+            >
+              <boxGeometry args={[0.18, 0.05, 0.45]} />
+              <meshPhongMaterial color={color} side={THREE.DoubleSide} />
+            </mesh>
+          );
+        })}
       </group>
     );
   }
 
-  if (type === "nlp") {
+  // flower2: Lotus style (pink, layered petals)
+  if (type === "flower2") {
     return (
-      <group ref={meshRef}>
-        <mesh>
-          <torusGeometry args={[1, 0.35, 10, 32]} />
-          <meshPhongMaterial color={color} />
+      <group ref={meshRef} position={[0, -0.2, 0]}>
+        {/* Central seedpod */}
+        <mesh position={[0, 0.15, 0]}>
+          <cylinderGeometry args={[0.2, 0.15, 0.2, 16]} />
+          <meshPhongMaterial color="#ffe066" />
         </mesh>
-        <mesh position={[0, 0, 0]}>
-          <sphereGeometry args={[0.55]} />
-          <meshBasicMaterial color="#bc8cff" />
-        </mesh>
+        {/* Inner petals */}
+        {Array.from({ length: 8 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 8;
+          return (
+            <mesh 
+              key={`inner-${i}`} 
+              position={[Math.sin(angle) * 0.35, 0.2, Math.cos(angle) * 0.35]} 
+              rotation={[0.6, -angle, 0.1]}
+            >
+              <sphereGeometry args={[0.2, 16, 16]} />
+              <meshPhongMaterial color={color} side={THREE.DoubleSide} />
+            </mesh>
+          );
+        })}
+        {/* Outer petals */}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 12;
+          return (
+            <mesh 
+              key={`outer-${i}`} 
+              position={[Math.sin(angle) * 0.65, 0.05, Math.cos(angle) * 0.65]} 
+              rotation={[0.2, -angle, 0.3]}
+            >
+              <sphereGeometry args={[0.35, 16, 16]} />
+              <meshPhongMaterial color="#ff7494" side={THREE.DoubleSide} />
+            </mesh>
+          );
+        })}
       </group>
     );
   }
 
-  if (type === "cv") {
+  // flower3: Rose style (compact spiral petals)
+  if (type === "flower3") {
+    return (
+      <group ref={meshRef} position={[0, -0.1, 0]}>
+        {/* Bud core */}
+        <mesh>
+          <sphereGeometry args={[0.22, 16, 16]} />
+          <meshPhongMaterial color={color} />
+        </mesh>
+        {/* Tight layered petals wrapping around */}
+        {Array.from({ length: 10 }).map((_, i) => {
+          const angle = (i * Math.PI * 2.4) / 10;
+          const radius = 0.18 + i * 0.045;
+          return (
+            <mesh 
+              key={i} 
+              position={[Math.sin(angle) * radius, 0.08 + i * 0.02, Math.cos(angle) * radius]} 
+              rotation={[0.4 + i * 0.05, -angle + Math.PI / 2, 0.2]}
+            >
+              <sphereGeometry args={[0.25 - i * 0.005, 8, 8]} />
+              <meshStandardMaterial color={color} side={THREE.DoubleSide} roughness={0.3} />
+            </mesh>
+          );
+        })}
+      </group>
+    );
+  }
+
+  // flower4: Daisy style (slender petals, orange/yellow core)
+  if (type === "flower4") {
     return (
       <group ref={meshRef}>
         <mesh>
-          <sphereGeometry args={[1.05]} />
-          <meshPhongMaterial color={color} />
+          <sphereGeometry args={[0.28, 16, 16]} />
+          <meshBasicMaterial color="#ff9900" />
         </mesh>
-        <mesh position={[0.6, 0.4, 0.8]}>
-          <sphereGeometry args={[0.32]} />
-          <meshBasicMaterial color="#fff" />
+        {Array.from({ length: 14 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 14;
+          return (
+            <mesh 
+              key={i} 
+              position={[Math.sin(angle) * 0.62, 0, Math.cos(angle) * 0.62]} 
+              rotation={[0.08, -angle, 0]}
+            >
+              <boxGeometry args={[0.12, 0.03, 0.5]} />
+              <meshPhongMaterial color={color} />
+            </mesh>
+          );
+        })}
+      </group>
+    );
+  }
+
+  // flower5: Tulip style (bell/cup shaped petals)
+  if (type === "flower5") {
+    return (
+      <group ref={meshRef} position={[0, -0.2, 0]}>
+        {/* Stem connection */}
+        <mesh position={[0, -0.1, 0]}>
+          <cylinderGeometry args={[0.06, 0.06, 0.2, 8]} />
+          <meshPhongMaterial color="#2e7d32" />
         </mesh>
+        {/* 3 Inner overlapping cup petals */}
+        {Array.from({ length: 3 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 3;
+          return (
+            <mesh 
+              key={`inner-${i}`} 
+              position={[Math.sin(angle) * 0.22, 0.25, Math.cos(angle) * 0.22]} 
+              rotation={[0.5, -angle, 0]}
+            >
+              <cylinderGeometry args={[0.2, 0.1, 0.45, 16, 1, true]} />
+              <meshPhongMaterial color={color} side={THREE.DoubleSide} />
+            </mesh>
+          );
+        })}
+        {/* 3 Outer overlapping cup petals */}
+        {Array.from({ length: 3 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 3 + Math.PI / 3;
+          return (
+            <mesh 
+              key={`outer-${i}`} 
+              position={[Math.sin(angle) * 0.3, 0.22, Math.cos(angle) * 0.3]} 
+              rotation={[0.35, -angle, 0]}
+            >
+              <cylinderGeometry args={[0.24, 0.12, 0.4, 16, 1, true]} />
+              <meshPhongMaterial color={color} side={THREE.DoubleSide} />
+            </mesh>
+          );
+        })}
+      </group>
+    );
+  }
+
+  // flower6: Sakura/Cosmos style (pink 5-petal star layout)
+  if (type === "flower6") {
+    return (
+      <group ref={meshRef}>
+        <mesh>
+          <sphereGeometry args={[0.18, 16, 16]} />
+          <meshBasicMaterial color="#ffe066" />
+        </mesh>
+        {Array.from({ length: 5 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 5;
+          return (
+            <mesh 
+              key={i} 
+              position={[Math.sin(angle) * 0.48, 0, Math.cos(angle) * 0.48]} 
+              rotation={[0.15, -angle, 0]}
+            >
+              <sphereGeometry args={[0.25, 16, 16]} />
+              <meshPhongMaterial color={color} side={THREE.DoubleSide} />
+            </mesh>
+          );
+        })}
+      </group>
+    );
+  }
+
+  // fallback type support
+  if (type === "flower") {
+    return (
+      <group ref={meshRef}>
+        <mesh>
+          <sphereGeometry args={[0.32, 16, 16]} />
+          <meshBasicMaterial color="#ffe066" />
+        </mesh>
+        {Array.from({ length: 6 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 6;
+          return (
+            <mesh 
+              key={i} 
+              position={[Math.sin(angle) * 0.6, 0, Math.cos(angle) * 0.6]} 
+              rotation={[0.2, -angle, 0]}
+            >
+              <coneGeometry args={[0.22, 0.6, 16]} />
+              <meshPhongMaterial color={color} side={THREE.DoubleSide} />
+            </mesh>
+          );
+        })}
       </group>
     );
   }
@@ -79,6 +266,7 @@ function PreviewMesh({ type, color = "#3fb950" }: PreviewProps) {
 export default function ProjectPreview3D({ type, color = "#3fb950" }: PreviewProps) {
   const webglAvailable = useWebGLAvailable();
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -114,7 +302,7 @@ export default function ProjectPreview3D({ type, color = "#3fb950" }: PreviewPro
             className="w-6 h-6 border-2 transition-transform duration-1000 ease-in-out group-hover:rotate-45"
             style={{ 
               borderColor: color,
-              borderRadius: type === "nlp" ? "50%" : type === "cv" ? "4px" : type === "automl" ? "0" : "30% 70% 30% 70% / 50% 50% 50% 50%"
+              borderRadius: type === "nlp" ? "50%" : type === "cv" ? "4px" : type.startsWith("flower") ? "50%" : type === "logo" ? "3px" : type === "automl" ? "0" : "30% 70% 30% 70% / 50% 50% 50% 50%"
             }} 
           />
         </div>
@@ -128,11 +316,16 @@ export default function ProjectPreview3D({ type, color = "#3fb950" }: PreviewPro
   }
 
   return (
-    <div className="project-3d-preview">
+    <div 
+      className="project-3d-preview"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ cursor: "pointer" }}
+    >
       <Canvas camera={{ position: [0, 0, 4.2], fov: 52 }} style={{ background: "transparent" }}>
         <ambientLight intensity={0.65} />
         <pointLight position={[5, 5, 5]} intensity={1.1} />
-        <PreviewMesh type={type} color={color} />
+        <PreviewMesh type={type} color={color} hovered={hovered} />
       </Canvas>
     </div>
   );

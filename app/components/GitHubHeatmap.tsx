@@ -8,14 +8,9 @@ export default function GitHubHeatmap() {
 
   const cells = useMemo(() => {
     const data: number[] = [];
-    // Seeded pseudo-random to produce a consistent contribution graph
-    let seed = 42;
-    const rand = () => {
-      seed = (seed * 16807 + 0) % 2147483647;
-      return (seed - 1) / 2147483646;
-    };
     for (let i = 0; i < weeks * daysPerWeek; i++) {
-      const v = rand();
+      const raw = Math.sin((i + 1) * 12.9898 + 42) * 43758.5453;
+      const v = raw - Math.floor(raw);
       // More weight to middle range
       if (v < 0.28) data.push(0);
       else if (v < 0.52) data.push(1);
@@ -37,7 +32,13 @@ export default function GitHubHeatmap() {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   return (
-    <div className="github-heatmap-wrapper">
+    <a 
+      href="https://github.com/kuppireddybhageerathareddy1110"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="github-heatmap-wrapper block transition-opacity hover:opacity-90"
+      title="View real GitHub profile and contribution activity"
+    >
       <div className="flex items-center justify-between mb-3">
         <div>
           <span className="text-sm text-[var(--text-muted)] mono">1,248 contributions in the last year</span>
@@ -87,6 +88,6 @@ export default function GitHubHeatmap() {
           </div>
         ))}
       </div>
-    </div>
+    </a>
   );
 }

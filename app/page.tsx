@@ -32,7 +32,11 @@ import GitHubStats from "./components/GitHubStats";
 import Reveal from "./components/Reveal";
 import LazyCanvas from "./components/LazyCanvas";
 import CopilotModel3D from "./components/CopilotModel3D";
-
+import TripleAttractor3D from "./components/TripleAttractor3D";
+import ChessBoard3D from "./components/ChessBoard3D";
+import Logo3D from "./components/Logo3D";
+import SkillCard from "./components/SkillCard";
+import SkillLogo3D from "./components/SkillLogo3D";
 const navItems = [
   { label: "skills", href: "#skills" },
   { label: "workflows", href: "#workflows" },
@@ -90,7 +94,7 @@ const projects = [
     color: "#3fb950",
     tags: ["AutoML", "SHAP", "Optuna", "FastAPI"],
     href: "https://automl-studio.netlify.app",
-    type: "automl",
+    type: "flower1",
     featured: true,
   },
   {
@@ -100,7 +104,7 @@ const projects = [
     color: "#58a6ff",
     tags: ["NLP", "BioBERT", "Flask", "LLM"],
     href: "https://github.com/kuppireddybhageerathareddy1110/bot1",
-    type: "nlp",
+    type: "flower2",
   },
   {
     title: "Sentiment Analysis Engine",
@@ -109,7 +113,7 @@ const projects = [
     color: "#bc8cff",
     tags: ["NLTK", "Sklearn", "LIME"],
     href: "https://github.com/kuppireddybhageerathareddy1110/mm",
-    type: "nlp",
+    type: "flower3",
   },
   {
     title: "Drowsiness Detection",
@@ -118,7 +122,7 @@ const projects = [
     color: "#e3b341",
     tags: ["OpenCV", "CV", "Safety"],
     href: "https://github.com/kuppireddybhageerathareddy1110",
-    type: "cv",
+    type: "flower4",
   },
   {
     title: "Gas Detection IoT",
@@ -127,7 +131,7 @@ const projects = [
     color: "#f85149",
     tags: ["IoT", "Sensors", "Embedded"],
     href: "https://github.com/kuppireddybhageerathareddy1110",
-    type: "default",
+    type: "flower5",
   },
   {
     title: "Text-to-Image AI",
@@ -136,7 +140,7 @@ const projects = [
     color: "#bc8cff",
     tags: ["Diffusion", "Multimodal", "Research"],
     href: "https://github.com/kuppireddybhageerathareddy1110/Towards-Realistic-and-Consistent-Text-to-Image-Generation-with-Multimodal-AI",
-    type: "cv",
+    type: "flower6",
   },
 ];
 
@@ -229,12 +233,15 @@ export default function Portfolio() {
       {/* Navbar */}
       <nav className="nav">
         <div className="nav-inner">
-          <a href="#hero" className="nav-logo">
-            <span className="accent">bhageeratha</span>
-            <span className="text-[#8b949e]">@</span>
-            <span>portfolio</span>
-            <span className="text-[#8b949e] ml-1">:~$</span>
-          </a>
+          <div className="flex items-center gap-3">
+            <Logo3D />
+            <a href="#hero" className="nav-logo">
+              <span className="accent">bhageeratha</span>
+              <span className="text-[#8b949e]">@</span>
+              <span>portfolio</span>
+              <span className="text-[#8b949e] ml-1">:~$</span>
+            </a>
+          </div>
 
           <div className="nav-links hidden md:flex">
             {navItems.map((item) => (
@@ -407,14 +414,16 @@ export default function Portfolio() {
 
             <div className="skills-grid mb-8">
               {Object.entries(skills).map(([category, items]) => (
-                <div key={category} className="skill-card card-hover">
-                  <h3 className="capitalize">{category.replace("_", " ")}</h3>
+                <SkillCard key={category} category={category}>
                   <div className="skill-tags">
                     {items.map((skill) => (
-                      <span key={skill} className="skill-tag">{skill}</span>
+                      <span key={skill} className="skill-tag">
+                        <SkillLogo3D skill={skill} />
+                        {skill}
+                      </span>
                     ))}
                   </div>
-                </div>
+                </SkillCard>
               ))}
             </div>
 
@@ -607,16 +616,41 @@ export default function Portfolio() {
               <p className="max-w-md text-[#8b949e] mt-2">Fully interactive Three.js experiences. Orbit, zoom, switch modes. This is what modern portfolios can feel like.</p>
             </div>
 
-            <div className="lab-feature">
-              <div className="lab-feature-image relative overflow-hidden h-[260px] min-h-[260px] w-full">
-                <ParallaxCard src="/lotm-fool-chess.png" alt="Chess themed project artwork" />
+            {/* 1. Strange Attractors Full-width showcase */}
+            <div className="mb-14">
+              <div className="section-tag">FEATURED SIMULATION — CHAOS SYSTEM</div>
+              <h3 className="text-2xl font-bold mb-2">Strange Attractor Lab</h3>
+              <p className="text-[#8b949e] text-sm mb-6 max-w-2xl">
+                Explore Lorenz, Rössler, and Water Lily mathematical models. Fully interactive R3F 3D trails, adjustable integration values, and zoom controls.
+              </p>
+              <div className="relative w-full overflow-visible">
+                <TripleAttractor3D />
               </div>
-              <div>
-                <div className="section-tag">FEATURED VISUAL</div>
-                <h3>Chess AI concept board</h3>
-                <p>
-                  Visual asset from the source portfolio folder, paired with the interactive Three.js lab below.
-                </p>
+            </div>
+
+            {/* 2. Interactive 3D Chess Board Showcase */}
+            <div className="mb-14">
+              <div className="section-tag">NEURAL CHESS AI CONCEPT</div>
+              <h3 className="text-2xl font-bold mb-2">Chess.AI 3D Interface</h3>
+              <p className="text-[#8b949e] text-sm mb-6 max-w-2xl">
+                Cyberpunk-themed 3D chess simulator. Featuring custom geometric pieces with metallic materials, click-to-select movement, and real-time AI game replay calculations.
+              </p>
+              <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-8 items-start">
+                <ChessBoard3D />
+                <div className="glass p-5 rounded-xl border border-[#30363d] space-y-4">
+                  <div className="text-xs mono text-[#8b949e] tracking-wider uppercase">Themed Chess Concept</div>
+                  <div className="relative overflow-hidden rounded-lg border border-[#30363d] aspect-[4/3] group/img w-full">
+                    <Image 
+                      src="/lotm-fool-chess.png" 
+                      alt="LOTM The Fool Chess Concept" 
+                      fill 
+                      className="object-cover transition-transform duration-500 group-hover/img:scale-105" 
+                    />
+                  </div>
+                  <p className="text-xs text-[#8b949e] leading-relaxed">
+                    Visual concept depiction of the Lord of the Mysteries (LOTM) &quot;The Fool&quot; themed chess board, which inspired the dark cyber-emerald styling, metallic surfaces, and glowing indicators of the 3D simulation.
+                  </p>
+                </div>
               </div>
             </div>
 

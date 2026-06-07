@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Triple Attractor Simulation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@300;400;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#030308;color:#e8e4d9;font-family:'Syne',sans-serif}
+  .tabs{display:flex;border-bottom:0.5px solid rgba(255,255,255,0.07);background:#030308;position:sticky;top:0;z-index:10}
+  .tab{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;padding:13px 22px;cursor:pointer;color:#444;border-bottom:1.5px solid transparent;transition:.2s;text-transform:uppercase}
+  .tab.active{color:#f8e70c;border-bottom-color:#f8e70c}
+  .tab.teal.active{color:#6adfb8;border-bottom-color:#6adfb8}
+  .tab.blue.active{color:#6ab4ff;border-bottom-color:#6ab4ff}
+  .tab:hover:not(.active){color:#888}
+  .pane{display:none}.pane.active{display:block}
+  .viewport{position:relative;width:100%;height:500px;overflow:hidden;background:#030308}
+  canvas.main{position:absolute;inset:0;width:100%!important;height:100%!important}
+  .hud{position:absolute;top:20px;left:24px;z-index:2;pointer-events:none}
+  .hud-sub{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--ac);opacity:.6;margin-bottom:4px}
+  .hud-name{font-size:36px;font-weight:800;color:#f0ebe0;line-height:1;letter-spacing:-1px}
+  .hud-name span{color:var(--ac)}
+  .panel{position:absolute;right:20px;top:20px;background:rgba(3,3,8,.78);border:0.5px solid rgba(var(--acr),.25);border-radius:8px;padding:18px 20px;min-width:170px;z-index:3}
+  .pr{margin-bottom:12px}.pr:last-child{margin-bottom:0}
+  .pl{font-family:'Space Mono',monospace;font-size:9px;color:var(--ac);letter-spacing:2px;display:flex;justify-content:space-between;margin-bottom:5px}
+  .pl span{color:#e8e4d9}
+  .eq-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:20px 20px 0}
+  .eq{background:#08090f;border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px;position:relative;overflow:hidden}
+  .eq::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--acr),.4),transparent)}
+  .eq-v{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--ac);margin-bottom:4px}
+  .eq-f{font-family:'Space Mono',monospace;font-size:10px;color:#666;line-height:1.8}
+  .eq-f em{color:#bbb;font-style:normal}
+  .info-strip{display:flex;gap:0;padding:14px 20px 18px;border-top:0.5px solid rgba(255,255,255,.04);margin-top:18px}
+  .is{border-left:1.5px solid rgba(var(--acr),.3);padding-left:12px;margin-right:24px}
+  .is-v{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--ac)}
+  .is-k{font-size:10px;color:#444;margin-top:2px;font-weight:300;letter-spacing:.5px}
+  .split3{display:grid;grid-template-columns:1fr 1fr 1fr;height:440px}
+  .sp{position:relative;overflow:hidden;border-right:0.5px solid rgba(255,255,255,.05)}
+  .sp:last-child{border-right:none}
+  canvas.sub{position:absolute;inset:0;width:100%!important;height:100%!important}
+  .sp-label{position:absolute;bottom:12px;left:12px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;opacity:.5;z-index:2}
+  .btn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:5px 10px;border:0.5px solid rgba(var(--acr),.35);border-radius:4px;background:transparent;color:var(--ac);cursor:pointer;transition:.15s;margin-top:10px}
+  .btn:hover{background:rgba(var(--acr),.12)}
+  input[type=range]{width:100%}
+</style>
+</head>
+<body>
+<!-- Rössler -->
+<div class="tabs">
+  <div class="tab teal active" data-tab="rossler">Rössler</div>
+  <div class="tab blue" data-tab="lorenz">Lorenz</div>
+  <div class="tab" data-tab="lily">Water Lily</div>
+  <div class="tab" data-tab="all">All Three</div>
+</div>
+<div class="pane active" id="pane-rossler" style="--ac:#6adfb8;--acr:106,223,184">
+  <div class="viewport"><canvas class="main" id="rc"></canvas>
+    <div class="hud"><div class="hud-sub">— strange attractor</div><div class="hud-name">Röss<span>eler</span></div></div>
+    <div class="panel">
+      <div class="pr"><div class="pl">a <span id="rav">0.20</span></div><input type="range" id="ra" min="0.05" max="0.5" step="0.01" value="0.2"></div>
+      <div class="pr"><div class="pl">b <span id="rbv">0.20</span></div><input type="range" id="rb" min="0.05" max="0.5" step="0.01" value="0.2"></div>
+      <div class="pr"><div class="pl">c <span id="rcv">5.70</span></div><input type="range" id="rcc" min="2" max="10" step="0.1" value="5.7"></div>
+      <div class="pr"><div class="pl">speed <span id="rsv">1×</span></div><input type="range" id="rsp" min="0.2" max="3" step="0.1" value="1"></div>
+      <button class="btn" id="rreset">↺ reset</button>
+    </div>
+  </div>
+  <div class="eq-row">
+    <div class="eq"><div class="eq-v">dx/dt</div><div class="eq-f">= –<em>y</em> – <em>z</em></div></div>
+    <div class="eq"><div class="eq-v">dy/dt</div><div class="eq-f">= <em>x</em> + <em>a·y</em></div></div>
+    <div class="eq"><div class="eq-v">dz/dt</div><div class="eq-f">= <em>b</em> + <em>z</em>·(<em>x−c</em>)</div></div>
+  </div>
+  <div class="info-strip">
+    <div class="is"><div class="is-v">1976</div><div class="is-k">Otto Rössler</div></div>
+    <div class="is"><div class="is-v">~2.01</div><div class="is-k">Lyapunov λ₁</div></div>
+    <div class="is"><div class="is-v">2.01D</div><div class="is-k">fractal dim</div></div>
+  </div>
+</div>
+<!-- Lorenz -->
+<div class="pane" id="pane-lorenz" style="--ac:#6ab4ff;--acr:106,180,255">
+  <div class="viewport"><canvas class="main" id="lc"></canvas>
+    <div class="hud"><div class="hud-sub">— butterfly effect</div><div class="hud-name">Loren<span>z</span></div></div>
+    <div class="panel">
+      <div class="pr"><div class="pl">σ <span id="lsv">10.0</span></div><input type="range" id="ls" min="1" max="20" step="0.5" value="10"></div>
+      <div class="pr"><div class="pl">ρ <span id="lrv">28.0</span></div><input type="range" id="lr" min="10" max="50" step="0.5" value="28"></div>
+      <div class="pr"><div class="pl">β <span id="lbv">2.67</span></div><input type="range" id="lb" min="0.5" max="5" step="0.05" value="2.667"></div>
+      <div class="pr"><div class="pl">speed <span id="lspv">1×</span></div><input type="range" id="lsp" min="0.2" max="3" step="0.1" value="1"></div>
+      <button class="btn" id="lreset">↺ reset</button>
+    </div>
+  </div>
+  <div class="eq-row">
+    <div class="eq"><div class="eq-v">dx/dt</div><div class="eq-f">= <em>σ(y−x)</em></div></div>
+    <div class="eq"><div class="eq-v">dy/dt</div><div class="eq-f">= <em>x(ρ−z)−y</em></div></div>
+    <div class="eq"><div class="eq-v">dz/dt</div><div class="eq-f">= <em>xy − β·z</em></div></div>
+  </div>
+  <div class="info-strip">
+    <div class="is"><div class="is-v">1963</div><div class="is-k">Edward Lorenz</div></div>
+    <div class="is"><div class="is-v">0.906</div><div class="is-k">Lyapunov λ₁</div></div>
+    <div class="is"><div class="is-v">2.06D</div><div class="is-k">fractal dim</div></div>
+  </div>
+</div>
+<!-- Water Lily -->
+<div class="pane" id="pane-lily" style="--ac:#f8e70c;--acr:248,231,12">
+  <div class="viewport"><canvas class="main" id="wc"></canvas>
+    <div class="hud"><div class="hud-sub">— fibonacci phyllotaxis</div><div class="hud-name">Water <span>Lily</span></div></div>
+    <div class="panel">
+      <div class="pr"><div class="pl">petals <span id="npv">60</span></div><input type="range" id="np" min="12" max="120" step="1" value="60"></div>
+      <div class="pr"><div class="pl">spread <span id="spv">0.40</span></div><input type="range" id="spr" min="0.1" max="0.8" step="0.01" value="0.4"></div>
+      <div class="pr"><div class="pl">bloom <span id="blv">1.00</span></div><input type="range" id="bl" min="0.1" max="2" step="0.05" value="1"></div>
+      <div class="pr"><div class="pl">rotate <span id="rtv">auto</span></div><input type="range" id="rt" min="0" max="1" step="0.01" value="0.5"></div>
+      <button class="btn" id="wreset">↺ reset</button>
+    </div>
+  </div>
+  <div class="eq-row">
+    <div class="eq"><div class="eq-v">φ</div><div class="eq-f">= <em>(1+√5)/2</em><br>golden ratio</div></div>
+    <div class="eq"><div class="eq-v">θₙ</div><div class="eq-f">= <em>n · φ · 2π</em><br>fibonacci angle</div></div>
+    <div class="eq"><div class="eq-v">r(θ)</div><div class="eq-f">= <em>cos(πθ)</em><br>petal envelope</div></div>
+  </div>
+  <div class="info-strip">
+    <div class="is"><div class="is-v">137.5°</div><div class="is-k">golden angle</div></div>
+    <div class="is"><div class="is-v">Fib</div><div class="is-k">spiral count</div></div>
+    <div class="is"><div class="is-v">3D</div><div class="is-k">dome geometry</div></div>
+  </div>
+</div>
+<!-- All -->
+<div class="pane" id="pane-all" style="--ac:#d4a0ff;--acr:212,160,255">
+  <div class="split3">
+    <div class="sp"><canvas class="sub" id="ac1"></canvas><div class="sp-label" style="color:#6adfb8">Rössler</div></div>
+    <div class="sp"><canvas class="sub" id="ac2"></canvas><div class="sp-label" style="color:#6ab4ff">Lorenz</div></div>
+    <div class="sp"><canvas class="sub" id="ac3"></canvas><div class="sp-label" style="color:#f8e70c">Water Lily</div></div>
+  </div>
+  <div class="info-strip" style="justify-content:center;gap:32px;margin-top:0">
+    <div class="is" style="--ac:#6adfb8;--acr:106,223,184"><div class="is-v">chaos</div><div class="is-k">Rössler 1976</div></div>
+    <div class="is" style="--ac:#6ab4ff;--acr:106,180,255"><div class="is-v">butterfly</div><div class="is-k">Lorenz 1963</div></div>
+    <div class="is" style="--ac:#f8e70c;--acr:248,231,12"><div class="is-v">phyllotaxis</div><div class="is-k">Fibonacci spiral</div></div>
+  </div>
+</div>
+<script>
+const PHI=(1+Math.sqrt(5))/2;
+// ── WebGL attractor engine ──
+function mkAttractorGL(id,colorYoung,colorOld){
+  const c=document.getElementById(id);if(!c)return null;
+  const gl=c.getContext('webgl');if(!gl)return null;
+  const vs=`attribute vec3 aP;attribute float aA;uniform mat4 uM;varying float vA;void main(){gl_Position=uM*vec4(aP,1.);gl_PointSize=1.5;vA=aA;}`;
+  const [r1,g1,b1]=colorYoung,[r2,g2,b2]=colorOld;
+  const fs=`precision mediump float;varying float vA;void main(){vec3 y=vec3(${r1},${g1},${b1});vec3 o=vec3(${r2},${g2},${b2});gl_FragColor=vec4(mix(o,y,vA),vA*.9+.1);}`;
+  function sh(t,s){const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);return x;}
+  const p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);gl.useProgram(p);
+  const MAX=7000,pos=new Float32Array(MAX*3),ages=new Float32Array(MAX);
+  const pV=gl.createBuffer(),aV=gl.createBuffer();
+  const aP=gl.getAttribLocation(p,'aP'),aA=gl.getAttribLocation(p,'aA'),uM=gl.getUniformLocation(p,'uM');
+  function resize(){const r=c.parentElement.getBoundingClientRect();c.width=Math.max(r.width,1);c.height=Math.max(r.height,1);gl.viewport(0,0,c.width,c.height);}
+  resize();window.addEventListener('resize',resize);
+  return{gl,prog:p,pos,ages,MAX,pV,aV,aP,aA,uM,canvas:c,resize,count:0,head:0};
+}
+function norm(v){const l=Math.hypot(...v);return v.map(x=>x/l);}
+function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}
+function dot(a,b){return a.reduce((s,x,i)=>s+x*b[i],0);}
+function lookAt(e,c,u){const z=norm(e.map((x,i)=>x-c[i])),x=norm(cross(u,z)),y=cross(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,e),-dot(y,e),-dot(z,e),1]);}
+function persp(fov,asp,n,f){const t=1/Math.tan(fov/2),nf=1/(n-f);return new Float32Array([t/asp,0,0,0,0,t,0,0,0,0,(f+n)*nf,-1,0,0,2*f*n*nf,0]);}
+function mat4Mul(a,b){const r=new Float32Array(16);for(let i=0;i<4;i++)for(let j=0;j<4;j++)for(let k=0;k<4;k++)r[i*4+j]+=a[i*4+k]*b[k*4+j];return r;}
+function drawAttractor(ctx,rot,cx,cy,cz,dist){
+  const{gl,prog,pos,ages,MAX,pV,aV,aP,aA,uM,canvas,count}=ctx;
+  const e=[Math.sin(rot)*dist,Math.cos(rot*.35)*dist*.4+cy,Math.cos(rot)*dist];
+  const v=lookAt(e,[cx,cy,cz],[0,1,0]),pr=persp(Math.PI/4,canvas.width/canvas.height,.1,200);
+  const mvp=mat4Mul(pr,v);
+  gl.useProgram(prog);gl.clearColor(.012,.012,.031,1);gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);
+  gl.uniformMatrix4fv(uM,false,mvp);
+  gl.bindBuffer(gl.ARRAY_BUFFER,pV);gl.bufferData(gl.ARRAY_BUFFER,pos,gl.DYNAMIC_DRAW);
+  gl.enableVertexAttribArray(aP);gl.vertexAttribPointer(aP,3,gl.FLOAT,false,0,0);
+  gl.bindBuffer(gl.ARRAY_BUFFER,aV);gl.bufferData(gl.ARRAY_BUFFER,ages,gl.DYNAMIC_DRAW);
+  gl.enableVertexAttribArray(aA);gl.vertexAttribPointer(aA,1,gl.FLOAT,false,0,0);
+  if(count>1)gl.drawArrays(gl.LINE_STRIP,0,count);
+}
+function rk4R(x,y,z,dt,a,b,c){
+  function f(x,y,z){return[-y-z,x+a*y,b+z*(x-c)];}
+  const[k1x,k1y,k1z]=f(x,y,z),[k2x,k2y,k2z]=f(x+dt/2*k1x,y+dt/2*k1y,z+dt/2*k1z);
+  const[k3x,k3y,k3z]=f(x+dt/2*k2x,y+dt/2*k2y,z+dt/2*k2z),[k4x,k4y,k4z]=f(x+dt*k3x,y+dt*k3y,z+dt*k3z);
+  return[x+dt/6*(k1x+2*k2x+2*k3x+k4x),y+dt/6*(k1y+2*k2y+2*k3y+k4y),z+dt/6*(k1z+2*k2z+2*k3z+k4z)];
+}
+function rk4L(x,y,z,dt,s,r,b){
+  function f(x,y,z){return[s*(y-x),x*(r-z)-y,x*y-b*z];}
+  const[k1x,k1y,k1z]=f(x,y,z),[k2x,k2y,k2z]=f(x+dt/2*k1x,y+dt/2*k1y,z+dt/2*k1z);
+  const[k3x,k3y,k3z]=f(x+dt/2*k2x,y+dt/2*k2y,z+dt/2*k2z),[k4x,k4y,k4z]=f(x+dt*k3x,y+dt*k3y,z+dt*k3z);
+  return[x+dt/6*(k1x+2*k2x+2*k3x+k4x),y+dt/6*(k1y+2*k2y+2*k3y+k4y),z+dt/6*(k1z+2*k2z+2*k3z+k4z)];
+}
+function stepR(state,ctx,P,dt){
+  const steps=Math.round(P.sp*8);
+  for(let i=0;i<steps;i++){
+    [state.x,state.y,state.z]=rk4R(state.x,state.y,state.z,.012,P.a,P.b,P.c);
+    const i3=ctx.head*3;
+    ctx.pos[i3]=state.x*.065;ctx.pos[i3+1]=state.y*.065;ctx.pos[i3+2]=(state.z-P.c)*.065;
+    ctx.ages[ctx.head]=1;ctx.head=(ctx.head+1)%ctx.MAX;if(ctx.count<ctx.MAX)ctx.count++;
+  }
+  for(let i=0;i<ctx.MAX;i++)ctx.ages[i]=Math.max(0,ctx.ages[i]-dt*.25);
+}
+function stepL(state,ctx,P,dt){
+  const steps=Math.round(P.sp*8);
+  for(let i=0;i<steps;i++){
+    [state.x,state.y,state.z]=rk4L(state.x,state.y,state.z,.005,P.s,P.r,P.b);
+    const i3=ctx.head*3;const cy=P.r/2,cz=P.r/2;
+    ctx.pos[i3]=state.x*.055;ctx.pos[i3+1]=(state.y-cy)*.055;ctx.pos[i3+2]=(state.z-cz)*.055;
+    ctx.ages[ctx.head]=1;ctx.head=(ctx.head+1)%ctx.MAX;if(ctx.count<ctx.MAX)ctx.count++;
+  }
+  for(let i=0;i<ctx.MAX;i++)ctx.ages[i]=Math.max(0,ctx.ages[i]-dt*.25);
+}
+function resetR(s,ctx){s.x=.1;s.y=.1;s.z=.1;ctx.head=0;ctx.count=0;ctx.pos.fill(0);ctx.ages.fill(0);}
+function resetL(s,ctx){s.x=.1;s.y=0;s.z=0;ctx.head=0;ctx.count=0;ctx.pos.fill(0);ctx.ages.fill(0);}
+// ── Water Lily WebGL ──
+function mkLilyGL(id){
+  const c=document.getElementById(id);if(!c)return null;
+  const gl=c.getContext('webgl');if(!gl)return null;
+  const vs=`attribute vec3 aP;attribute float aC;uniform mat4 uM;varying float vC;void main(){gl_Position=uM*vec4(aP,1.);vC=aC;}`;
+  const fs=`precision mediump float;varying float vC;void main(){
+    vec3 a=vec3(.78,.83,.61);
+    vec3 b=vec3(.84,.92,.74);
+    vec3 cc=vec3(.97,.91,.05);
+    vec3 d=vec3(.75,.34,0.);
+    vec3 col;float t=vC*3.;
+    if(t<1.)col=mix(d,cc,t);
+    else if(t<2.)col=mix(cc,b,t-1.);
+    else col=mix(b,a,t-2.);
+    gl_FragColor=vec4(col,1.);
+  }`;
+  function sh(t,s){const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);return x;}
+  const p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);gl.useProgram(p);
+  const aP=gl.getAttribLocation(p,'aP'),aC=gl.getAttribLocation(p,'aC'),uM=gl.getUniformLocation(p,'uM');
+  const pV=gl.createBuffer(),cV=gl.createBuffer(),iB=gl.createBuffer();
+  function resize(){const r=c.parentElement.getBoundingClientRect();c.width=Math.max(r.width,1);c.height=Math.max(r.height,1);gl.viewport(0,0,c.width,c.height);}
+  resize();window.addEventListener('resize',resize);
+  return{gl,prog:p,pV,cV,iB,aP,aC,uM,canvas:c,resize};
+}
+function buildLily(P){
+  const{np,spread,bloom}=P;
+  const vpp=23,vrpp=15;
+  const phi=(1+Math.sqrt(5));
+  function lsp(n){return Array.from({length:n},(_,i)=>i/(n-1));}
+  function lsv(n){return Array.from({length:n},(_,i)=>-1+2*i/(n-1));}
+  function interp1(xs,ys,t){
+    const n=xs.length;
+    if(t<=xs[0])return ys[0];if(t>=xs[n-1])return ys[n-1];
+    for(let i=0;i<n-1;i++)if(t<=xs[i+1]){const f=(t-xs[i])/(xs[i+1]-xs[i]);return ys[i]*(1-f)+ys[i+1]*f;}
+    return ys[n-1];
+  }
+  function ip1arr(xsN,ys,n){
+    const xs=xsN.map(v=>v*(n-1));
+    return Array.from({length:n},(_,i)=>interp1(xs,ys,i));
+  }
+  const PR=lsv(vpp).map(v=>1-Math.abs(v));
+  const petalScale=ip1arr([0,.5,1],[.3,.8,.1],np);
+  const petalWidth=ip1arr([0,1],[1,.5],np).map(v=>v*v);
+  const phiArrBase=ip1arr([0,1],[0,spread],np).map(v=>Math.pow(v/spread,0.9)*spread);
+  const verts=[],colors=[],indices=[];
+  for(let pi=0;pi<np;pi++){
+    const baseTheta=(phi*(pi+1));
+    for(let vi=0;vi<vpp;vi++){
+      const theta=(baseTheta+lsv(vpp)[vi]/2*petalScale[pi])*Math.PI;
+      for(let ri=0;ri<vrpp;ri++){
+        const r=ri/(vrpp-1);
+        const petalR=PR[vi]*petalWidth[pi]*r;
+        const dphi=PR[vi]*interp1([0,.5,1],[0,.05,.1],pi/(np-1));
+        const phi_v=phiArrBase[pi]+Math.pow(r,4)*.03;
+        const phi_total=phi_v+dphi;
+        const core=Math.pow(r,2)*.6*lsp(vpp*np)[pi*vpp+vi];
+        const W=Math.cos(Math.PI*phi_total)*(petalR+core);
+        const x=Math.cos(theta)*W;
+        const y=Math.sin(theta)*W;
+        const z=(Math.sin(Math.PI*phi_total)*petalR*1.7+core*.4)*bloom;
+        const col=phi_total;
+        verts.push(x,y,z);colors.push(Math.min(1,Math.max(0,col)));
+      }
+    }
+  }
+  for(let pi=0;pi<np;pi++){
+    for(let vi=0;vi<vpp-1;vi++){
+      for(let ri=0;ri<vrpp-1;ri++){
+        const base=(pi*vpp+vi)*vrpp+ri;
+        const next=(pi*vpp+(vi+1))*vrpp+ri;
+        indices.push(base,next,base+1,next,next+1,base+1);
+      }
+    }
+  }
+  return{verts:new Float32Array(verts),colors:new Float32Array(colors),indices:new Uint16Array(indices.map(i=>Math.min(i,65535)))};
+}
+function drawLily(ctx,rot,P,lilyData){
+  const{gl,prog,pV,cV,iB,aP,aC,uM,canvas}=ctx;
+  const{verts,colors,indices}=lilyData;
+  const e=[Math.sin(rot)*3.5,2.5+Math.cos(rot*.2)*.5,Math.cos(rot)*3.5];
+  const v=lookAt(e,[0,.3,0],[0,1,0]),pr=persp(Math.PI/4,canvas.width/canvas.height,.1,100);
+  const mvp=mat4Mul(pr,v);
+  gl.useProgram(prog);gl.clearColor(.012,.012,.031,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+  gl.enable(gl.DEPTH_TEST);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+  gl.uniformMatrix4fv(uM,false,mvp);
+  gl.bindBuffer(gl.ARRAY_BUFFER,pV);gl.bufferData(gl.ARRAY_BUFFER,verts,gl.DYNAMIC_DRAW);
+  gl.enableVertexAttribArray(aP);gl.vertexAttribPointer(aP,3,gl.FLOAT,false,0,0);
+  gl.bindBuffer(gl.ARRAY_BUFFER,cV);gl.bufferData(gl.ARRAY_BUFFER,colors,gl.DYNAMIC_DRAW);
+  gl.enableVertexAttribArray(aC);gl.vertexAttribPointer(aC,1,gl.FLOAT,false,0,0);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,iB);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,indices,gl.STATIC_DRAW);
+  gl.drawElements(gl.TRIANGLES,indices.length,gl.UNSIGNED_SHORT,0);
+}
+// ── Init all ──
+const rCtx=mkAttractorGL('rc',[.42,.87,.72],[.08,.25,.20]);
+const lCtx=mkAttractorGL('lc',[.42,.71,1.0],[.05,.15,.35]);
+const wCtx=mkLilyGL('wc');
+const a1Ctx=mkAttractorGL('ac1',[.42,.87,.72],[.08,.25,.20]);
+const a2Ctx=mkAttractorGL('ac2',[.42,.71,1.0],[.05,.15,.35]);
+const a3Ctx=mkLilyGL('ac3');
+const rS={x:.1,y:.1,z:.1},rP={a:.2,b:.2,c:5.7,sp:1};
+const lS={x:.1,y:0,z:0},lP={s:10,r:28,b:2.667,sp:1};
+const wP={np:60,spread:.4,bloom:1};
+const b1S={x:.1,y:.1,z:.1},b2S={x:.1,y:0,z:0};
+let rot=0,lastT=0,lilyData=buildLily(wP),lilyDirty=false;
+let wRot=0,wRotSpeed=.5;
+let activeTab='rossler';
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    activeTab=t.dataset.tab;
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('pane-'+activeTab).classList.add('active');
+    [rCtx,lCtx,wCtx,a1Ctx,a2Ctx,a3Ctx].forEach(c=>c&&c.resize&&c.resize());
+  });
+});
+function bindR(id,key,disp,fmt,rst){
+  const el=document.getElementById(id),out=document.getElementById(disp);
+  if(!el)return;
+  el.addEventListener('input',()=>{rP[key]=parseFloat(el.value);out.textContent=fmt(rP[key]);if(rst){resetR(rS,rCtx);if(a1Ctx)resetR(b1S,a1Ctx);}});
+}
+function bindL(id,key,disp,fmt,rst){
+  const el=document.getElementById(id),out=document.getElementById(disp);
+  if(!el)return;
+  el.addEventListener('input',()=>{lP[key]=parseFloat(el.value);out.textContent=fmt(lP[key]);if(rst){resetL(lS,lCtx);if(a2Ctx)resetL(b2S,a2Ctx);}});
+}
+function bindW(id,key,disp,fmt){
+  const el=document.getElementById(id),out=document.getElementById(disp);
+  if(!el)return;
+  el.addEventListener('input',()=>{
+    if(key==='rotspeed'){wRotSpeed=parseFloat(el.value);out.textContent=fmt(wRotSpeed);return;}
+    wP[key]=parseFloat(el.value);out.textContent=fmt(wP[key]);lilyDirty=true;
+  });
+}
+bindR('ra','a','rav',v=>v.toFixed(2),true);
+bindR('rb','b','rbv',v=>v.toFixed(2),true);
+bindR('rcc','c','rcv',v=>v.toFixed(1),true);
+bindR('rsp','sp','rsv',v=>v.toFixed(1)+'×',false);
+document.getElementById('rreset')?.addEventListener('click',()=>{resetR(rS,rCtx);if(a1Ctx)resetR(b1S,a1Ctx);});
+bindL('ls','s','lsv',v=>v.toFixed(1),true);
+bindL('lr','r','lrv',v=>v.toFixed(1),true);
+bindL('lb','b','lbv',v=>v.toFixed(2),true);
+bindL('lsp','sp','lspv',v=>v.toFixed(1)+'×',false);
+document.getElementById('lreset')?.addEventListener('click',()=>{resetL(lS,lCtx);if(a2Ctx)resetL(b2S,a2Ctx);});
+bindW('np','np','npv',v=>Math.round(v));
+bindW('spr','spread','spv',v=>v.toFixed(2));
+bindW('bl','bloom','blv',v=>v.toFixed(2));
+bindW('rt','rotspeed','rtv',v=>v<0.05?'paused':(v*2).toFixed(1)+'×');
+document.getElementById('wreset')?.addEventListener('click',()=>{wP.np=60;wP.spread=.4;wP.bloom=1;lilyDirty=true;});
+function frame(ts){
+  const dt=Math.min((ts-lastT)/1000,.05);lastT=ts;
+  rot+=dt*.18;wRot+=dt*wRotSpeed*.3;
+  if(lilyDirty){lilyData=buildLily(wP);lilyDirty=false;}
+  if(activeTab==='rossler'&&rCtx){stepR(rS,rCtx,rP,dt);drawAttractor(rCtx,rot,0,0,0,4);}
+  if(activeTab==='lorenz'&&lCtx){stepL(lS,lCtx,lP,dt);drawAttractor(lCtx,rot,0,0,0,4);}
+  if(activeTab==='lily'&&wCtx){drawLily(wCtx,wRot,wP,lilyData);}
+  if(activeTab==='all'){
+    if(a1Ctx){stepR(b1S,a1Ctx,rP,dt);drawAttractor(a1Ctx,rot,0,0,0,4);}
+    if(a2Ctx){stepL(b2S,a2Ctx,lP,dt);drawAttractor(a2Ctx,rot,0,0,0,4);}
+    if(a3Ctx){drawLily(a3Ctx,wRot,wP,lilyData);}
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(ts=>{lastT=ts;requestAnimationFrame(frame);});
+</script>
+</body>
+</html>
+</script>
+</body>
+</html>
+</script>
+</body>
+</html>

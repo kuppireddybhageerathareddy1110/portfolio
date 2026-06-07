@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 interface FloatingChessProps {
   theme?: "chess" | "knight" | "poet" | "king";
@@ -17,9 +17,7 @@ interface Piece {
 }
 
 export default function FloatingChess({ theme = "chess" }: FloatingChessProps) {
-  const [pieces, setPieces] = useState<Piece[]>([]);
-
-  useEffect(() => {
+  const pieces = useMemo<Piece[]>(() => {
     const getPieceSet = () => {
       switch (theme) {
         case "knight":
@@ -51,7 +49,7 @@ export default function FloatingChess({ theme = "chess" }: FloatingChessProps) {
       generated.push({ char, left, size, opacity, duration, delay, blur });
     }
 
-    setPieces(generated);
+    return generated;
   }, [theme]);
 
   return (

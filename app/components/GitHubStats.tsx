@@ -292,7 +292,13 @@ export default function GitHubStats({ theme }: GitHubStatsProps) {
 
       {/* SVG Live stats widgets + Streak */}
       <div className="grid md:grid-cols-2 gap-5 pt-2">
-        <div className="flex flex-col items-center justify-center p-4 border border-[var(--border)] bg-[var(--bg-2)] rounded-xl relative group transition-all duration-300 hover:border-[var(--accent)] overflow-hidden">
+        <a 
+          href="https://github.com/kuppireddybhageerathareddy1110"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center justify-center p-4 border border-[var(--border)] bg-[var(--bg-2)] rounded-xl relative group transition-all duration-300 hover:border-[var(--accent)] overflow-hidden"
+          title="View live stats on GitHub"
+        >
           <div className="text-[10px] mono text-[var(--text-muted)] absolute top-2 right-2 tracking-widest px-2 py-0.5 border border-white/5 rounded-full bg-black/40 z-10">
             LIVE WIDGET
           </div>
@@ -303,9 +309,15 @@ export default function GitHubStats({ theme }: GitHubStatsProps) {
             className="max-w-full rounded-md shadow-md select-none pointer-events-none transition-transform duration-300 group-hover:scale-[1.01]"
             loading="lazy"
           />
-        </div>
+        </a>
 
-        <div className="flex flex-col items-center justify-center p-4 border border-[var(--border)] bg-[var(--bg-2)] rounded-xl relative group transition-all duration-300 hover:border-[var(--accent)] overflow-hidden">
+        <a 
+          href="https://github.com/kuppireddybhageerathareddy1110"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center justify-center p-4 border border-[var(--border)] bg-[var(--bg-2)] rounded-xl relative group transition-all duration-300 hover:border-[var(--accent)] overflow-hidden"
+          title="View language stats on GitHub"
+        >
           <div className="text-[10px] mono text-[var(--text-muted)] absolute top-2 right-2 tracking-widest px-2 py-0.5 border border-white/5 rounded-full bg-black/40 z-10">
             LIVE WIDGET
           </div>
@@ -316,11 +328,17 @@ export default function GitHubStats({ theme }: GitHubStatsProps) {
             className="max-w-full rounded-md shadow-md select-none pointer-events-none transition-transform duration-300 group-hover:scale-[1.01]"
             loading="lazy"
           />
-        </div>
+        </a>
       </div>
 
       {/* Streak Stats Widget */}
-      <div className="flex flex-col items-center justify-center p-4 border border-[var(--border)] bg-[var(--bg-2)] rounded-xl relative group transition-all duration-300 hover:border-[var(--accent)] overflow-hidden">
+      <a 
+        href="https://github.com/kuppireddybhageerathareddy1110"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex flex-col items-center justify-center p-4 border border-[var(--border)] bg-[var(--bg-2)] rounded-xl relative group transition-all duration-300 hover:border-[var(--accent)] overflow-hidden block"
+        title="View GitHub streak stats"
+      >
         <div className="text-[10px] mono text-[var(--text-muted)] absolute top-2 right-2 tracking-widest px-2 py-0.5 border border-white/5 rounded-full bg-black/40 z-10 flex items-center gap-1">
           <Flame size={10} /> STREAK
         </div>
@@ -331,7 +349,7 @@ export default function GitHubStats({ theme }: GitHubStatsProps) {
           className="max-w-full rounded-md shadow-md select-none pointer-events-none transition-transform duration-300 group-hover:scale-[1.01]"
           loading="lazy"
         />
-      </div>
+      </a>
     </div>
   );
 }

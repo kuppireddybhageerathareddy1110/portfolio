@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef, useState, useMemo } from "react";
@@ -27,6 +27,18 @@ const skillsOrbitData: SkillOrbitData[] = [
   { name: "Docker", color: "#f85149", size: 0.23, radius: 6.2, speed: 0.19, inclination: 0.1, phase: 2.1 },
   { name: "AWS", color: "#58a6ff", size: 0.23, radius: 6.9, speed: 0.16, inclination: -0.2, phase: 3.5 },
 ];
+
+// Mapping of skill names to logo SVG URLs for texture mapping
+const skillLogoMap: Record<string, string> = {
+  Python: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg",
+  "PyTorch": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pytorch.svg",
+  TensorFlow: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tensorflow.svg",
+  "Next.js": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nextdotjs.svg",
+  FastAPI: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/fastapi.svg",
+  SHAP: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/chartdotjs.svg",
+  Docker: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/docker.svg",
+  AWS: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/amazonaws.svg",
+};
 
 interface SkillsOrbProps {
   theme?: "chess" | "knight" | "poet" | "king";
@@ -61,74 +73,6 @@ function OrbitLine({ radius, inclination, color }: { radius: number; inclination
   );
 }
 
-function SkillPlanet({ data, index }: { data: SkillOrbitData; index: number }) {
-  const groupRef = useRef<THREE.Group>(null!);
-  const meshRef = useRef<THREE.Mesh>(null!);
-  const [hovered, setHovered] = useState(false);
-
-  useFrame((state) => {
-    if (groupRef.current) {
-      // If hovered, slow down orbit to let the user view/interact
-      const speedFactor = hovered ? 0.05 : 1.0;
-      const angle = state.clock.elapsedTime * data.speed * speedFactor + data.phase;
-      
-      const x = Math.cos(angle) * data.radius;
-      const z = Math.sin(angle) * data.radius;
-      
-      // Calculate coordinates on the tilted orbital plane
-      const y = z * Math.sin(data.inclination);
-      const rotatedZ = z * Math.cos(data.inclination);
-      
-      groupRef.current.position.set(x, y, rotatedZ);
-    }
-    
-    if (meshRef.current) {
-      // Rotation on its own axis
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.8 + index;
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      <mesh
-        ref={meshRef}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
-        <sphereGeometry args={[data.size * (hovered ? 1.35 : 1.0)]} />
-        <meshPhongMaterial
-          color={data.color}
-          emissive={data.color}
-          emissiveIntensity={hovered ? 0.55 : 0.18}
-          shininess={90}
-        />
-      </mesh>
-
-      {/* Dynamic Tag Label */}
-      <Html
-        position={[0, data.size + 0.35, 0]}
-        style={{
-          pointerEvents: "none",
-          userSelect: "none",
-        }}
-        center
-      >
-        <div
-          className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/80 text-white border border-white/10 whitespace-nowrap"
-          style={{
-            transform: hovered ? "scale(1.15)" : "scale(1)",
-            transition: "transform 0.15s ease",
-            color: data.color,
-            boxShadow: hovered ? `0 0 10px ${data.color}44` : "none",
-          }}
-        >
-          {data.name}
-        </div>
-      </Html>
-    </group>
-  );
-}
-
 function SunStar({ theme = "chess" }: SkillsOrbProps) {
   const sunRef = useRef<THREE.Mesh>(null!);
   const glowRef = useRef<THREE.Mesh>(null!);
@@ -147,7 +91,7 @@ function SunStar({ theme = "chess" }: SkillsOrbProps) {
   // Coordinate color with theme
   const sunColor = useMemo(() => {
     switch (theme) {
-      case "knight": return "#ff4a4a";
+
       case "poet": return "#e3a95d";
       case "king": return "#ffd700";
       default: return "#3fb950";
@@ -181,6 +125,94 @@ function SunStar({ theme = "chess" }: SkillsOrbProps) {
     </group>
   );
 }
+
+function SkillPlanet({ data, index }: { data: SkillOrbitData; index: number }) {
+  const groupRef = useRef<THREE.Group>(null!);
+  const meshRef = useRef<THREE.Mesh>(null!);
+  const [hovered, setHovered] = useState(false);
+
+  // Resolve logo URL and load texture for this skill (fallback to transparent pixel)
+  const placeholder = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO9M6YgAAAAASUVORK5CYII=';
+  const logoUrl = skillLogoMap[data.name] ?? '';
+  const texture = useLoader(THREE.TextureLoader, logoUrl || placeholder);
+
+  useFrame((state) => {
+    if (groupRef.current) {
+      // If hovered, slow down orbit to let the user view/interact
+      const speedFactor = hovered ? 0.05 : 1.0;
+      const angle = state.clock.elapsedTime * data.speed * speedFactor + data.phase;
+      
+      const x = Math.cos(angle) * data.radius;
+      const z = Math.sin(angle) * data.radius;
+      
+      // Calculate coordinates on the tilted orbital plane
+      const y = z * Math.sin(data.inclination);
+      const rotatedZ = z * Math.cos(data.inclination);
+      
+      groupRef.current.position.set(x, y, rotatedZ);
+    }
+    
+    if (meshRef.current) {
+      // Rotation on its own axis
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.8 + index;
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+        {/* Texture loading and material setup */}
+        {/* Render skill planet with logo texture */}
+        <mesh
+          ref={meshRef}
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
+        >
+          <sphereGeometry args={[data.size * (hovered ? 1.35 : 1.0)]} />
+          {logoUrl ? (
+            <meshStandardMaterial
+              map={texture}
+              color={data.color}
+              emissive={data.color}
+              emissiveIntensity={hovered ? 0.45 : 0.15}
+              metalness={0.7}
+              roughness={0.2}
+            />
+          ) : (
+            <meshStandardMaterial
+              color={data.color}
+              emissive={data.color}
+              emissiveIntensity={hovered ? 0.45 : 0.15}
+              metalness={0.7}
+              roughness={0.2}
+            />
+          )}
+        </mesh>
+
+      {/* Dynamic Tag Label */}
+      <Html
+        position={[0, data.size + 0.35, 0]}
+        style={{
+          pointerEvents: "none",
+          userSelect: "none",
+        }}
+        center
+      >
+        <div
+          className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/80 text-white border border-white/10 whitespace-nowrap"
+          style={{
+            transform: hovered ? "scale(1.15)" : "scale(1)",
+            transition: "transform 0.15s ease",
+            color: data.color,
+            boxShadow: hovered ? `0 0 10px ${data.color}44` : "none",
+          }}
+        >
+          {data.name}
+        </div>
+      </Html>
+    </group>
+  );
+}
+
 
 export default function SkillsOrb({ theme = "chess" }: SkillsOrbProps) {
   const webglAvailable = useWebGLAvailable();
